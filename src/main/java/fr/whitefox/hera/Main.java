@@ -13,9 +13,9 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         that = this;
 
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "----------------------------------------");
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Hera Plugin started");
-        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "----------------------------------------");
+        getServer().getConsoleSender().sendMessage("");
+        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[Hera] Up !");
+        getServer().getConsoleSender().sendMessage("");
 
         //  Management
         getCommand("alert").setExecutor(new CommandsManagement());
@@ -35,17 +35,15 @@ public final class Main extends JavaPlugin {
         //  Dev
         getCommand("update").setExecutor(new CommandsTestPlugin());
 
-
-
         getServer().getPluginManager().registerEvents(new HeraListeners(), this);
-
     }
 
     @Override
     public void onDisable() {
-        getServer().getConsoleSender().sendMessage(ChatColor.RED + "----------------------------------------");
-        getServer().getConsoleSender().sendMessage(ChatColor.RED + "Hera Plugin stopped");
-        getServer().getConsoleSender().sendMessage(ChatColor.RED + "----------------------------------------");
         that = null;
+
+        getServer().getConsoleSender().sendMessage("");
+        getServer().getConsoleSender().sendMessage(ChatColor.RED + "[Hera] Goodbye :)");
+        getServer().getConsoleSender().sendMessage("");
     }
 }
