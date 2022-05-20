@@ -32,15 +32,6 @@ public class CommandsTeleportation implements CommandExecutor {
                 }
             }
 
-            if (cmd.getName().equalsIgnoreCase("spawn")) {
-
-                Location spawn = new Location(Bukkit.getWorld("word_of_the_end"), 200, 200, 200, 1.8f, 7.4f);
-                player.teleport(spawn);
-                player.sendMessage("");
-                player.sendMessage(ChatColor.GREEN + "Téléportation au spawn effectuée ");
-
-            }
-
             return true;
         }
 

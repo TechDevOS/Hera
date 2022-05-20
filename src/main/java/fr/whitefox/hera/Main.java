@@ -22,11 +22,10 @@ public final class Main extends JavaPlugin {
         getCommand("down").setExecutor(new CommandsManagement());
 
         //  Moderation
-        getCommand("clean").setExecutor(new CommandsModeration());
+        getCommand("dupeip").setExecutor(new CommandsModeration());
 
         //  Teleportation
         getCommand("tpall").setExecutor(new CommandsTeleportation());
-        getCommand("spawn").setExecutor(new CommandsTeleportation());
 
         //  Cosmetic
         getCommand("staffhat").setExecutor(new CommandsCosmetics());

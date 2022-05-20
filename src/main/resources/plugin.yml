@@ -8,25 +8,22 @@ website: https://github.com/WhiteFox2232
 commands:
   alert:
     description: Commande permettant de faire des annonces
-    permission: palanim.alert
+    permission: hera.alert
   down:
     description: Commande permettant de stop le serveur au bout de 10 secondes
-    permission: palanim.down
+    permission: hera.down
   tpall:
     description: Commande permettant de tp l'entièreté du serveur sur la position de l'executeur
-    permission: palanim.tpall
-  clean:
-    description: Commande permettant de clear le chat
-    permission: palanim.clean
+    permission: hera.tpall
+  dupeip:
+    description: Get IP address of a Player
+    permission: hera.dupeip
   staffhat:
     description: Commande permettant de vous mettre un chapeau de staff :)
-    permission: palanim.staffhat
+    permission: hera.staffhat
   update:
     description: Dev Command
-    permission: palanim.dev
-  spawn:
-    description: Commande permettant de se rendre au spawn
-    permission: palanim.spawn
+    permission: hera.dev
   p:
     description: Fait apparaître des particules
-    permission: palanim.particule
+    permission: hera.particule

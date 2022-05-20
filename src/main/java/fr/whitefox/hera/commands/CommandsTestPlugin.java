@@ -26,8 +26,7 @@ public class CommandsTestPlugin implements CommandExecutor {
             if(sender instanceof Player) {
                 Player player = (Player) sender;
 
-                player.sendMessage("");
-                player.sendMessage("§aLe plugin a été mis à jour !");
+                player.sendMessage("§6[§9Hera§6] §aLe plugin a été mis à jour !");
             } else{
                 getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Le plugin a été mis à jour !");
             }
