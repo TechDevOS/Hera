@@ -9,7 +9,6 @@ import org.bukkit.entity.Player;
 
 import java.net.InetSocketAddress;
 
-
 public class CommandsModeration implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
@@ -31,7 +30,7 @@ public class CommandsModeration implements CommandExecutor {
                         return true;
                     }
 
-                    String ip = target.getAddress().getHostName();
+                    InetSocketAddress ip = target.getAddress();
                     player.sendMessage(" ");
                     player.sendMessage("§e----------------------------------------");
                     player.sendMessage("§eAdresse IP de §b" + target.getName());

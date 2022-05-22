@@ -2,7 +2,6 @@ package fr.whitefox.hera.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -18,7 +17,6 @@ public class CommandsTeleportation implements CommandExecutor {
 
             if (cmd.getName().equalsIgnoreCase("tpall")) {
                 if (Bukkit.getServer().getOnlinePlayers().size() == 1) {
-                    player.sendMessage("");
                     player.sendMessage(ChatColor.RED + "Il n'y a pas d'autres joueurs sur le serveur");
                 } else if (Bukkit.getServer().getOnlinePlayers().size() > 1) {
                     int numOfPLayers = 0;
@@ -27,14 +25,12 @@ public class CommandsTeleportation implements CommandExecutor {
                         numOfPLayers++;
                     }
 
-
                     player.sendMessage("§aTeleportation effectuée de §b" + (numOfPLayers - 1) + "§a joueurs sur votre position.");
                 }
             }
 
             return true;
         }
-
 
         return false;
     }

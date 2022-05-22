@@ -2,6 +2,7 @@ package fr.whitefox.hera;
 
 import fr.whitefox.hera.commands.*;
 import org.bukkit.ChatColor;
+import org.bukkit.command.Command;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
@@ -23,6 +24,7 @@ public final class Main extends JavaPlugin {
 
         //  Moderation
         getCommand("dupeip").setExecutor(new CommandsModeration());
+        getCommand("vanish").setExecutor(new CommandsModeration());
 
         //  Teleportation
         getCommand("tpall").setExecutor(new CommandsTeleportation());
