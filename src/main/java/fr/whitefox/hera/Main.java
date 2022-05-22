@@ -1,8 +1,9 @@
 package fr.whitefox.hera;
 
 import fr.whitefox.hera.commands.*;
+import fr.whitefox.hera.events.JoinEvent;
+import fr.whitefox.hera.events.QuitEvent;
 import org.bukkit.ChatColor;
-import org.bukkit.command.Command;
 import org.bukkit.plugin.java.JavaPlugin;
 
 
@@ -24,7 +25,7 @@ public final class Main extends JavaPlugin {
 
         //  Moderation
         getCommand("dupeip").setExecutor(new CommandsModeration());
-        getCommand("vanish").setExecutor(new CommandsModeration());
+        getCommand("vanish").setExecutor(new VanishCommand());
 
         //  Teleportation
         getCommand("tpall").setExecutor(new CommandsTeleportation());
@@ -36,7 +37,8 @@ public final class Main extends JavaPlugin {
         //  Dev
         getCommand("update").setExecutor(new CommandsTestPlugin());
 
-        getServer().getPluginManager().registerEvents(new HeraListeners(), this);
+        getServer().getPluginManager().registerEvents(new JoinEvent(), this);
+        getServer().getPluginManager().registerEvents(new QuitEvent(), this);
     }
 
     @Override

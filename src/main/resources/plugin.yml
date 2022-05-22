@@ -18,6 +18,9 @@ commands:
   dupeip:
     description: Get IP address of a Player
     permission: hera.dupeip
+  vanish:
+    description: Devenez invisible !
+    permission: hera.vanish
   staffhat:
     description: Commande permettant de vous mettre un chapeau de staff :)
     permission: hera.staffhat
