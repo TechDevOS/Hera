@@ -44,6 +44,32 @@ public class CommandsModeration implements CommandExecutor {
                 return true;
             }
 
+            if(cmd.getName().equalsIgnoreCase("sc")) {
+
+                if (args.length == 0) {
+                    player.sendMessage(ChatColor.RED + "La commande est : /sc <message>");
+                }
+
+                if (args.length >= 1) {
+                    StringBuilder bc = new StringBuilder();
+                    for (String part : args) {
+                        bc.append(part + " ");
+                    }
+
+                    int numOfPLayers = 0;
+                    for (Player p : Bukkit.getServer().getOnlinePlayers()) {
+                        if(player.hasPermission("hera.sc")){
+                            p.sendMessage("§2[§aStaffChat§2] §b" + player.getName() + " : " + bc.toString());
+                        }
+
+                        numOfPLayers++;
+                    }
+
+                }
+
+                return true;
+            }
+
         }
         return false;
     }

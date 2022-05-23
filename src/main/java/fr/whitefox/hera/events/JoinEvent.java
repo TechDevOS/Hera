@@ -6,6 +6,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
 
+import static fr.whitefox.hera.Main.that;
+
+
 import java.io.IOException;
 
 public class JoinEvent implements Listener {

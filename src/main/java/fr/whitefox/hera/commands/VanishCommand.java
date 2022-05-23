@@ -31,10 +31,17 @@ public class VanishCommand implements CommandExecutor {
 
             } else if(!invisible_list.contains(player)){
                 for(Player people : Bukkit.getOnlinePlayers()){
-                    people.hidePlayer(that, player);
+                    if(people.hasPermission("hera.vanish")){
+                        people.showPlayer(that, player);
+                    } else{
+                        people.hidePlayer(that, player);
+                    }
+
                 }
                 invisible_list.add(player);
                 player.sendMessage(ChatColor.GREEN + "You are now invisible !");
+                player.setDisplayName("§7[§aVANISH§7] " + player.getName());
+                player.setPlayerListName("§7[§aVANISH§7] " + player.getName());
             }
         }
 

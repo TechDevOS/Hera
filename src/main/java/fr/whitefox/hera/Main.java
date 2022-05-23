@@ -25,6 +25,7 @@ public final class Main extends JavaPlugin {
 
         //  Moderation
         getCommand("dupeip").setExecutor(new CommandsModeration());
+        getCommand("sc").setExecutor(new CommandsModeration());
         getCommand("vanish").setExecutor(new VanishCommand());
 
         //  Teleportation

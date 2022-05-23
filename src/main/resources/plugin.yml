@@ -21,6 +21,9 @@ commands:
   vanish:
     description: Devenez invisible !
     permission: hera.vanish
+  sc:
+    description: StaffChat
+    permission: hera.sc
   staffhat:
     description: Commande permettant de vous mettre un chapeau de staff :)
     permission: hera.staffhat
