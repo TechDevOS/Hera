@@ -4,10 +4,15 @@ import fr.whitefox.hera.commands.*;
 import fr.whitefox.hera.events.JoinEvent;
 import fr.whitefox.hera.events.QuitEvent;
 import org.bukkit.ChatColor;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.ArrayList;
 
 
 public final class Main extends JavaPlugin {
+
+    public ArrayList<Player> invisible_list = new ArrayList<>();
 
     public static Main that;
 
@@ -26,7 +31,7 @@ public final class Main extends JavaPlugin {
         //  Moderation
         getCommand("dupeip").setExecutor(new CommandsModeration());
         getCommand("sc").setExecutor(new CommandsModeration());
-        getCommand("vanish").setExecutor(new VanishCommand());
+        getCommand("vanish").setExecutor(new VanishCommand(this));
 
         //  Teleportation
         getCommand("tpall").setExecutor(new CommandsTeleportation());
@@ -38,7 +43,7 @@ public final class Main extends JavaPlugin {
         //  Dev
         getCommand("update").setExecutor(new CommandsTestPlugin());
 
-        getServer().getPluginManager().registerEvents(new JoinEvent(), this);
+        getServer().getPluginManager().registerEvents(new JoinEvent(this), this);
         getServer().getPluginManager().registerEvents(new QuitEvent(), this);
     }
 
