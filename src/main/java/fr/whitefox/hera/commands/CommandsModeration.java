@@ -58,8 +58,8 @@ public class CommandsModeration implements CommandExecutor {
 
                     int numOfPLayers = 0;
                     for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-                        if(player.hasPermission("hera.sc")){
-                            p.sendMessage("§2[§aStaffChat§2] §b" + player.getName() + " : " + bc.toString());
+                        if(p.hasPermission("hera.sc")){
+                            p.sendMessage("§5[§dStaffChat§5] §a[" + player.getWorld().getName() +  "]§b " + player.getName() + " : " + bc.toString());
                         }
 
                         numOfPLayers++;
