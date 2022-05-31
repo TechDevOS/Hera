@@ -20,13 +20,11 @@ public class CommandsTeleportation implements CommandExecutor {
                     player.sendMessage(ChatColor.RED + "There are no other players on the server");
 
                 } else {
-                    int numOfPLayers = 0;
                     for (Player p : Bukkit.getServer().getOnlinePlayers()) {
                         p.teleport(player.getLocation());
-                        numOfPLayers++;
                     }
 
-                    player.sendMessage("§b" + (numOfPLayers - 1) + "§a players have been teleported to your position");
+                    player.sendMessage("§b" + (Bukkit.getServer().getOnlinePlayers().size() - 1) + "§a players have been teleported to your position");
                 }
             }
 
