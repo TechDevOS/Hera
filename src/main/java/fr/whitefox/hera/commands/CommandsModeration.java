@@ -1,13 +1,16 @@
 package fr.whitefox.hera.commands;
 
+import fr.whitefox.hera.utils.APICall;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.json.simple.JSONObject;
 
-import java.net.InetSocketAddress;
+import java.io.IOException;
+import java.net.*;
 
 public class CommandsModeration implements CommandExecutor {
     @Override
@@ -30,13 +33,32 @@ public class CommandsModeration implements CommandExecutor {
                         return true;
                     }
 
-                    InetSocketAddress ip = target.getAddress();
+                    String ip = target.getAddress().toString().substring(1).split(":")[0] ;
+
+                    JSONObject obj = APICall.getIP(ip);
+                    if(obj == null){
+                        player.sendMessage(ChatColor.RED + "L'adresse IP n'existe pas !");
+                        return false;
+                    }
+
+                    if(obj.get("status") == "success"){
+                        player.sendMessage(ChatColor.RED + "L'IP saisie est incorrecte !");
+                        return false;
+                    }
+
+                    String connexion = "Réseau domestique";
+                    if((boolean) obj.get("mobile")) connexion = "4G";
+                    if((boolean) obj.get("proxy")) connexion = "Proxy";
+                    if((boolean) obj.get("hosting")) connexion = "Hébergeur";
+
                     player.sendMessage(" ");
                     player.sendMessage("§e----------------------------------------");
                     player.sendMessage("§eAdresse IP de §b" + target.getName());
                     player.sendMessage(" ");
-                    player.sendMessage("» §6" + ip);
-                    player.sendMessage(" ");
+                    player.sendMessage("» §6Adresse IP :§c " + ip);
+                    player.sendMessage("» §6Pays :§c " + obj.get("country"));
+                    player.sendMessage("» §6FAI : §c" + obj.get("isp"));
+                    player.sendMessage("» §6Type de connexion : §c" + connexion);
                     player.sendMessage("§e----------------------------------------");
                     player.sendMessage(" ");
                 }

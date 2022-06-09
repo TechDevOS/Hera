@@ -1,5 +1,6 @@
 package fr.whitefox.hera.commands;
 
+import fr.whitefox.hera.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -11,6 +12,12 @@ import static fr.whitefox.hera.Main.that;
 
 public class CommandsManagement implements CommandExecutor {
 
+    Main plugin;
+
+    public CommandsManagement(Main plugin) {
+        this.plugin = plugin;
+    }
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 
@@ -21,7 +28,7 @@ public class CommandsManagement implements CommandExecutor {
 
             Bukkit.broadcastMessage("§e----------------------------------------");
             Bukkit.broadcastMessage(" ");
-            Bukkit.broadcastMessage("§6ANNONCE§r » §4§lLe serveur va redémarrer dans §l10 secondes§r ! ");
+            Bukkit.broadcastMessage(plugin.getConfig().getString("messages.down").replace("&", "§"));
             Bukkit.broadcastMessage(" ");
             Bukkit.broadcastMessage("§e----------------------------------------");
 
@@ -48,11 +55,9 @@ public class CommandsManagement implements CommandExecutor {
                     bc.append(part + " ");
                 }
 
-                Bukkit.broadcastMessage("§e----------------------------------------");
                 Bukkit.broadcastMessage(" ");
-                Bukkit.broadcastMessage("§6ANNONCE§r » §4§l" + bc.toString());
+                Bukkit.broadcastMessage("   §6" + player.getName() + "§r » §4§l" + bc.toString());
                 Bukkit.broadcastMessage(" ");
-                Bukkit.broadcastMessage("§e----------------------------------------");
 
             }
 

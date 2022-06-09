@@ -20,13 +20,15 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         that = this;
 
+        saveDefaultConfig();
+
         getServer().getConsoleSender().sendMessage("");
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[Hera] Up !");
         getServer().getConsoleSender().sendMessage("");
 
         //  Management
-        getCommand("alert").setExecutor(new CommandsManagement());
-        getCommand("down").setExecutor(new CommandsManagement());
+        getCommand("alert").setExecutor(new CommandsManagement(this));
+        getCommand("down").setExecutor(new CommandsManagement(this));
 
         //  Moderation
         getCommand("dupeip").setExecutor(new CommandsModeration());
