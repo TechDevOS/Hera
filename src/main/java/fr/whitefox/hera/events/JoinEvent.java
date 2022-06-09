@@ -1,6 +1,7 @@
 package fr.whitefox.hera.events;
 
 import fr.whitefox.hera.Main;
+import fr.whitefox.hera.utils.AntiVPN;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.entity.Player;
@@ -21,6 +22,8 @@ public class JoinEvent implements Listener {
     public void onJoin(PlayerJoinEvent event) throws IOException {
 
         Player player = event.getPlayer();
+
+        AntiVPN.verif(player);
 
         // Hide player, if player not invisible disconnect/reconnect
         for (int i = 0; i < plugin.invisible_list.size(); i++){
