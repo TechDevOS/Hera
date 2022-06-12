@@ -26,9 +26,9 @@ public class JoinEvent implements Listener {
         AntiVPN.verif(player);
 
         // Hide player, if player not invisible disconnect/reconnect
-        for (int i = 0; i < plugin.invisible_list.size(); i++){
+        /*for (int i = 0; i < plugin.invisible_list.size(); i++){
             player.hidePlayer(plugin, plugin.invisible_list.get(i));
-        }
+        }*/
 
         event.setJoinMessage("");
         Bukkit.broadcastMessage("[§a+§r] " + player.getDisplayName());

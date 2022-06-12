@@ -39,7 +39,6 @@ public final class Main extends JavaPlugin {
         getCommand("tpall").setExecutor(new CommandsTeleportation());
 
         //  Cosmetic
-        getCommand("staffhat").setExecutor(new CommandsCosmetics());
         getCommand("p").setExecutor(new CommandsCosmetics());
 
         //  Dev
