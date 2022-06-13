@@ -35,4 +35,3 @@ public class JoinEvent implements Listener {
         player.sendMessage("§6[§9Hera§6] §rBienvenue à toi §b" + player.getDisplayName() + "§r sur ce serveur !");
     }
 }
-

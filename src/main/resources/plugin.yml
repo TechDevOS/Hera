@@ -6,9 +6,6 @@ description: A Minecraft Plugin
 website: https://github.com/WhiteFox2232
 
 commands:
-  alert:
-    description: Commande permettant de faire des annonces
-    permission: hera.alert
   down:
     description: Commande permettant de stop le serveur au bout de 10 secondes
     permission: hera.down
@@ -27,6 +24,15 @@ commands:
   update:
     description: Dev Command
     permission: hera.dev
-  p:
-    description: Fait apparaître des particules
-    permission: hera.particule
+  gm:
+    description: Permet de changer votre mode de jeu
+    permission: hera.gm
+  heal:
+    description: Permet de vous régénérer
+    permission: hera.heal
+  feed:
+    description: Permet de remettre votre niveau de nourriture au maxiumum
+    permission: hera.feed
+  spawn:
+    description: Revenir au spawn
+    permission: hera.spawn

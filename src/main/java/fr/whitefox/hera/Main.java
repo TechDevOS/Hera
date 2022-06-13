@@ -18,28 +18,20 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        that = this;
-
-        saveDefaultConfig();
 
         getServer().getConsoleSender().sendMessage("");
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[Hera] Up !");
         getServer().getConsoleSender().sendMessage("");
 
-        //  Management
-        getCommand("alert").setExecutor(new CommandsManagement(this));
-        getCommand("down").setExecutor(new CommandsManagement(this));
-
-        //  Moderation
         getCommand("dupeip").setExecutor(new CommandsModeration());
-        getCommand("sc").setExecutor(new CommandsModeration());
         getCommand("vanish").setExecutor(new VanishCommand(this));
-
-        //  Teleportation
         getCommand("tpall").setExecutor(new CommandsTeleportation());
-
-        //  Cosmetic
-        getCommand("p").setExecutor(new CommandsCosmetics());
+        getCommand("gm").setExecutor(new GamemodeCommand());
+        getCommand("heal").setExecutor(new HealCommand());
+        getCommand("feed").setExecutor(new FeedCommand());
+        getCommand("spawn").setExecutor(new SpawnCommand());
+        getCommand("stop").setExecutor(new StopCommand());
+        // getCommand("p").setExecutor(new CommandsCosmetics());
 
         //  Dev
         getCommand("update").setExecutor(new CommandsTestPlugin());
