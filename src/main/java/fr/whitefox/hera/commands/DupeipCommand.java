@@ -9,10 +9,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
 
-import java.io.IOException;
-import java.net.*;
-
-public class CommandsModeration implements CommandExecutor {
+public class DupeipCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 

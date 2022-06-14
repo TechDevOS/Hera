@@ -6,9 +6,6 @@ description: A Minecraft Plugin
 website: https://github.com/WhiteFox2232
 
 commands:
-  down:
-    description: Commande permettant de stop le serveur au bout de 10 secondes
-    permission: hera.down
   tpall:
     description: Commande permettant de tp l'entièreté du serveur sur la position de l'executeur
     permission: hera.tpall
@@ -18,9 +15,6 @@ commands:
   vanish:
     description: Devenez invisible !
     permission: hera.vanish
-  staffhat:
-    description: Commande permettant de vous mettre un chapeau de staff :)
-    permission: hera.staffhat
   update:
     description: Dev Command
     permission: hera.dev

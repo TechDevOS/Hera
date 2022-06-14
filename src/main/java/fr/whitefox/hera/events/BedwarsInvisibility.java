@@ -11,11 +11,11 @@ import org.bukkit.potion.PotionEffectType;
 public class BedwarsInvisibility implements Listener {
 
     @EventHandler
-    public void OnEntityDamageByEntity(EntityDamageByEntityEvent event){
+    public void OnEntityDamageByEntity(EntityDamageByEntityEvent event) {
         Entity damager = event.getDamager();
         Player player = (Player) event.getEntity();
 
-        if(damager instanceof Player && player.hasPotionEffect(PotionEffectType.INVISIBILITY) ){
+        if (damager instanceof Player && player.hasPotionEffect(PotionEffectType.INVISIBILITY)) {
             player.removePotionEffect(PotionEffectType.INVISIBILITY);
 
             player.sendMessage(ChatColor.GREEN + "Vous êtes de nouveau visible !");
