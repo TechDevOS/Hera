@@ -36,3 +36,6 @@ commands:
   spawn:
     description: Revenir au spawn
     permission: hera.spawn
+  s:
+    description: Permet de /stop le serveur avec raison
+    permission: hera.stop
