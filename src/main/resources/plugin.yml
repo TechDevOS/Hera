@@ -2,8 +2,8 @@ name: Hera
 version: '${project.version}'
 main: fr.whitefox.hera.Main
 authors: [ WhiteFox2232 ]
-description: A Minecraft Plugin
-website: https://github.com/WhiteFox2232
+description: Hera is a Minecraft plugin for community server events. It facilitates the work of event managers
+website: https://github.com/TechdevOS/Hera
 
 commands:
   tpall:
@@ -15,9 +15,6 @@ commands:
   vanish:
     description: Devenez invisible !
     permission: hera.vanish
-  update:
-    description: Dev Command
-    permission: hera.dev
   gm:
     description: Permet de changer votre mode de jeu
     permission: hera.gm

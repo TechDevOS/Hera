@@ -23,4 +23,5 @@ public class BedwarsInvisibility implements Listener {
 
         }
     }
+
 }

@@ -7,14 +7,15 @@ import org.bukkit.event.Listener;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.player.PlayerJoinEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.io.IOException;
 
-public class JoinEvent implements Listener {
+public class JoinQuitEvent implements Listener {
 
     Main plugin;
 
-    public JoinEvent(Main plugin) {
+    public JoinQuitEvent(Main plugin) {
         this.plugin = plugin;
     }
 
@@ -25,13 +26,20 @@ public class JoinEvent implements Listener {
 
         AntiVPN.verif(player);
 
-        // Hide player, if player not invisible disconnect/reconnect
-        /*for (int i = 0; i < plugin.invisible_list.size(); i++){
-            player.hidePlayer(plugin, plugin.invisible_list.get(i));
-        }*/
-
         event.setJoinMessage("");
         Bukkit.broadcastMessage("[§a+§r] " + player.getDisplayName());
         player.sendMessage("§6[§9Hera§6] §rBienvenue à toi §b" + player.getDisplayName() + "§r sur ce serveur !");
+
     }
+
+    @EventHandler
+    public void onLeave(PlayerQuitEvent event) {
+
+        Player player = event.getPlayer();
+
+        event.setQuitMessage("");
+        Bukkit.broadcastMessage("[§4-§r] " + player.getDisplayName());
+
+    }
+
 }

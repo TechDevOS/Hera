@@ -17,14 +17,14 @@ public class TeleportationCommand implements CommandExecutor {
 
             if (cmd.getName().equalsIgnoreCase("tpall")) {
                 if (Bukkit.getServer().getOnlinePlayers().size() == 1) {
-                    player.sendMessage(ChatColor.RED + "There are no other players on the server");
+                    player.sendMessage(ChatColor.RED + "Il n'y a pas d'autres joueurs sur le serveur.");
 
                 } else {
                     for (Player p : Bukkit.getServer().getOnlinePlayers()) {
                         p.teleport(player.getLocation());
                     }
 
-                    player.sendMessage("§b" + (Bukkit.getServer().getOnlinePlayers().size() - 1) + "§a players have been teleported to your position");
+                    player.sendMessage("§b" + (Bukkit.getServer().getOnlinePlayers().size() - 1) + "§a joueurs ont été téléportés sur votre position.");
                 }
             }
 

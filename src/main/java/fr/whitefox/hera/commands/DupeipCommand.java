@@ -10,6 +10,7 @@ import org.bukkit.entity.Player;
 import org.json.simple.JSONObject;
 
 public class DupeipCommand implements CommandExecutor {
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 
@@ -48,16 +49,11 @@ public class DupeipCommand implements CommandExecutor {
                     if((boolean) obj.get("proxy")) connexion = "Proxy";
                     if((boolean) obj.get("hosting")) connexion = "Hébergeur";
 
-                    player.sendMessage(" ");
-                    player.sendMessage("§e----------------------------------------");
-                    player.sendMessage("§eAdresse IP de §b" + target.getName());
-                    player.sendMessage(" ");
-                    player.sendMessage("» §6Adresse IP :§c " + ip);
+                    player.sendMessage("\n§eAdresse IP de §b" + target.getName());
+                    player.sendMessage("\n» §6Adresse IP :§c " + ip);
                     player.sendMessage("» §6Pays :§c " + obj.get("country"));
                     player.sendMessage("» §6FAI : §c" + obj.get("isp"));
-                    player.sendMessage("» §6Type de connexion : §c" + connexion);
-                    player.sendMessage("§e----------------------------------------");
-                    player.sendMessage(" ");
+                    player.sendMessage("» §6Type de connexion : §c" + connexion + "\n");
                 }
 
                 return true;
