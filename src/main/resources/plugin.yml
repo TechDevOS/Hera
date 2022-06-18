@@ -30,3 +30,12 @@ commands:
   s:
     description: Permet de /stop le serveur avec raison
     permission: hera.stop
+  rain:
+    description: Permet de mettre de la pluie
+    permission: hera.weather
+  thunder:
+    description: Permet de mettre de l'orage
+    permission: hera.weather
+  sun:
+    description: Permet de clear la pluie et l'orage
+    permission: hera.weather

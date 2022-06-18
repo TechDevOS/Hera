@@ -19,10 +19,9 @@ public class StopCommand implements CommandExecutor {
                 for (Player people : Bukkit.getOnlinePlayers()) {
                     people.kickPlayer(
                             "§4§lVous avez été éjecté du serveur !" +
-                            "\n\n§c§lRaison : §eLe serveur redémarre" +
+                            "\n\n\n§c§lRaison : §eLe serveur redémarre" +
                             "\n\n\n§l§6[§9§lHera§l§6]");
                 }
-
                 Bukkit.shutdown();
             }
 
@@ -37,10 +36,9 @@ public class StopCommand implements CommandExecutor {
                 for (Player people : Bukkit.getOnlinePlayers()) {
                     people.kickPlayer(
                             "§4§lVous avez été éjecté du serveur !" +
-                            "\n\n§c§lRaison : §e" + reason +
+                            "\n\n\n§c§lRaison : §e" + reason +
                             "\n\n\n§l§6[§9§lHera§l§6]");
                 }
-
                 Bukkit.shutdown();
             }
 

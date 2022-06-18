@@ -1,7 +1,7 @@
 package fr.whitefox.hera;
 
 import fr.whitefox.hera.commands.*;
-import fr.whitefox.hera.events.BedwarsInvisibility;
+import fr.whitefox.hera.events.BetterInvisibility;
 import fr.whitefox.hera.events.JoinQuitEvent;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
@@ -31,9 +31,12 @@ public final class Main extends JavaPlugin {
         getCommand("feed").setExecutor(new FeedCommand());
         getCommand("spawn").setExecutor(new SpawnCommand());
         getCommand("s").setExecutor(new StopCommand());
+        getCommand("sun").setExecutor(new WeatherCommand());
+        getCommand("rain").setExecutor(new WeatherCommand());
+        getCommand("thunder").setExecutor(new WeatherCommand());
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(this), this);
-        getServer().getPluginManager().registerEvents(new BedwarsInvisibility(), this);
+        getServer().getPluginManager().registerEvents(new BetterInvisibility(), this);
     }
 
     @Override
