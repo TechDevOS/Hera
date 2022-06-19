@@ -13,7 +13,7 @@ import java.io.IOException;
 
 public class JoinQuitEvent implements Listener {
 
-    Main plugin;
+    private Main plugin;
 
     public JoinQuitEvent(Main plugin) {
         this.plugin = plugin;
@@ -27,9 +27,12 @@ public class JoinQuitEvent implements Listener {
         AntiVPN.verif(player);
 
         event.setJoinMessage("");
-        Bukkit.broadcastMessage("[§a+§r] " + player.getDisplayName());
-        player.sendMessage("§6[§9Hera§6] §rBienvenue à toi §b" + player.getDisplayName() + "§r sur ce serveur !");
 
+        if(plugin.getConfig().getBoolean("join.joinMessage")){
+            Bukkit.broadcastMessage(plugin.getConfig().getString("join.broadcast").replace("&", "§") + player.getDisplayName());
+            player.sendMessage(plugin.getConfig().getString("join.custom1").replace("&", "§") + player.getDisplayName() + plugin.getConfig().getString("join.custom2").replace("&", "§"));
+
+        }
     }
 
     @EventHandler
@@ -38,8 +41,10 @@ public class JoinQuitEvent implements Listener {
         Player player = event.getPlayer();
 
         event.setQuitMessage("");
-        Bukkit.broadcastMessage("[§4-§r] " + player.getDisplayName());
 
+        if(plugin.getConfig().getBoolean("leave.quitMessage")){
+            Bukkit.broadcastMessage(plugin.getConfig().getString("leave.broadcast").replace("&", "§") + player.getDisplayName());
+
+        }
     }
-
 }

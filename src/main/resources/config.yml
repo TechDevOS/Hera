@@ -1,0 +1,8 @@
+join:
+  joinMessage: true
+  broadcast: "[&a+&r] "
+  custom1: "&6[&9Hera&6] &rBienvenue à toi &b"
+  custom2: "&r sur ce serveur !"
+leave:
+  quitMessage: true
+  broadcast: "[&4-&r] "
