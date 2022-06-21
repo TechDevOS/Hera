@@ -24,7 +24,9 @@ public class JoinQuitEvent implements Listener {
 
         Player player = event.getPlayer();
 
-        AntiVPN.verif(player);
+        if (plugin.getConfig().getBoolean("antiVPN.global")) {
+            AntiVPN.verif(player);
+        }
 
         event.setJoinMessage("");
 

@@ -6,3 +6,9 @@ join:
 leave:
   quitMessage: true
   broadcast: "[&4-&r] "
+
+antiVPN:
+  global: true
+  4G: true
+  hosting: true
+  proxy: true
