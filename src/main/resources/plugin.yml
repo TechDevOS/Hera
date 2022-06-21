@@ -39,3 +39,6 @@ commands:
   sun:
     description: Permet de clear la pluie et l'orage
     permission: hera.weather
+  wl:
+    description: Set Whitelist
+    permission: hera.wl
