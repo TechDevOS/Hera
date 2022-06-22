@@ -101,7 +101,5 @@ public class APICall {
         }
 
         return data_obj;
-
-
     }
 }

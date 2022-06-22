@@ -39,6 +39,7 @@ public final class Main extends JavaPlugin {
         getCommand("sun").setExecutor(new WeatherCommand());
         getCommand("rain").setExecutor(new WeatherCommand());
         getCommand("thunder").setExecutor(new WeatherCommand());
+        getCommand("wl").setExecutor(new WhitelistCommand(this));
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(this), this);
         getServer().getPluginManager().registerEvents(new BetterInvisibility(), this);
