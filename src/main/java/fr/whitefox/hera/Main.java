@@ -2,6 +2,7 @@ package fr.whitefox.hera;
 
 import fr.whitefox.hera.commands.*;
 import fr.whitefox.hera.events.BetterInvisibility;
+import fr.whitefox.hera.events.BetterTnt;
 import fr.whitefox.hera.events.JoinQuitEvent;
 import fr.whitefox.hera.utils.AntiVPN;
 import org.bukkit.ChatColor;
@@ -41,6 +42,7 @@ public final class Main extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(this), this);
         getServer().getPluginManager().registerEvents(new BetterInvisibility(), this);
+        getServer().getPluginManager().registerEvents(new BetterTnt(), this);
     }
 
     @Override
