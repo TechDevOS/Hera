@@ -42,3 +42,6 @@ commands:
   wl:
     description: Set Whitelist
     permission: hera.wl
+  antivpn:
+    description: Permet d'activer ou désactiver l'antiVPN
+    permission: hera.antivpn
