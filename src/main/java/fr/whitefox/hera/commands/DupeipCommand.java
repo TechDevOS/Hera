@@ -14,10 +14,10 @@ public class DupeipCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 
-        if(sender instanceof Player) {
+        if (sender instanceof Player) {
             Player player = (Player) sender;
 
-            if(cmd.getName().equalsIgnoreCase("dupeip")) {
+            if (cmd.getName().equalsIgnoreCase("dupeip")) {
 
                 if (args.length == 0) {
                     player.sendMessage(ChatColor.RED + "La commande est : /dupeip <pseudo>");
