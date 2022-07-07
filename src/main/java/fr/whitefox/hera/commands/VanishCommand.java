@@ -47,7 +47,7 @@ public class VanishCommand implements CommandExecutor {
                     return true;
                 }
 
-                if (args.length >= 1) {
+                if (args.length > 0){
                     Player target = Bukkit.getServer().getPlayer(args[0]);
 
                     if (target == null) {
