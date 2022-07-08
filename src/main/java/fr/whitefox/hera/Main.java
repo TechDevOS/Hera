@@ -5,6 +5,7 @@ import fr.whitefox.hera.events.BetterInvisibility;
 import fr.whitefox.hera.events.BetterTnt;
 import fr.whitefox.hera.events.JoinQuitEvent;
 import fr.whitefox.hera.utils.AntiVPN;
+import fr.whitefox.hera.utils.Vanish;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -23,6 +24,7 @@ public final class Main extends JavaPlugin {
         saveDefaultConfig();
 
         new AntiVPN(this);
+        new Vanish(this);
 
         getServer().getConsoleSender().sendMessage(" ");
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[Hera] Up !");

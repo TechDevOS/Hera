@@ -25,7 +25,7 @@ public class GamemodeCommand implements CommandExecutor {
         if(!(sender instanceof Player)) return false;
         Player player = (Player) sender;
 
-        if(args.length <= 0) {
+        if(args.length == 0) {
             player.sendMessage(ChatColor.RED + "Vous devez spécifier un mode de jeu ! Exemple : /gm <0;1;2;3>");
             return false;
         }
