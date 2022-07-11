@@ -45,3 +45,6 @@ commands:
   antivpn:
     description: Permet d'activer ou désactiver l'antiVPN
     permission: hera.antivpn
+  debug:
+    description: Debug Command
+    permission: hera.debug.debug

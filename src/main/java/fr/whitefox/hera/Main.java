@@ -1,6 +1,8 @@
 package fr.whitefox.hera;
 
 import fr.whitefox.hera.commands.*;
+import fr.whitefox.hera.debug.*;
+import fr.whitefox.hera.debug.DebugCommand;
 import fr.whitefox.hera.events.BetterInvisibility;
 import fr.whitefox.hera.events.BetterTnt;
 import fr.whitefox.hera.events.JoinQuitEvent;
@@ -43,6 +45,7 @@ public final class Main extends JavaPlugin {
         getCommand("thunder").setExecutor(new WeatherCommand());
         getCommand("wl").setExecutor(new WhitelistCommand(this));
         getCommand("antivpn").setExecutor(new AntiVPNCommand(this));
+        getCommand("debug").setExecutor(new DebugCommand());
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(this), this);
         getServer().getPluginManager().registerEvents(new BetterInvisibility(), this);
