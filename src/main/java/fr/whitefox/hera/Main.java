@@ -45,7 +45,9 @@ public final class Main extends JavaPlugin {
         getCommand("thunder").setExecutor(new WeatherCommand());
         getCommand("wl").setExecutor(new WhitelistCommand(this));
         getCommand("antivpn").setExecutor(new AntiVPNCommand(this));
+        getCommand("msg").setExecutor(new MessagesCommand());
         getCommand("debug").setExecutor(new DebugCommand());
+        getCommand("r").setExecutor(new MessagesCommand());
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(this), this);
         getServer().getPluginManager().registerEvents(new BetterInvisibility(), this);

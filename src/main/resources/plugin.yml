@@ -48,3 +48,6 @@ commands:
   debug:
     description: Debug Command
     permission: hera.debug.debug
+  msg:
+    description: Envoyer un message à un autre joueur
+    permission: hera.msg
