@@ -2,12 +2,8 @@ package fr.whitefox.hera;
 
 import fr.whitefox.hera.commands.*;
 import fr.whitefox.hera.debug.*;
-import fr.whitefox.hera.debug.DebugCommand;
-import fr.whitefox.hera.events.BetterInvisibility;
-import fr.whitefox.hera.events.BetterTnt;
-import fr.whitefox.hera.events.JoinQuitEvent;
-import fr.whitefox.hera.utils.AntiVPN;
-import fr.whitefox.hera.utils.Vanish;
+import fr.whitefox.hera.events.*;
+import fr.whitefox.hera.utils.*;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -27,10 +23,15 @@ public final class Main extends JavaPlugin {
 
         new AntiVPN(this);
         new Vanish(this);
+        new Webhooks(this);
 
         getServer().getConsoleSender().sendMessage(" ");
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[Hera] Up !");
         getServer().getConsoleSender().sendMessage(" ");
+
+        if (this.getConfig().getBoolean("WebhooksDiscord.activate")) {
+            Webhooks.up();
+        }
 
         getCommand("dupeip").setExecutor(new DupeipCommand());
         getCommand("vanish").setExecutor(new VanishCommand(this));
@@ -47,16 +48,21 @@ public final class Main extends JavaPlugin {
         getCommand("antivpn").setExecutor(new AntiVPNCommand(this));
         getCommand("msg").setExecutor(new MessagesCommand());
         getCommand("debug").setExecutor(new DebugCommand());
-        getCommand("r").setExecutor(new MessagesCommand());
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(this), this);
         getServer().getPluginManager().registerEvents(new BetterInvisibility(), this);
         getServer().getPluginManager().registerEvents(new BetterTnt(), this);
+        getServer().getPluginManager().registerEvents(new PlayerChat(), this);
+        getServer().getPluginManager().registerEvents(new DamageEvent(), this);
     }
 
     @Override
     public void onDisable() {
         that = null;
+
+        if (this.getConfig().getBoolean("WebhooksDiscord.activate")) {
+            Webhooks.down();
+        }
 
         getServer().getConsoleSender().sendMessage(" ");
         getServer().getConsoleSender().sendMessage(ChatColor.RED + "[Hera] Goodbye :)");

@@ -10,10 +10,10 @@ import org.bukkit.entity.Player;
 public class MessagesCommand implements CommandExecutor {
 
     @Override
-    public boolean onCommand(CommandSender commandSender, Command cmd, String msg, String[] args) {
+    public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 
         if (cmd.getName().equalsIgnoreCase("msg")) {
-            Player player = (Player) commandSender;
+            Player player = (Player) sender;
             if (args.length == 0 || args.length == 1) {
                 player.sendMessage(ChatColor.RED + "Utilise bien la commande");
             }

@@ -18,7 +18,7 @@ public class DebugCommand implements CommandExecutor {
 
             if(args.length == 0){
                 try {
-                    Runtime.getRuntime().exec("cp /Users/whitefox/IdeaProjects/Hera/target/hera-1.0-SNAPSHOT.jar /Users/whitefox/Desktop/Server/plugins");
+                    Runtime.getRuntime().exec("cp /Users/whitefox/IdeaProjects/Hera/target/hera-1.0.jar /Users/whitefox/Desktop/Server/plugins");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

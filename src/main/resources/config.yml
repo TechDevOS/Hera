@@ -4,11 +4,16 @@ join:
   custom1: "&6[&9Hera&6] &rBienvenue à toi &b"
   custom2: "&r sur ce serveur !"
 leave:
-  quitMessage: true
+  leaveMessage: true
   broadcast: "[&4-&r] "
 
 antiVPN:
-  global: true
+  activate: true
   4G: true
   hosting: true
   proxy: true
+WebhooksDiscord:
+  activate: true
+  joinLeave: "https://discord.com/api/webhooks/1000146310785159299/La60bck5oADB-7rtl81HHMG5OiPtKdUnJOw4LkYJnTehoIR1aM_IK5swDPsNwlld76K3"
+  PluginUpDown: "https://discord.com/api/webhooks/1000146310785159299/La60bck5oADB-7rtl81HHMG5OiPtKdUnJOw4LkYJnTehoIR1aM_IK5swDPsNwlld76K3"
+  messages: "https://discord.com/api/webhooks/1000146310785159299/La60bck5oADB-7rtl81HHMG5OiPtKdUnJOw4LkYJnTehoIR1aM_IK5swDPsNwlld76K3"
