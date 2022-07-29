@@ -19,6 +19,8 @@ public final class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        that = this;
+
         saveDefaultConfig();
 
         new AntiVPN(this);
@@ -50,10 +52,10 @@ public final class Main extends JavaPlugin {
         getCommand("debug").setExecutor(new DebugCommand());
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(this), this);
+        getServer().getPluginManager().registerEvents(new PlayerChat(this), this);
+        getServer().getPluginManager().registerEvents(new DamageEvent(this), this);
         getServer().getPluginManager().registerEvents(new BetterInvisibility(), this);
         getServer().getPluginManager().registerEvents(new BetterTnt(), this);
-        getServer().getPluginManager().registerEvents(new PlayerChat(), this);
-        getServer().getPluginManager().registerEvents(new DamageEvent(), this);
     }
 
     @Override

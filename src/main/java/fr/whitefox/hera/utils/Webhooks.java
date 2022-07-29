@@ -238,4 +238,58 @@ public class Webhooks {
             e.printStackTrace();
         }
     }
+
+    public static void damage(Player damager, Player trigger, Double damage){
+        // Config
+        String tokenWebhook = plugin.getConfig().getString("WebhooksDiscord.damage");
+        long timestamp = Instant.now().getEpochSecond();
+
+        // Build
+        String jsonBrut = "";
+        jsonBrut += "{\"content\": null,"
+                + "\"embeds\": [{"
+                + "\"color\": 5793266,"
+                + "\"fields\": [{"
+                + "\"name\" : \"Pseudo Attaquant\","
+                + "\"value\": \"`" + damager.getName() + "`\","
+                + "\"inline\": true},{"
+                + "\"name\" : \"Pseudo Cible\","
+                + "\"value\": \"`" + trigger.getName() + "`\","
+                + "\"inline\": true},{"
+                + "\"name\" : \"UUID Attaquant\","
+                + "\"value\": \"```" + damager.getUniqueId() + "```\","
+                + "\"inline\": false},{"
+                + "\"name\" : \"UUID Cible\","
+                + "\"value\": \"```" + trigger.getUniqueId() + "```\","
+                + "\"inline\": false},{"
+                + "\"name\" : \"Dégâts\","
+                + "\"value\": \"`" + damage + "HP`\","
+                + "\"inline\": true},{"
+                + "\"name\" : \"Date et heure\","
+                + "\"value\": \"<t:" + timestamp + ":F>\","
+                + "\"inline\": true}],"
+                + "\"footer\": {"
+                + "\"text\": \"Hera Logger\","
+                + "\"icon_url\": \"https://media.discordapp.net/attachments/785951129187778614/1000094167302668398/sync.png?width=1264&height=1264\"}"
+                + "}],"
+                + "\"username\": \"Hera Logger\","
+                + "\"avatar_url\": \"https://media.discordapp.net/attachments/785951129187778614/1000094167302668398/sync.png?width=1264&height=1264\","
+                + "\"attachments\": []}";
+        try {
+            URL url = new URL(tokenWebhook);
+            HttpsURLConnection con = (HttpsURLConnection) url.openConnection();
+            con.addRequestProperty("Content-Type", "application/json");
+            con.addRequestProperty("User-Agent", "Java-DiscordWebhook-BY-Gelox_");
+            con.setDoOutput(true);
+            con.setRequestMethod("POST");
+            OutputStream stream = con.getOutputStream();
+            stream.write(jsonBrut.getBytes());
+            stream.flush();
+            stream.close();
+            con.getInputStream().close();
+            con.disconnect();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
