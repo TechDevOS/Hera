@@ -28,12 +28,7 @@ public class JoinQuitEvent implements Listener {
             AntiVPN.verif(player);
         }
 
-        if (plugin.getConfig().getBoolean("WebhooksDiscord.activate")) {
-            Webhooks.join(player);
-        }
-
         event.setJoinMessage("");
-
 
         if(plugin.getConfig().getBoolean("join.joinMessage")){
             Bukkit.broadcastMessage(plugin.getConfig().getString("join.broadcast").replace("&", "§") + player.getDisplayName());
@@ -46,10 +41,6 @@ public class JoinQuitEvent implements Listener {
     public void onLeave(PlayerQuitEvent event) {
 
         Player player = event.getPlayer();
-
-        if (plugin.getConfig().getBoolean("WebhooksDiscord.activate")) {
-            Webhooks.leave(player);
-        }
 
         event.setQuitMessage("");
 
