@@ -53,7 +53,6 @@ public final class Main extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(this), this);
         getServer().getPluginManager().registerEvents(new PlayerChat(this), this);
-        getServer().getPluginManager().registerEvents(new DamageEvent(this), this);
         getServer().getPluginManager().registerEvents(new BetterInvisibility(), this);
         getServer().getPluginManager().registerEvents(new BetterTnt(), this);
     }
