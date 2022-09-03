@@ -1,12 +1,13 @@
 package fr.whitefox.hera.utils;
 
 import fr.whitefox.hera.Main;
-import org.bukkit.entity.Player;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.OutputStream;
 import java.net.URL;
 import java.time.Instant;
+
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class Webhooks {
 
@@ -17,9 +18,13 @@ public class Webhooks {
     }
 
     public static void up(){
+
+        Dotenv dotenv = null;
+        dotenv = Dotenv.configure().load();
+
         // Config
-        // String tokenWebhook = plugin.getConfig().getString("WebhooksDiscord.PluginUpDown");
-        String tokenWebhook = "https://discord.com/api/webhooks/1002666275559972964/WMaYGyjbzbcVzFyA6qwe-aTG4IL_9gTgfXPE18hHtsqCIW6J33DpWroKHV1ORpzvcIPT";
+        String tokenWebhook = dotenv.get("WEBHOOKS");
+
         long timestamp = Instant.now().getEpochSecond();
 
         // Build
@@ -59,8 +64,12 @@ public class Webhooks {
     }
 
     public static void down(){
+
+        Dotenv dotenv = null;
+        dotenv = Dotenv.configure().load();
+
         // Config
-        String tokenWebhook = plugin.getConfig().getString("WebhooksDiscord.PluginUpDown");
+        String tokenWebhook = dotenv.get("WEBHOOKS");
         long timestamp = Instant.now().getEpochSecond();
 
         // Build
