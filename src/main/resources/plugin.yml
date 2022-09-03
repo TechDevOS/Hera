@@ -47,7 +47,7 @@ commands:
     permission: hera.antivpn
   debug:
     description: Debug Command
-    permission: hera.debug.debug
+    permission: hera.debug
   freeze:
     description: Permet de freeze un joueur
     permission: hera.freeze
