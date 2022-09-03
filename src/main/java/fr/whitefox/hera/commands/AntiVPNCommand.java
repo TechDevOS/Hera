@@ -7,6 +7,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import static org.bukkit.Bukkit.getServer;
+
 public class AntiVPNCommand implements CommandExecutor {
 
     Main plugin;
@@ -18,26 +20,45 @@ public class AntiVPNCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 
-        Player player = (Player) sender;
+            if (cmd.getName().equalsIgnoreCase("antivpn")) {
 
-        if(cmd.getName().equalsIgnoreCase("antivpn")){
-            if(args.length == 0){
-                player.sendMessage(ChatColor.RED + "Vous devez spécifier un état. Exemple : /antivpn <on/off>");
+                if (sender instanceof Player) {
+                    Player player = (Player) sender;
 
-            } else if (args[0].equalsIgnoreCase("on")){
-                player.sendMessage("§6[§9Hera§6] §aL'antiVPN a bien été §2§lactivé");
-                plugin.getConfig().set("antiVPN.global", "true");
+                    if (args.length == 0) {
+                        player.sendMessage(ChatColor.RED + "Vous devez spécifier un état. Exemple : /antivpn <on/off>");
 
-            } else if (args[0].equalsIgnoreCase("off")){
-                player.sendMessage("§6[§9Hera§6] §aL'antiVPN a bien été §2§ldésactivé");
-                plugin.getConfig().set("antiVPN.global", "false");
+                    } else if (args[0].equalsIgnoreCase("on")) {
+                        player.sendMessage("§6[§9Hera§6] §aL'antiVPN a bien été §2§lactivé§r§a. \nRelancez le serveur pour que la configuration soit effective.");
+                        plugin.getConfig().set("antiVPN.activate", true);
 
-            } else{
-                player.sendMessage(ChatColor.RED + "Vous devez spécifier un état valide. Exemple : /antivpn <on/off>");
+                    } else if (args[0].equalsIgnoreCase("off")) {
+                        player.sendMessage("§6[§9Hera§6] §aL'antiVPN a bien été §2§ldésactivé§r§a. \nRelancez le serveur pour que la configuration soit effective.");
+                        plugin.getConfig().set("antiVPN.activate", false);
+
+                    } else {
+                        player.sendMessage(ChatColor.RED + "Vous devez spécifier un état valide. Exemple : /antivpn <on/off>");
+
+                    }
+                } else {
+                    if (args.length == 0) {
+                        getServer().getConsoleSender().sendMessage(ChatColor.RED + "Vous devez spécifier un état. Exemple : /antivpn <on/off>");
+
+                    } else if (args[0].equalsIgnoreCase("on")) {
+                        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "L'antiVPN a bien été activé. Relancez le serveur pour que la configuration soit effective.");
+                        plugin.getConfig().set("antiVPN.activate", true);
+
+                    } else if (args[0].equalsIgnoreCase("off")) {
+                        getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "L'antiVPN a bien été désactivé. Relancez le serveur pour que la configuration soit effective.");
+                        plugin.getConfig().set("antiVPN.activate", false);
+
+                    } else {
+                        getServer().getConsoleSender().sendMessage(ChatColor.RED + "Vous devez spécifier un état valide. Exemple : /antivpn <on/off>");
+
+                    }
+                }
 
             }
-        }
-
 
         return true;
     }
