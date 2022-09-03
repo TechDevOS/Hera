@@ -3,6 +3,12 @@ join:
   broadcast: "[&a+&r] "
   custom1: "&6[&9Hera&6] &rBienvenue à toi &b"
   custom2: "&r sur ce serveur !"
+
+config:
+  spawn_x: 0
+  spawn_y: 0
+  spawn_z: 0
+
 leave:
   leaveMessage: true
   broadcast: "[&4-&r] "
@@ -12,6 +18,7 @@ antiVPN:
   4G: true
   hosting: true
   proxy: true
+
 WebhooksDiscord:
   activate: true
   PluginUpDown: ""
