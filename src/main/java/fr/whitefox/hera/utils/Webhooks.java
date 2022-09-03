@@ -18,9 +18,7 @@ public class Webhooks {
 
     public static void up(){
         // Config
-        // String tokenWebhook = plugin.getConfig().getString("WebhooksDiscord.PluginUpDown");
-        String tokenWebhook = "https://discord.com/api/webhooks/1002666275559972964/WMaYGyjbzbcVzFyA6qwe-aTG4IL_9gTgfXPE18hHtsqCIW6J33DpWroKHV1ORpzvcIPT";
-        long timestamp = Instant.now().getEpochSecond();
+        String tokenWebhook = plugin.getConfig().getString("WebhooksDiscord.PluginUpDown");
 
         // Build
         String jsonBrut = "";
