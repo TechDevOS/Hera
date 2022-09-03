@@ -24,7 +24,7 @@ public class TeleportationCommand implements CommandExecutor {
                         p.teleport(player.getLocation());
                     }
 
-                    player.sendMessage("§b" + (Bukkit.getServer().getOnlinePlayers().size() - 1) + "§a joueurs ont été téléportés sur votre position.");
+                    player.sendMessage("§6[§9Hera§6] §b" + (Bukkit.getServer().getOnlinePlayers().size() - 1) + "§a joueurs ont été téléportés sur votre position.");
                 }
             }
 

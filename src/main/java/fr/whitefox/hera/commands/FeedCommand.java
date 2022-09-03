@@ -38,6 +38,7 @@ public class FeedCommand implements CommandExecutor {
                 return true;
             }
         }
+
         return true;
     }
 }

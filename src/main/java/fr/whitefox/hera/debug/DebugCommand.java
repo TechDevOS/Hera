@@ -1,5 +1,6 @@
 package fr.whitefox.hera.debug;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -26,9 +27,11 @@ public class DebugCommand implements CommandExecutor {
                 if(sender instanceof Player) {
                     Player player = (Player) sender;
 
-                    player.sendMessage("§6[§9Hera§6]§r §4§lDEBUG§r ▶ §aLe plugin a été mis à jour !");
+                    player.sendMessage("§6[§9Hera§6]§r §4§lDEBUG§r ▶ §aLe plugin a été mis à jour ! Redémarrage en cours...");
+                    getServer().dispatchCommand(getServer().getConsoleSender(), "rl");
                 } else{
-                    getServer().getConsoleSender().sendMessage("§6[§9Hera§6]§r §4§lDEBUG§r ▶ §aLe plugin a été mis à jour !");
+                    getServer().getConsoleSender().sendMessage("§6[§9Hera§6]§r §4§lDEBUG§r ▶ §aLe plugin a été mis à jour ! Redémarrage en cours...");
+                    getServer().dispatchCommand(getServer().getConsoleSender(), "rl");
                 }
 
                 return true;
@@ -60,7 +63,24 @@ public class DebugCommand implements CommandExecutor {
 
                 return true;
 
+            } else if(args[0].equalsIgnoreCase("test")){
+                Player player = (Player) sender;
+
+                player.sendMessage("This test is good");
+
+                String response = args[1];
+
+                if(response.contains(player.getName())){
+                    player.sendMessage(ChatColor.GREEN + "Oh bah on dirait que l'arg a ton pseudo mon reuf");
+                } else{
+                    player.sendMessage(ChatColor.RED + "Désolé frérot, te prends pas pour le centre du monde.");
+                }
+
+                return true;
+
             } else return false;
+
+
         }
 
         return true;

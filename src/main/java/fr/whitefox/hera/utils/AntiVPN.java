@@ -18,7 +18,6 @@ public class AntiVPN {
 
         String ip = player.getAddress().toString().substring(1).split(":")[0] ;
 
-        String uuw = "uwu";
         JSONObject obj = APICall.getIP(ip);
 
         if((boolean) obj.get("proxy") && plugin.getConfig().getBoolean("antiVPN.proxy")){
