@@ -48,6 +48,9 @@ commands:
   debug:
     description: Debug Command
     permission: hera.debug.debug
-  msg:
-    description: Envoyer un message à un autre joueur
-    permission: hera.msg
+  freeze:
+    description: Permet de freeze un joueur
+    permission: hera.freeze
+  fly:
+    description: Permet de se mettre en fly
+    permission: hera.fly
