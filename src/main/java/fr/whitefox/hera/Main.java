@@ -14,6 +14,9 @@ import java.util.ArrayList;
 public final class Main extends JavaPlugin {
 
     public ArrayList<Player> invisible_list = new ArrayList<>();
+    public ArrayList<Player> fight_list = new ArrayList<>();
+    public ArrayList<Player> freeze_list = new ArrayList<>();
+    public ArrayList<Player> fly_list = new ArrayList<>();
 
     public static Main that;
 
@@ -41,20 +44,24 @@ public final class Main extends JavaPlugin {
         getCommand("gm").setExecutor(new GamemodeCommand());
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("feed").setExecutor(new FeedCommand());
-        getCommand("spawn").setExecutor(new SpawnCommand());
+        getCommand("spawn").setExecutor(new SpawnCommand(this));
         getCommand("s").setExecutor(new StopCommand());
         getCommand("sun").setExecutor(new WeatherCommand());
         getCommand("rain").setExecutor(new WeatherCommand());
         getCommand("thunder").setExecutor(new WeatherCommand());
         getCommand("wl").setExecutor(new WhitelistCommand(this));
         getCommand("antivpn").setExecutor(new AntiVPNCommand(this));
-        getCommand("msg").setExecutor(new MessagesCommand());
         getCommand("debug").setExecutor(new DebugCommand());
+        getCommand("freeze").setExecutor(new FreezeCommand(this));
+        getCommand("fly").setExecutor(new FlyCommand(this));
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(this), this);
+        getServer().getPluginManager().registerEvents(new Fight(this), this);
         getServer().getPluginManager().registerEvents(new PlayerChat(), this);
         getServer().getPluginManager().registerEvents(new BetterInvisibility(), this);
         getServer().getPluginManager().registerEvents(new BetterTnt(), this);
+        getServer().getPluginManager().registerEvents(new DeathEvent(this), this);
+        getServer().getPluginManager().registerEvents(new FreezeEvent(this), this);
     }
 
     @Override
