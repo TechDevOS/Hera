@@ -20,4 +20,4 @@ antiVPN:
   proxy: true
 
 WebhooksDiscord:
-  activate: true
+  activate: false
