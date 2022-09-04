@@ -17,40 +17,43 @@ public class GamemodeCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 
-        gm.put("0", GameMode.SURVIVAL);
-        gm.put("1", GameMode.CREATIVE);
-        gm.put("2", GameMode.ADVENTURE);
-        gm.put("3", GameMode.SPECTATOR);
+        if (cmd.getName().equalsIgnoreCase("gm")) {
 
-        if(!(sender instanceof Player)) return false;
-        Player player = (Player) sender;
+            if (!(sender instanceof Player)) return false;
+            Player player = (Player) sender;
 
-        if(args.length == 0) {
-            player.sendMessage(ChatColor.RED + "Vous devez spécifier un mode de jeu ! Exemple : /gm <0;1;2;3>");
-            return false;
-        }
+            gm.put("0", GameMode.SURVIVAL);
+            gm.put("1", GameMode.CREATIVE);
+            gm.put("2", GameMode.ADVENTURE);
+            gm.put("3", GameMode.SPECTATOR);
 
-        GameMode gamemode;
-        if(gm.containsKey(args[0])) {
-            gamemode = gm.get(args[0]);
-        } else {
-            player.sendMessage(ChatColor.RED + "Vous devez spécifier un mode de jeu valide ! Exemple : /gm <0;1;2;3>");
-            return false;
-        }
-
-        if(args.length > 1) {
-            Player target = Bukkit.getServer().getPlayer(args[1]);
-
-            if(target == null) {
-                player.sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
+            if (args.length == 0) {
+                player.sendMessage(ChatColor.RED + "Vous devez spécifier un mode de jeu ! Exemple : /gm <0;1;2;3>");
                 return false;
             }
-            target.setGameMode(gamemode);
-            target.sendMessage("§6[§9Hera§6] §aVotre mode de jeu a bien été modifié");
-            player.sendMessage("§6[§9Hera§6] §aLe mode de jeu de §c" + target.getName() + "§a a bien été modifié");
-        } else {
-            player.setGameMode(gamemode);
-            player.sendMessage("§6[§9Hera§6] §aVotre mode de jeu a bien été modifié");
+
+            GameMode gamemode;
+            if (gm.containsKey(args[0])) {
+                gamemode = gm.get(args[0]);
+            } else {
+                player.sendMessage(ChatColor.RED + "Vous devez spécifier un mode de jeu valide ! Exemple : /gm <0;1;2;3>");
+                return false;
+            }
+
+            if (args.length > 1) {
+                Player target = Bukkit.getServer().getPlayer(args[1]);
+
+                if (target == null) {
+                    player.sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
+                    return false;
+                }
+                target.setGameMode(gamemode);
+                target.sendMessage("§6[§9Hera§6] §aVotre mode de jeu a bien été modifié");
+                player.sendMessage("§6[§9Hera§6] §aLe mode de jeu de §c" + target.getName() + "§a a bien été modifié");
+            } else {
+                player.setGameMode(gamemode);
+                player.sendMessage("§6[§9Hera§6] §aVotre mode de jeu a bien été modifié");
+            }
         }
 
         return true;

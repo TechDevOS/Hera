@@ -17,7 +17,7 @@ public class Webhooks {
         this.plugin = plugin;
     }
 
-    public static void up(){
+    public static void up() {
 
         Dotenv dotenv = null;
         dotenv = Dotenv.configure().load();
@@ -63,7 +63,7 @@ public class Webhooks {
         }
     }
 
-    public static void down(){
+    public static void down() {
 
         Dotenv dotenv = null;
         dotenv = Dotenv.configure().load();

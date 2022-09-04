@@ -30,7 +30,7 @@ public class JoinQuitEvent implements Listener {
 
         event.setJoinMessage("");
 
-        if(plugin.getConfig().getBoolean("join.joinMessage")){
+        if (plugin.getConfig().getBoolean("join.joinMessage")) {
             Bukkit.broadcastMessage(plugin.getConfig().getString("join.broadcast").replace("&", "§") + player.getDisplayName());
             player.sendMessage(plugin.getConfig().getString("join.custom1").replace("&", "§") + player.getDisplayName() + plugin.getConfig().getString("join.custom2").replace("&", "§"));
         }
@@ -43,7 +43,7 @@ public class JoinQuitEvent implements Listener {
 
         event.setQuitMessage("");
 
-        if(plugin.getConfig().getBoolean("leave.leaveMessage")){
+        if (plugin.getConfig().getBoolean("leave.leaveMessage")) {
             Bukkit.broadcastMessage(plugin.getConfig().getString("leave.broadcast").replace("&", "§") + player.getDisplayName());
         }
     }

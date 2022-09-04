@@ -23,21 +23,20 @@ public class Fight implements Listener {
         if (event.getDamager() instanceof Player && event.getEntity() instanceof Player) {
             Player damager = (Player) event.getDamager();
             Player trigger = (Player) event.getEntity();
-            double damage = event.getDamage();
 
-            if(!plugin.fight_list.contains(damager) || !plugin.fight_list.contains(trigger)){
-                    plugin.fight_list.add(damager);
+            if (!plugin.fight_list.contains(damager) || !plugin.fight_list.contains(trigger)) {
+                plugin.fight_list.add(damager);
+                plugin.fight_list.add(trigger);
+
+                damager.sendMessage("§6[§9Hera §cFight§6] §cVous entrez en combat avec §b" + trigger.getName() + "§c. Ne vous déconnectez pas !");
+                trigger.sendMessage("§6[§9Hera §cFight§6] §cVous entrez en combat avec §b" + damager.getName() + "§c. Ne vous déconnectez pas !");
+                Bukkit.getScheduler().runTaskLater(that, () -> {
                     plugin.fight_list.add(trigger);
-
-                    damager.sendMessage("§6[§9Hera §cFight§6] §cVous entrez en combat avec §b" + trigger.getName() + "§c. Ne vous déconnectez pas !");
-                    trigger.sendMessage("§6[§9Hera §cFight§6] §cVous entrez en combat avec §b" + damager.getName() + "§c. Ne vous déconnectez pas !");
-                    Bukkit.getScheduler().runTaskLater(that, () -> {
-                        plugin.fight_list.add(trigger);
-                        plugin.fight_list.remove(damager);
-                        damager.sendMessage("§6[§9Hera §cFight§6] §cVous n'êtes plus en combat avec §b" + trigger.getName() + ".");
-                        trigger.sendMessage("§6[§9Hera §cFight§6] §cVous n'êtes plus en combat avec §b" + damager.getName() + ".");
-                    }, 400L);
-                }
+                    plugin.fight_list.remove(damager);
+                    damager.sendMessage("§6[§9Hera §cFight§6] §cVous n'êtes plus en combat avec §b" + trigger.getName() + ".");
+                    trigger.sendMessage("§6[§9Hera §cFight§6] §cVous n'êtes plus en combat avec §b" + damager.getName() + ".");
+                }, 400L);
             }
         }
     }
+}

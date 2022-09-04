@@ -13,7 +13,7 @@ public class BetterInvisibility implements Listener {
     @EventHandler
     public void OnEntityDamageByEntity(EntityDamageByEntityEvent event) {
 
-        if(event.getEntity() instanceof Player && event.getDamager() instanceof Player) {
+        if (event.getEntity() instanceof Player && event.getDamager() instanceof Player) {
             Player player = (Player) event.getEntity();
             Entity damager = event.getDamager();
 

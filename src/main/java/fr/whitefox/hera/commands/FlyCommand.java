@@ -19,12 +19,13 @@ public class FlyCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 
-        if(!(sender instanceof Player)) return false;
-        Player player = (Player) sender;
+        if (cmd.getName().equalsIgnoreCase("fly")) {
 
-        if(cmd.getName().equalsIgnoreCase("fly")) {
+            if (!(sender instanceof Player)) return false;
+            Player player = (Player) sender;
+
             if (args.length == 0) {
-                if(!plugin.fly_list.contains(player)){
+                if (!plugin.fly_list.contains(player)) {
                     plugin.fly_list.add(player);
                     player.setAllowFlight(true);
                     player.sendMessage("§6[§9Hera§6] §aVous êtes désormais en fly !");
@@ -35,7 +36,7 @@ public class FlyCommand implements CommandExecutor {
                 }
             }
 
-            if (args.length > 0){
+            if (args.length > 0) {
                 Player target = Bukkit.getServer().getPlayer(args[0]);
 
                 if (target == null) {
@@ -43,7 +44,7 @@ public class FlyCommand implements CommandExecutor {
                     return true;
                 }
 
-                if(!plugin.fly_list.contains(target)){
+                if (!plugin.fly_list.contains(target)) {
                     plugin.fly_list.add(target);
                     target.setAllowFlight(true);
                     target.sendMessage("§6[§9Hera§6] §aVous êtes désormais en fly !");

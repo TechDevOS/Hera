@@ -11,16 +11,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 public class BetterTnt implements Listener {
 
     @EventHandler
-    public void onPlayerMoveEvent(PlayerMoveEvent event){
+    public void onPlayerMoveEvent(PlayerMoveEvent event) {
 
-        if(event.getTo() != event.getFrom()){
-            Player player = (Player) event.getPlayer();
+        if (event.getTo() != event.getFrom()) {
+            Player player = event.getPlayer();
 
             ItemStack tnt = new ItemStack(Material.TNT);
             ItemMeta tntMeta = tnt.getItemMeta();
             tnt.setItemMeta(tntMeta);
-
-            Location pLocation = player.getLocation();
 
             if (player.getInventory().contains(tnt)) {
                 player.playEffect(player.getLocation(), Effect.MOBSPAWNER_FLAMES, null);

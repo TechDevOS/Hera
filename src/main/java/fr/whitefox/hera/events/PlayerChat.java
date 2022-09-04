@@ -9,17 +9,18 @@ import org.bukkit.event.player.AsyncPlayerChatEvent;
 public class PlayerChat implements Listener {
 
     @EventHandler
-    public void onPlayerMention(AsyncPlayerChatEvent event){
+    public void onPlayerMention(AsyncPlayerChatEvent event) {
         Player player = event.getPlayer();
         String message = String.format(event.getMessage());
 
         event.setCancelled(true);
 
         for (Player people : Bukkit.getServer().getOnlinePlayers()) {
-            if(message.contains(people.getName())){
+            if (message.contains(people.getName())) {
                 String formatedMessage = message.replaceAll(people.getName(), "§5§l" + people.getName() + "§7");
                 people.sendMessage("§7" + player.getName() + " : " + formatedMessage);
-            } else{
+
+            } else {
                 people.sendMessage("§7" + player.getName() + " : " + message);
             }
         }

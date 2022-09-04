@@ -18,26 +18,24 @@ public class SpawnCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 
-        if(sender instanceof Player){
+        if (cmd.getName().equalsIgnoreCase("spawn")) {
+
+            if (!(sender instanceof Player)) return false;
             Player player = (Player) sender;
 
-            if(cmd.getName().equalsIgnoreCase("spawn")) {
-                if (args.length == 0) {
+            if (args.length == 0) {
 
-                    double x = plugin.getConfig().getDouble("config.spawn_x");
-                    double y = plugin.getConfig().getDouble("config.spawn_y");
-                    double z = plugin.getConfig().getDouble("config.spawn_z");
+                double x = plugin.getConfig().getDouble("config.spawn_x");
+                double y = plugin.getConfig().getDouble("config.spawn_y");
+                double z = plugin.getConfig().getDouble("config.spawn_z");
 
-                    Location spawn = new Location(player.getWorld(), x, y, z, 0f, 0f);
-                    player.teleport(spawn);
+                Location spawn = new Location(player.getWorld(), x, y, z, 0f, 0f);
+                player.teleport(spawn);
 
-                    player.sendMessage("§6[§9Hera§6] §aVous venez d'être téléporté au spawn.");
-
-                }
-
-                return true;
+                player.sendMessage("§6[§9Hera§6] §aVous venez d'être téléporté au spawn.");
             }
 
+            return true;
         }
 
         return true;

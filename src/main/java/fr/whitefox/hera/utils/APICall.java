@@ -22,7 +22,7 @@ public class APICall {
             return null;
         }
 
-        if(url == null){
+        if (url == null) {
             return null;
         }
 
@@ -33,7 +33,7 @@ public class APICall {
             return null;
         }
 
-        if(conn == null){
+        if (conn == null) {
             return null;
         }
 
@@ -57,7 +57,7 @@ public class APICall {
             return null;
         }
 
-        if(responsecode == 0){
+        if (responsecode == 0) {
             return null;
         }
 
@@ -75,7 +75,7 @@ public class APICall {
             return null;
         }
 
-        if(scanner == null){
+        if (scanner == null) {
             return null;
         }
 
@@ -96,7 +96,7 @@ public class APICall {
             return null;
         }
 
-        if(data_obj == null){
+        if (data_obj == null) {
             return null;
         }
 

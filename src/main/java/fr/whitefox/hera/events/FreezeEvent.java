@@ -15,13 +15,12 @@ public class FreezeEvent implements Listener {
     }
 
     @EventHandler
-    public void onFreeze(PlayerMoveEvent event){
+    public void onFreeze(PlayerMoveEvent event) {
 
         Player player = event.getPlayer();
 
-        if(plugin.freeze_list.contains(player)){
+        if (plugin.freeze_list.contains(player)) {
             event.setCancelled(true);
-
         }
     }
 }

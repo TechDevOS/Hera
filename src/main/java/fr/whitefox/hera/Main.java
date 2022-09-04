@@ -38,7 +38,7 @@ public final class Main extends JavaPlugin {
             Webhooks.up();
         }
 
-        getCommand("dupeip").setExecutor(new DupeipCommand());
+        getCommand("dupeip").setExecutor(new DupeipCommand(this));
         getCommand("vanish").setExecutor(new VanishCommand(this));
         getCommand("tpall").setExecutor(new TeleportationCommand());
         getCommand("gm").setExecutor(new GamemodeCommand());
@@ -60,7 +60,7 @@ public final class Main extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new PlayerChat(), this);
         getServer().getPluginManager().registerEvents(new BetterInvisibility(), this);
         getServer().getPluginManager().registerEvents(new BetterTnt(), this);
-        getServer().getPluginManager().registerEvents(new DeathEvent(this), this);
+        getServer().getPluginManager().registerEvents(new DeathEvent(), this);
         getServer().getPluginManager().registerEvents(new FreezeEvent(this), this);
     }
 

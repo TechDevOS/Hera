@@ -15,21 +15,21 @@ public class DebugCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 
-        if(cmd.getName().equalsIgnoreCase("debug")){
+        if (cmd.getName().equalsIgnoreCase("debug")) {
 
-            if(args.length == 0){
+            if (args.length == 0) {
                 try {
                     Runtime.getRuntime().exec("cp /Users/whitefox/IdeaProjects/Hera/target/hera-1.0.jar /Users/whitefox/Desktop/Server/plugins");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
 
-                if(sender instanceof Player) {
+                if (sender instanceof Player) {
                     Player player = (Player) sender;
 
                     player.sendMessage("§6[§9Hera§6]§r §4§lDEBUG§r ▶ §aLe plugin a été mis à jour ! Redémarrage en cours...");
                     getServer().dispatchCommand(getServer().getConsoleSender(), "rl");
-                } else{
+                } else {
                     getServer().getConsoleSender().sendMessage("§6[§9Hera§6]§r §4§lDEBUG§r ▶ §aLe plugin a été mis à jour ! Redémarrage en cours...");
                     getServer().dispatchCommand(getServer().getConsoleSender(), "rl");
                 }
@@ -37,8 +37,8 @@ public class DebugCommand implements CommandExecutor {
                 return true;
             }
 
-            if(args[0].equalsIgnoreCase("info")){
-                if(sender instanceof Player) {
+            if (args[0].equalsIgnoreCase("info")) {
+                if (sender instanceof Player) {
                     Player player = (Player) sender;
                     long maxMemory = Runtime.getRuntime().maxMemory();
                     long cores = Runtime.getRuntime().availableProcessors();
@@ -63,24 +63,7 @@ public class DebugCommand implements CommandExecutor {
 
                 return true;
 
-            } else if(args[0].equalsIgnoreCase("test")){
-                Player player = (Player) sender;
-
-                player.sendMessage("This test is good");
-
-                String response = args[1];
-
-                if(response.contains(player.getName())){
-                    player.sendMessage(ChatColor.GREEN + "Oh bah on dirait que l'arg a ton pseudo mon reuf");
-                } else{
-                    player.sendMessage(ChatColor.RED + "Désolé frérot, te prends pas pour le centre du monde.");
-                }
-
-                return true;
-
-            } else return false;
-
-
+            }
         }
 
         return true;

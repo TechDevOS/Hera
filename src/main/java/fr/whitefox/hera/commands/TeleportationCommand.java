@@ -12,23 +12,21 @@ public class TeleportationCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
-        if(sender instanceof Player) {
+        if (cmd.getName().equalsIgnoreCase("tpall")) {
+
+            if (!(sender instanceof Player)) return false;
             Player player = (Player) sender;
 
-            if (cmd.getName().equalsIgnoreCase("tpall")) {
-                if (Bukkit.getServer().getOnlinePlayers().size() == 1) {
-                    player.sendMessage(ChatColor.RED + "Il n'y a pas d'autres joueurs sur le serveur.");
+            if (Bukkit.getServer().getOnlinePlayers().size() == 1) {
+                player.sendMessage(ChatColor.RED + "Il n'y a pas d'autres joueurs sur le serveur.");
 
-                } else {
-                    for (Player p : Bukkit.getServer().getOnlinePlayers()) {
-                        p.teleport(player.getLocation());
-                    }
-
-                    player.sendMessage("§6[§9Hera§6] §b" + (Bukkit.getServer().getOnlinePlayers().size() - 1) + "§a joueurs ont été téléportés sur votre position.");
+            } else {
+                for (Player p : Bukkit.getServer().getOnlinePlayers()) {
+                    p.teleport(player.getLocation());
                 }
-            }
 
-            return true;
+                player.sendMessage("§6[§9Hera§6] §b" + (Bukkit.getServer().getOnlinePlayers().size() - 1) + "§a joueurs ont été téléportés sur votre position.");
+            }
         }
 
         return true;

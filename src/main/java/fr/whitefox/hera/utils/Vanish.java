@@ -1,4 +1,5 @@
 package fr.whitefox.hera.utils;
+
 import fr.whitefox.hera.Main;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
