@@ -60,6 +60,7 @@ public final class Main extends JavaPlugin {
         getCommand("fly").setExecutor(new FlyCommand(this));
         getCommand("day").setExecutor(new TimeCommand());
         getCommand("night").setExecutor(new TimeCommand());
+        getCommand("kick").setExecutor(new KickCommand());
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(this), this);
         getServer().getPluginManager().registerEvents(new Fight(this), this);

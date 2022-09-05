@@ -60,3 +60,6 @@ commands:
   night:
     description: Permet de définir le monde sur nuit
     permission: hera.time
+  kick:
+    description: Permet d'éjecter un joueur du serveur
+    permission: hera.kick
