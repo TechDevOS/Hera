@@ -4,6 +4,7 @@ import fr.whitefox.hera.commands.*;
 import fr.whitefox.hera.debug.*;
 import fr.whitefox.hera.events.*;
 import fr.whitefox.hera.utils.*;
+import net.luckperms.api.LuckPerms;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -19,6 +20,7 @@ public final class Main extends JavaPlugin {
     public ArrayList<Player> fly_list = new ArrayList<>();
 
     public static Main that;
+    private LuckPerms luckPerms;
 
     @Override
     public void onEnable() {
@@ -33,6 +35,8 @@ public final class Main extends JavaPlugin {
         getServer().getConsoleSender().sendMessage(" ");
         getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "[Hera] Up !");
         getServer().getConsoleSender().sendMessage(" ");
+
+        this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
 
         if (this.getConfig().getBoolean("WebhooksDiscord.activate")) {
             Webhooks.up();
@@ -59,7 +63,7 @@ public final class Main extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(this), this);
         getServer().getPluginManager().registerEvents(new Fight(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerChat(), this);
+        getServer().getPluginManager().registerEvents(new PlayerChat(this, this.luckPerms), this);
         getServer().getPluginManager().registerEvents(new BetterInvisibility(), this);
         getServer().getPluginManager().registerEvents(new BetterTnt(), this);
         getServer().getPluginManager().registerEvents(new DeathEvent(), this);
