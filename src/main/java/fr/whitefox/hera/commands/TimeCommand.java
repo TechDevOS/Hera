@@ -26,7 +26,7 @@ public class TimeCommand implements CommandExecutor {
                     return true;
                 }
 
-                if (args.length > 0) {
+                if (args.length >= 1) {
                     Player target = Bukkit.getServer().getPlayer(args[0]);
 
                     if (target == null) {
@@ -34,7 +34,7 @@ public class TimeCommand implements CommandExecutor {
                         return true;
                     }
                     target.getLocation().getWorld().setTime(6000);
-                    getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Le monde a bien été défini sur §2§lJour");
+                    getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Le monde a bien été défini sur Jour");
                 }
             }
         }
@@ -48,19 +48,21 @@ public class TimeCommand implements CommandExecutor {
             } else {
                 if (args.length == 0) {
                     getServer().getConsoleSender().sendMessage(ChatColor.RED + "Vous devez spécifier un joueur !");
-                    return true;
+                    return false;
                 }
 
-                if (args.length > 0) {
+                if (args.length >= 1) {
                     Player target = Bukkit.getServer().getPlayer(args[0]);
 
                     if (target == null) {
                         getServer().getConsoleSender().sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
-                        return true;
+                        return false;
                     }
                     target.getLocation().getWorld().setTime(18000);
-                    getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Le monde a bien été défini sur §2§lNuit");
+                    getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Le monde a bien été défini sur Nuit");
                 }
+
+                return true;
             }
         }
 
