@@ -12,12 +12,6 @@ import static org.bukkit.Bukkit.getServer;
 
 public class WhitelistCommand implements CommandExecutor {
 
-    Main plugin;
-
-    public WhitelistCommand(Main plugin) {
-        this.plugin = plugin;
-    }
-
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 

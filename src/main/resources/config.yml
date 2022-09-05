@@ -14,7 +14,7 @@ leave:
   broadcast: "[&4-&r] "
 
 antiVPN:
-  activate: true
+  activate: false
   4G: true
   hosting: true
   proxy: true

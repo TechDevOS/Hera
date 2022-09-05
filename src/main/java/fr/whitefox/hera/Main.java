@@ -49,7 +49,7 @@ public final class Main extends JavaPlugin {
         getCommand("sun").setExecutor(new WeatherCommand());
         getCommand("rain").setExecutor(new WeatherCommand());
         getCommand("thunder").setExecutor(new WeatherCommand());
-        getCommand("wl").setExecutor(new WhitelistCommand(this));
+        getCommand("wl").setExecutor(new WhitelistCommand());
         getCommand("antivpn").setExecutor(new AntiVPNCommand(this));
         getCommand("debug").setExecutor(new DebugCommand());
         getCommand("freeze").setExecutor(new FreezeCommand(this));
