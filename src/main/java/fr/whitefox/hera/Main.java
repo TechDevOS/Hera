@@ -54,6 +54,8 @@ public final class Main extends JavaPlugin {
         getCommand("debug").setExecutor(new DebugCommand());
         getCommand("freeze").setExecutor(new FreezeCommand(this));
         getCommand("fly").setExecutor(new FlyCommand(this));
+        getCommand("day").setExecutor(new TimeCommand());
+        getCommand("night").setExecutor(new TimeCommand());
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(this), this);
         getServer().getPluginManager().registerEvents(new Fight(this), this);

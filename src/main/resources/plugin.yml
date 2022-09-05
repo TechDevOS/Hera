@@ -54,3 +54,9 @@ commands:
   fly:
     description: Permet de se mettre en fly
     permission: hera.fly
+  day:
+    description: Permet de définir le monde sur jour
+    permission: hera.time
+  night:
+    description: Permet de définir le monde sur nuit
+    permission: hera.time
