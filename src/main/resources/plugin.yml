@@ -63,3 +63,15 @@ commands:
   kick:
     description: Permet d'éjecter un joueur du serveur
     permission: hera.kick
+  pday:
+    description: Permet de définir la vision du joueur sur jour
+    permission: hera.time
+  pnight:
+    description: Permet de définir le vision du joueur sur nuit
+    permission: hera.time
+  ban:
+    description: Permet de bannir temporairement ou définitivement un joueur
+    permission: hera.ban
+  unban:
+    description: Permet de débannir un joueur
+    permission: hera.ban
