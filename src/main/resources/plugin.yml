@@ -75,3 +75,9 @@ commands:
   unban:
     description: Permet de débannir un joueur
     permission: hera.ban
+  mute:
+    description: Permet de mute un joueur
+    permission: hera.mute
+  unmute:
+    description: Permet d'unmute un joueur
+    permission: hera.mute

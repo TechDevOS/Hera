@@ -3,10 +3,11 @@ package fr.whitefox.hera;
 import fr.whitefox.hera.commands.*;
 import fr.whitefox.hera.debug.DebugCommand;
 import fr.whitefox.hera.events.*;
+import fr.whitefox.hera.mysql.MuteManager;
 import fr.whitefox.hera.mysql.MySQL;
 import fr.whitefox.hera.mysql.PlayerInfos;
 import fr.whitefox.hera.utils.AntiVPN;
-import fr.whitefox.hera.utils.BanManager;
+import fr.whitefox.hera.mysql.BanManager;
 import fr.whitefox.hera.utils.Vanish;
 import fr.whitefox.hera.utils.Webhooks;
 import io.github.cdimascio.dotenv.Dotenv;
@@ -30,6 +31,7 @@ public class Main extends JavaPlugin {
     public MySQL mysql = new MySQL();
     public PlayerInfos playerInfos = new PlayerInfos();
     public BanManager banManager = new BanManager();
+    public MuteManager muteManager = new MuteManager();
 
     private LuckPerms luckPerms;
 
@@ -85,6 +87,8 @@ public class Main extends JavaPlugin {
         getCommand("kick").setExecutor(new KickCommand());
         getCommand("ban").setExecutor(new BanCommand());
         getCommand("unban").setExecutor(new BanCommand());
+        getCommand("mute").setExecutor(new MuteCommand());
+        getCommand("unmute").setExecutor(new MuteCommand());
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(this), this);
         getServer().getPluginManager().registerEvents(new Fight(this), this);

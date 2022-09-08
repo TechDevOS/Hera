@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerLoginEvent;
 
 public class PlayerChat implements Listener {
     private final Main plugin;
@@ -27,16 +28,31 @@ public class PlayerChat implements Listener {
         CachedMetaData metaData = this.luckPerms.getPlayerAdapter(Player.class).getMetaData(player);
         String prefix = metaData.getPrefix();
         String suffix = metaData.getSuffix();
+        String group = metaData.getPrimaryGroup();
 
         event.setCancelled(true);
 
-        for (Player people : Bukkit.getServer().getOnlinePlayers()) {
-            if (message.contains(people.getName())) {
-                String formatedMessage = message.replaceAll(people.getName(), "§5§l" + people.getName() + "§7");
-                people.sendMessage(prefix + player.getName() + "§r: "+ suffix + formatedMessage);
+        Main.getInstance().muteManager.checkDuration(player.getUniqueId());
 
-            } else {
-                people.sendMessage(prefix + player.getName() + "§r: "+ suffix + message);
+        if(Main.getInstance().muteManager.isMuted(player.getUniqueId())){
+            player.sendMessage("\n§cVous avez été rendu muet pour : §e" + Main.getInstance().muteManager.getReason(player.getUniqueId()) + ".\n§cFin de votre sanction dans : §e" + Main.getInstance().muteManager.getTimeLeft(player.getUniqueId()) + "\n");
+        } else {
+            for (Player people : Bukkit.getServer().getOnlinePlayers()) {
+                if (message.contains(people.getName())) {
+                    String formatedMessage = message.replaceAll(people.getName(), "§5§l" + people.getName() + "§7");
+                    if (group.equalsIgnoreCase("default")) {
+                        people.sendMessage("§7" + player.getName() + "§r: §7" + formatedMessage);
+                    } else {
+                        people.sendMessage(prefix + player.getName() + "§r: " + suffix + formatedMessage);
+                    }
+
+                } else {
+                    if (group.equalsIgnoreCase("default")) {
+                        people.sendMessage("§7" + player.getName() + "§r: §7" + message);
+                    } else {
+                        people.sendMessage(prefix + player.getName() + "§r: " + suffix + message);
+                    }
+                }
             }
         }
     }
