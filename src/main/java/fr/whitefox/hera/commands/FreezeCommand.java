@@ -10,27 +10,20 @@ import org.bukkit.entity.Player;
 
 public class FreezeCommand implements CommandExecutor {
 
-    Main plugin;
-
-    public FreezeCommand(Main plugin) {
-        this.plugin = plugin;
-    }
+    private Main main = Main.getInstance();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 
         if (cmd.getName().equalsIgnoreCase("freeze")) {
 
-            if (!(sender instanceof Player)) return false;
-            Player player = (Player) sender;
-
             if (args.length == 0) {
-                player.sendMessage(ChatColor.RED + "Vous devez spécifier un joueur !");
+                sender.sendMessage(ChatColor.RED + "Vous devez spécifier un joueur !");
                 return false;
             }
 
-            if (args[0].equalsIgnoreCase(player.getName())) {
-                player.sendMessage(ChatColor.RED + "Vous ne pouvez pas vous freeze vous même !");
+            if (args[0].equalsIgnoreCase(sender.getName())) {
+                sender.sendMessage(ChatColor.RED + "Vous ne pouvez pas vous freeze vous même !");
                 return false;
             }
 
@@ -38,18 +31,18 @@ public class FreezeCommand implements CommandExecutor {
                 Player target = Bukkit.getServer().getPlayer(args[0]);
 
                 if (target == null) {
-                    player.sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
+                    sender.sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
                     return false;
                 }
 
-                if (!plugin.freeze_list.contains(target)) {
-                    plugin.freeze_list.add(target);
+                if (!main.freeze_list.contains(target)) {
+                    main.freeze_list.add(target);
                     target.sendMessage("§6[§9Hera§6] §cVous avez été freeze !");
-                    player.sendMessage("§6[§9Hera§6] §aLe joueur §c" + target.getName() + "§a a bien été freeze.");
+                    sender.sendMessage("§6[§9Hera§6] §aLe joueur §c" + target.getName() + "§a a bien été freeze.");
                 } else {
-                    plugin.freeze_list.remove(target);
+                    main.freeze_list.remove(target);
                     target.sendMessage("§6[§9Hera§6] §aVous n'êtes plus freeze !");
-                    player.sendMessage("§6[§9Hera§6] §aLe joueur §c" + target.getName() + "§a n'est plus freeze.");
+                    sender.sendMessage("§6[§9Hera§6] §aLe joueur §c" + target.getName() + "§a n'est plus freeze.");
                 }
             }
         }

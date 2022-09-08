@@ -1,6 +1,5 @@
 package fr.whitefox.hera.commands;
 
-import fr.whitefox.hera.Main;
 import fr.whitefox.hera.utils.APICall;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -12,12 +11,6 @@ import org.json.simple.JSONObject;
 import static org.bukkit.Bukkit.getServer;
 
 public class DupeipCommand implements CommandExecutor {
-
-    Main plugin;
-
-    public DupeipCommand(Main plugin) {
-        this.plugin = plugin;
-    }
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
