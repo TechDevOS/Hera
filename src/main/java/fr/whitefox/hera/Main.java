@@ -6,9 +6,7 @@ import fr.whitefox.hera.events.*;
 import fr.whitefox.hera.mysql.MuteManager;
 import fr.whitefox.hera.mysql.MySQL;
 import fr.whitefox.hera.mysql.PlayerInfos;
-import fr.whitefox.hera.utils.AntiVPN;
 import fr.whitefox.hera.mysql.BanManager;
-import fr.whitefox.hera.utils.Vanish;
 import fr.whitefox.hera.utils.Webhooks;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.luckperms.api.LuckPerms;
@@ -41,7 +39,11 @@ public class Main extends JavaPlugin {
 
     @Override
     public void onEnable() {
+        getServer().getConsoleSender().sendMessage(ChatColor.RED + "[Hera] Starting...");
+
         instance = this;
+        this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
+
         Dotenv dotenv = null;
         dotenv = Dotenv.configure().load();
 
@@ -53,54 +55,49 @@ public class Main extends JavaPlugin {
 
         mysql.connect(host, port, tablename, username, password);
 
-        this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
         saveDefaultConfig();
 
         if (this.getConfig().getBoolean("WebhooksDiscord.activate")) {
             Webhooks.up();
         }
 
-        getServer().getConsoleSender().sendMessage("");
-        getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera] Up !");
-        getServer().getConsoleSender().sendMessage("");
-
-        getCommand("dupeip").setExecutor(new DupeipCommand(this));
-        getCommand("vanish").setExecutor(new VanishCommand(this));
+        getCommand("dupeip").setExecutor(new DupeipCommand());
+        getCommand("vanish").setExecutor(new VanishCommand());
         getCommand("tpall").setExecutor(new TeleportationCommand());
         getCommand("gm").setExecutor(new GamemodeCommand());
         getCommand("heal").setExecutor(new HealCommand());
         getCommand("feed").setExecutor(new FeedCommand());
-        getCommand("spawn").setExecutor(new SpawnCommand(this));
+        getCommand("spawn").setExecutor(new SpawnCommand());
         getCommand("s").setExecutor(new StopCommand());
         getCommand("sun").setExecutor(new WeatherCommand());
         getCommand("rain").setExecutor(new WeatherCommand());
         getCommand("thunder").setExecutor(new WeatherCommand());
         getCommand("wl").setExecutor(new WhitelistCommand());
-        getCommand("antivpn").setExecutor(new AntiVPNCommand(this));
+        getCommand("antivpn").setExecutor(new AntiVPNCommand());
         getCommand("debug").setExecutor(new DebugCommand());
-        getCommand("freeze").setExecutor(new FreezeCommand(this));
-        getCommand("fly").setExecutor(new FlyCommand(this));
-        getCommand("day").setExecutor(new TimeCommand(this));
-        getCommand("night").setExecutor(new TimeCommand(this));
-        getCommand("pday").setExecutor(new TimeCommand(this));
-        getCommand("pnight").setExecutor(new TimeCommand(this));
+        getCommand("freeze").setExecutor(new FreezeCommand());
+        getCommand("fly").setExecutor(new FlyCommand());
+        getCommand("day").setExecutor(new TimeCommand());
+        getCommand("night").setExecutor(new TimeCommand());
+        getCommand("pday").setExecutor(new TimeCommand());
+        getCommand("pnight").setExecutor(new TimeCommand());
         getCommand("kick").setExecutor(new KickCommand());
         getCommand("ban").setExecutor(new BanCommand());
         getCommand("unban").setExecutor(new BanCommand());
         getCommand("mute").setExecutor(new MuteCommand());
         getCommand("unmute").setExecutor(new MuteCommand());
 
-        getServer().getPluginManager().registerEvents(new JoinQuitEvent(this), this);
-        getServer().getPluginManager().registerEvents(new Fight(this), this);
-        getServer().getPluginManager().registerEvents(new PlayerChat(this, this.luckPerms), this);
+        getServer().getPluginManager().registerEvents(new JoinQuitEvent(), this);
+        getServer().getPluginManager().registerEvents(new Fight(), this);
+        getServer().getPluginManager().registerEvents(new PlayerChat(this.luckPerms), this);
         getServer().getPluginManager().registerEvents(new BetterInvisibility(), this);
         getServer().getPluginManager().registerEvents(new BetterTnt(), this);
         getServer().getPluginManager().registerEvents(new DeathEvent(), this);
-        getServer().getPluginManager().registerEvents(new FreezeEvent(this), this);
+        getServer().getPluginManager().registerEvents(new FreezeEvent(), this);
 
-        new AntiVPN(this);
-        new Vanish(this);
-        new Webhooks(this);
+        getServer().getConsoleSender().sendMessage("");
+        getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera] Up !");
+        getServer().getConsoleSender().sendMessage("");
     }
 
     @Override

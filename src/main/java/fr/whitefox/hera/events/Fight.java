@@ -9,12 +9,6 @@ import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
 public class Fight implements Listener {
 
-    Main plugin;
-
-    public Fight(Main plugin) {
-        this.plugin = plugin;
-    }
-
     private Main main = Main.getInstance();
 
     @EventHandler
@@ -24,15 +18,15 @@ public class Fight implements Listener {
             Player damager = (Player) event.getDamager();
             Player trigger = (Player) event.getEntity();
 
-            if (!plugin.fight_list.contains(damager) || !plugin.fight_list.contains(trigger)) {
-                plugin.fight_list.add(damager);
-                plugin.fight_list.add(trigger);
+            if (!main.fight_list.contains(damager) || !main.fight_list.contains(trigger)) {
+                main.fight_list.add(damager);
+                main.fight_list.add(trigger);
 
                 damager.sendMessage("§6[§9Hera §cFight§6] §cVous entrez en combat avec §b" + trigger.getName() + "§c. Ne vous déconnectez pas !");
                 trigger.sendMessage("§6[§9Hera §cFight§6] §cVous entrez en combat avec §b" + damager.getName() + "§c. Ne vous déconnectez pas !");
                 Bukkit.getScheduler().runTaskLater(main, () -> {
-                    plugin.fight_list.add(trigger);
-                    plugin.fight_list.remove(damager);
+                    main.fight_list.add(trigger);
+                    main.fight_list.remove(damager);
                     damager.sendMessage("§6[§9Hera §cFight§6] §cVous n'êtes plus en combat avec §b" + trigger.getName() + ".");
                     trigger.sendMessage("§6[§9Hera §cFight§6] §cVous n'êtes plus en combat avec §b" + damager.getName() + ".");
                 }, 400L);

@@ -1,7 +1,5 @@
 package fr.whitefox.hera.utils;
 
-import fr.whitefox.hera.Main;
-
 import javax.net.ssl.HttpsURLConnection;
 import java.io.OutputStream;
 import java.net.URL;
@@ -10,12 +8,6 @@ import java.time.Instant;
 import io.github.cdimascio.dotenv.Dotenv;
 
 public class Webhooks {
-
-    private static Main plugin;
-
-    public Webhooks(Main plugin) {
-        this.plugin = plugin;
-    }
 
     public static void up() {
 

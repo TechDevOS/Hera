@@ -15,11 +15,7 @@ import java.io.IOException;
 
 public class JoinQuitEvent implements Listener {
 
-    private Main plugin;
-
-    public JoinQuitEvent(Main plugin) {
-        this.plugin = plugin;
-    }
+    private Main main = Main.getInstance();
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) throws IOException {
@@ -29,15 +25,15 @@ public class JoinQuitEvent implements Listener {
 
         playerInfos.update(player);
 
-        if (plugin.getConfig().getBoolean("antiVPN.activate")) {
+        if (main.getConfig().getBoolean("antiVPN.activate")) {
             AntiVPN.verif(player);
         }
 
         event.setJoinMessage("");
 
-        if (plugin.getConfig().getBoolean("join.joinMessage")) {
-            Bukkit.broadcastMessage(plugin.getConfig().getString("join.broadcast").replace("&", "§") + player.getDisplayName());
-            player.sendMessage(plugin.getConfig().getString("join.custom1").replace("&", "§") + player.getDisplayName() + plugin.getConfig().getString("join.custom2").replace("&", "§"));
+        if (main.getConfig().getBoolean("join.joinMessage")) {
+            Bukkit.broadcastMessage(main.getConfig().getString("join.broadcast").replace("&", "§") + player.getDisplayName());
+            player.sendMessage(main.getConfig().getString("join.custom1").replace("&", "§") + player.getDisplayName() + main.getConfig().getString("join.custom2").replace("&", "§"));
         }
     }
 
@@ -48,21 +44,21 @@ public class JoinQuitEvent implements Listener {
 
         event.setQuitMessage("");
 
-        if (plugin.getConfig().getBoolean("leave.leaveMessage")) {
-            Bukkit.broadcastMessage(plugin.getConfig().getString("leave.broadcast").replace("&", "§") + player.getDisplayName());
+        if (main.getConfig().getBoolean("leave.leaveMessage")) {
+            Bukkit.broadcastMessage(main.getConfig().getString("leave.broadcast").replace("&", "§") + player.getDisplayName());
         }
     }
 
     @EventHandler
     public void onLogin(PlayerLoginEvent event){
         Player player = event.getPlayer();
-        Main.getInstance().banManager.checkDuration(player.getUniqueId());
+        main.banManager.checkDuration(player.getUniqueId());
 
-        if(Main.getInstance().banManager.isBanned(player.getUniqueId())){
+        if(main.banManager.isBanned(player.getUniqueId())){
             event.setResult(PlayerLoginEvent.Result.KICK_BANNED);
             event.setKickMessage("§4§lVous avez été banni du serveur !" +
-                    "\n\n\n§c§lRaison : §e" + Main.getInstance().banManager.getReason(player.getUniqueId()) +
-                    "\n§c§lTemps restant : §e" + Main.getInstance().banManager.getTimeLeft(player.getUniqueId()) +
+                    "\n\n\n§c§lRaison : §e" + main.banManager.getReason(player.getUniqueId()) +
+                    "\n§c§lTemps restant : §e" + main.banManager.getTimeLeft(player.getUniqueId()) +
                     "\n\n\n§l§6[§9§lHera§l§6]"
             );
         }

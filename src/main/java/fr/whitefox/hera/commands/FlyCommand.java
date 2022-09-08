@@ -10,11 +10,7 @@ import org.bukkit.entity.Player;
 
 public class FlyCommand implements CommandExecutor {
 
-    Main plugin;
-
-    public FlyCommand(Main plugin) {
-        this.plugin = plugin;
-    }
+    private Main main = Main.getInstance();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
@@ -25,12 +21,12 @@ public class FlyCommand implements CommandExecutor {
             Player player = (Player) sender;
 
             if (args.length == 0) {
-                if (!plugin.fly_list.contains(player)) {
-                    plugin.fly_list.add(player);
+                if (!main.fly_list.contains(player)) {
+                    main.fly_list.add(player);
                     player.setAllowFlight(true);
                     player.sendMessage("§6[§9Hera§6] §aVous êtes désormais en fly !");
                 } else {
-                    plugin.fly_list.remove(player);
+                    main.fly_list.remove(player);
                     player.setAllowFlight(false);
                     player.sendMessage("§6[§9Hera§6] §cVous n'êtes désormais plus en fly !");
                 }
@@ -44,13 +40,13 @@ public class FlyCommand implements CommandExecutor {
                     return true;
                 }
 
-                if (!plugin.fly_list.contains(target)) {
-                    plugin.fly_list.add(target);
+                if (!main.fly_list.contains(target)) {
+                    main.fly_list.add(target);
                     target.setAllowFlight(true);
                     target.sendMessage("§6[§9Hera§6] §aVous êtes désormais en fly !");
                     player.sendMessage("§6[§9Hera§6] §aVous venez de mettre en fly §c" + target.getName() + "§a !");
                 } else {
-                    plugin.fly_list.remove(target);
+                    main.fly_list.remove(target);
                     target.setAllowFlight(false);
                     target.sendMessage("§6[§9Hera§6] §cVous n'êtes désormais plus en fly !");
                     player.sendMessage("§6[§9Hera§6] §aVous venez de retirer le fly de §c" + target.getName() + "§a !");

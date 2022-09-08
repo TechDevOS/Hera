@@ -11,11 +11,7 @@ import org.bukkit.entity.Player;
 
 public class VanishCommand implements CommandExecutor {
 
-    Main plugin;
-
-    public VanishCommand(Main plugin) {
-        this.plugin = plugin;
-    }
+    private Main main = Main.getInstance();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
@@ -40,7 +36,7 @@ public class VanishCommand implements CommandExecutor {
                     return true;
                 }
 
-                if (plugin.invisible_list.contains(target)) {
+                if (main.invisible_list.contains(target)) {
                     player.sendMessage(ChatColor.GREEN + "§6[§9Hera§6] §aLe joueur §c" + target.getName() + "§a est maintenant visible pour les autres joueurs du serveur.");
                 } else {
                     player.sendMessage(ChatColor.GREEN + "§6[§9Hera§6] §aLe joueur §c" + target.getName() + "§a est maintenant invisible.");

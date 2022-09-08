@@ -8,14 +8,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.event.player.PlayerLoginEvent;
 
 public class PlayerChat implements Listener {
-    private final Main plugin;
     private final LuckPerms luckPerms;
 
-    public PlayerChat(Main plugin, LuckPerms luckPerms) {
-        this.plugin = plugin;
+    public PlayerChat(LuckPerms luckPerms) {
         this.luckPerms = luckPerms;
     }
 

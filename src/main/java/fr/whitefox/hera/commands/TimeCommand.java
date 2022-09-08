@@ -12,11 +12,7 @@ import static org.bukkit.Bukkit.getServer;
 
 public class TimeCommand implements CommandExecutor {
 
-    Main plugin;
-
-    public TimeCommand(Main plugin) {
-        this.plugin = plugin;
-    }
+    private Main main = Main.getInstance();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
@@ -51,13 +47,13 @@ public class TimeCommand implements CommandExecutor {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
 
-                if (!plugin.pday_list.contains(player)) {
-                    plugin.pday_list.add(player);
-                    plugin.pnight_list.remove(player);
+                if (!main.pday_list.contains(player)) {
+                    main.pday_list.add(player);
+                    main.pnight_list.remove(player);
                     player.setPlayerTime(6000, true);
                     player.sendMessage("§6[§9Hera§6] §aVotre vision personnelle a bien été définie sur §2§lJour ");
                 } else {
-                    plugin.pday_list.remove(player);
+                    main.pday_list.remove(player);
                     player.resetPlayerTime();
                     player.sendMessage("§6[§9Hera§6] §aVotre vision personnelle est bien revenue sur celle du serveur. ");
                 }
@@ -75,12 +71,12 @@ public class TimeCommand implements CommandExecutor {
                     return true;
                 }
 
-                if (!plugin.pday_list.contains(target)) {
-                    plugin.pday_list.add(target);
+                if (!main.pday_list.contains(target)) {
+                    main.pday_list.add(target);
                     target.setPlayerTime(6000, true);
                     getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "La vision personnelle de §6" + target.getName() + "§a a bien été définie sur Jour");
                 } else {
-                    plugin.pday_list.remove(target);
+                    main.pday_list.remove(target);
                     target.resetPlayerTime();
                     getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "La vision personnelle de §6" + target.getName() + "§a est bien revenue sur celle du serveur.");
                 }
@@ -119,13 +115,13 @@ public class TimeCommand implements CommandExecutor {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
 
-                if (!plugin.pnight_list.contains(player)) {
-                    plugin.pnight_list.add(player);
-                    plugin.pday_list.remove(player);
+                if (!main.pnight_list.contains(player)) {
+                    main.pnight_list.add(player);
+                    main.pday_list.remove(player);
                     player.getLocation().getWorld().setTime(18000);
                     player.sendMessage(" §aVotre vision personnelle a bien été défini sur §2§lNuit");
                 } else {
-                    plugin.pnight_list.remove(player);
+                    main.pnight_list.remove(player);
                     player.resetPlayerTime();
                     player.sendMessage("§6[§9Hera§6] §aVotre vision personnelle est bien revenue sur celle du serveur. ");
                 }
@@ -143,12 +139,12 @@ public class TimeCommand implements CommandExecutor {
                     return true;
                 }
 
-                if (!plugin.pnight_list.contains(target)) {
-                    plugin.pnight_list.add(target);
+                if (!main.pnight_list.contains(target)) {
+                    main.pnight_list.add(target);
                     target.getLocation().getWorld().setTime(18000);
                     getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "La vision personnelle de §6" + target.getName() + "§a a bien été définie sur Nuit");
                 } else {
-                    plugin.pnight_list.remove(target);
+                    main.pnight_list.remove(target);
                     target.resetPlayerTime();
                     getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "La vision personnelle de §6" + target.getName() + "§a est bien revenue sur celle du serveur.");
                 }

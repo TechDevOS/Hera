@@ -9,11 +9,7 @@ import org.bukkit.entity.Player;
 
 public class SpawnCommand implements CommandExecutor {
 
-    Main plugin;
-
-    public SpawnCommand(Main plugin) {
-        this.plugin = plugin;
-    }
+    private Main main = Main.getInstance();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
@@ -25,9 +21,9 @@ public class SpawnCommand implements CommandExecutor {
 
             if (args.length == 0) {
 
-                double x = plugin.getConfig().getDouble("config.spawn_x");
-                double y = plugin.getConfig().getDouble("config.spawn_y");
-                double z = plugin.getConfig().getDouble("config.spawn_z");
+                double x = main.getConfig().getDouble("config.spawn_x");
+                double y = main.getConfig().getDouble("config.spawn_y");
+                double z = main.getConfig().getDouble("config.spawn_z");
 
                 Location spawn = new Location(player.getWorld(), x, y, z, 0f, 0f);
                 player.teleport(spawn);
