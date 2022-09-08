@@ -121,7 +121,7 @@ public class BanCommand implements CommandExecutor {
 
     public void helpMessage(CommandSender sender) {
         sender.sendMessage("§cSyntaxe : /ban <joueur> perm <raison>");
-        sender.sendMessage("§cSyntaxe : /ban <joueur> <durée><unité> <raison>");
+        sender.sendMessage("§cSyntaxe : /ban <joueur> <durée>:<unité> <raison>");
     }
 }
 
