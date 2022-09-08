@@ -1,7 +1,7 @@
 package fr.whitefox.hera.commands;
 
 import fr.whitefox.hera.Main;
-import fr.whitefox.hera.utils.TimeUnit;
+import fr.whitefox.hera.mysql.TimeUnit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
