@@ -43,7 +43,7 @@ public class InfCommand implements CommandExecutor {
             sender.sendMessage("\n§cMuet : " + isMuted);
             sender.sendMessage("§cBanni : " + isBanned);
 
-            sender.sendMessage("\n§7" + ChatColor.STRIKETHROUGH + "----------------------------------------------------");
+            sender.sendMessage("\n§7" + ChatColor.STRIKETHROUGH + "---------------------------------------------------");
             sender.sendMessage(" ");
         }
         return true;
