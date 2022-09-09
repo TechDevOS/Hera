@@ -18,13 +18,12 @@ public class InfCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 
-        if(cmd.getName().equalsIgnoreCase("inf")){
+        if (cmd.getName().equalsIgnoreCase("inf")) {
 
             if (args.length < 1) {
-                helpMessage(sender);
+                sender.sendMessage(helpMessage());
                 return false;
             }
-
 
             String targetName = args[0];
 
@@ -41,24 +40,25 @@ public class InfCommand implements CommandExecutor {
             sender.sendMessage("\n§7" + ChatColor.STRIKETHROUGH + "----------------" + "§9§lPLAYER INFORMATIONS§7" + ChatColor.STRIKETHROUGH + "----------------");
             sender.sendMessage("\n\n§cPseudo : §6§l" + targetName);
             sender.sendMessage("§cDernière connexion : " + lastConnection);
-            sender.sendMessage("\n§cMuet : " + isMuted);
-            sender.sendMessage("§cBanni : " + isBanned);
-            if(Bukkit.getPlayer(targetUUID) != null){
+            if (Bukkit.getPlayer(targetUUID) != null && sender.hasPermission("hera.dupeip")) {
                 Player target = getServer().getPlayer(args[0]);
                 String ip = target.getAddress().toString().substring(1).split(":")[0];
-                sender.sendMessage("\n§cDernière IP connue : §6§l" + ip);
+                sender.sendMessage("§cDernière IP connue : §6§l" + ip);
             }
+            sender.sendMessage("\n§cMuet : " + isMuted);
+            sender.sendMessage("§cBanni : " + isBanned);
+
             sender.sendMessage("\n§7" + ChatColor.STRIKETHROUGH + "----------------------------------------------------");
             sender.sendMessage(" ");
         }
         return true;
     }
 
-    public void helpMessage(CommandSender sender) {
-        sender.sendMessage("§cSyntaxe : /inf <joueur>");
+    public String helpMessage() {
+        return "§cSyntaxe : /inf <joueur>";
     }
 
-    private String isBanned(UUID playerUUID){
+    private String isBanned(UUID playerUUID) {
         if (Main.getInstance().banManager.isBanned(playerUUID)) {
             return "§4§lOui";
         } else {
@@ -66,7 +66,7 @@ public class InfCommand implements CommandExecutor {
         }
     }
 
-    private String isMuted(UUID playerUUID){
+    private String isMuted(UUID playerUUID) {
         if (Main.getInstance().muteManager.isMuted(playerUUID)) {
             return "§4§lOui";
         } else {
@@ -74,7 +74,7 @@ public class InfCommand implements CommandExecutor {
         }
     }
 
-    private String getLastConnexion(UUID playerUUID){
+    private String getLastConnexion(UUID playerUUID) {
         if (Bukkit.getPlayer(playerUUID) != null) {
             return "§a§lJoueur actuellement connecté";
         } else {
