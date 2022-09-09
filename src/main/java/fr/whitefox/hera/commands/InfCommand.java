@@ -59,19 +59,11 @@ public class InfCommand implements CommandExecutor {
     }
 
     private String isBanned(UUID playerUUID) {
-        if (Main.getInstance().banManager.isBanned(playerUUID)) {
-            return "§4§lOui";
-        } else {
-            return "§a§lNon";
-        }
+        return Main.getInstance().banManager.isBanned(playerUUID) ? "§4§lOui" : "§a§lNon";
     }
 
     private String isMuted(UUID playerUUID) {
-        if (Main.getInstance().muteManager.isMuted(playerUUID)) {
-            return "§4§lOui";
-        } else {
-            return "§a§lNon";
-        }
+        return Main.getInstance().muteManager.isMuted(playerUUID) ? "§4§lOui" : "§a§lNon";
     }
 
     private String getLastConnexion(UUID playerUUID) {
