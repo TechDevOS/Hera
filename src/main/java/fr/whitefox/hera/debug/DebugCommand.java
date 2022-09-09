@@ -4,7 +4,6 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import java.io.IOException;
 
@@ -24,46 +23,29 @@ public class DebugCommand implements CommandExecutor {
                     e.printStackTrace();
                 }
 
-                if (sender instanceof Player) {
-                    Player player = (Player) sender;
-
-                    player.sendMessage("§6[§9Hera§6]§r §4§lDEBUG§r ▶ §aLe plugin a été mis à jour ! Redémarrage en cours...");
-                    getServer().dispatchCommand(getServer().getConsoleSender(), "rl");
-                } else {
-                    getServer().getConsoleSender().sendMessage("§6[§9Hera§6]§r §4§lDEBUG§r ▶ §aLe plugin a été mis à jour ! Redémarrage en cours...");
-                    getServer().dispatchCommand(getServer().getConsoleSender(), "rl");
-                }
+                sender.sendMessage("§6[§9Hera§6]§r §4§lDEBUG§r ▶ §aLe plugin a été mis à jour ! Redémarrage en cours...");
+                getServer().dispatchCommand(getServer().getConsoleSender(), "rl");
 
                 return true;
             }
 
             if (args[0].equalsIgnoreCase("info")) {
-                if (sender instanceof Player) {
-                    Player player = (Player) sender;
-                    long maxMemory = Runtime.getRuntime().maxMemory();
-                    long cores = Runtime.getRuntime().availableProcessors();
-                    long freeMemory = Runtime.getRuntime().freeMemory();
-                    long totalMemory = Runtime.getRuntime().totalMemory();
 
-                    player.sendMessage("§6[§9Hera§6]§r §4§lDEBUG §r▶ §cServer Information");
-                    player.sendMessage("\n▶ §aAvailable processors (cores) : §4§l" + cores);
-                    player.sendMessage("▶ §aFree memory (bytes): §4§l" + freeMemory);
-                    player.sendMessage("▶ §aMaximum memory (bytes): §4§l" + maxMemory);
-                    player.sendMessage("▶ §aTotal memory available to JVM (bytes): §4§l" + totalMemory);
-                } else {
-                    long maxMemory = Runtime.getRuntime().maxMemory();
+                long maxMemory = Runtime.getRuntime().maxMemory();
+                long cores = Runtime.getRuntime().availableProcessors();
+                long freeMemory = Runtime.getRuntime().freeMemory();
+                long totalMemory = Runtime.getRuntime().totalMemory();
 
-                    getServer().getConsoleSender().sendMessage("§6[§9Hera§6]§r §4§lDEBUG §r▶ §cServer Information");
-                    getServer().getConsoleSender().sendMessage(" ");
-                    getServer().getConsoleSender().sendMessage("▶ §aAvailable processors (cores) : §4§l" + Runtime.getRuntime().availableProcessors());
-                    getServer().getConsoleSender().sendMessage("▶ §aFree memory (bytes): §4§l" + Runtime.getRuntime().freeMemory());
-                    getServer().getConsoleSender().sendMessage("▶ §aMaximum memory (bytes): §4§l" + (maxMemory == Long.MAX_VALUE ? "no limit" : maxMemory));
-                    getServer().getConsoleSender().sendMessage("▶ §aTotal memory available to JVM (bytes): §4§l" + Runtime.getRuntime().totalMemory());
-                }
-
-                return true;
-
+                sender.sendMessage("\n§7" + ChatColor.STRIKETHROUGH + "------------------" + "§9§lDEBUG SERVER INF§7" + ChatColor.STRIKETHROUGH + "------------------");
+                sender.sendMessage("\n▶ §aAvailable processors (cores) : §4§l" + cores);
+                sender.sendMessage("▶ §aFree memory (bytes): §4§l" + freeMemory);
+                sender.sendMessage("▶ §aMaximum memory (bytes): §4§l" + maxMemory);
+                sender.sendMessage("▶ §aTotal memory available to JVM (bytes): §4§l" + totalMemory);
+                sender.sendMessage("\n§7" + ChatColor.STRIKETHROUGH + "----------------------------------------------------");
+                sender.sendMessage(" ");
             }
+
+            return true;
         }
 
         return true;
