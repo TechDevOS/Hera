@@ -9,19 +9,11 @@ import org.bukkit.command.CommandSender;
 import java.util.UUID;
 
 public class BanCommand implements CommandExecutor {
+
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 
-        /**
-         *    /ban <joueur> perm <raison>
-         *    /ban <joueur> <durée>:<unité> <raison>
-         */
-
         if (msg.equalsIgnoreCase("ban")) {
-            if (!sender.hasPermission("hera.ban")) {
-                sender.sendMessage("§cVous n'avez pas la permission d'éxecuter cette commande !");
-                return false;
-            }
 
             if (args.length < 3) {
                 helpMessage(sender);
@@ -81,10 +73,6 @@ public class BanCommand implements CommandExecutor {
             sender.sendMessage("§6[§9Hera§6] §aVous avez banni §6" + targetName + " §b(" + duration + " " + unit.getName() + ") §apour : §e" + reason);
             return false;
         }
-
-        /**
-         *    /unban <joueur>
-         */
 
         if (msg.equalsIgnoreCase("unban")) {
             if (!sender.hasPermission("hera.ban")) {

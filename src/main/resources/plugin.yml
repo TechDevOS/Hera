@@ -81,3 +81,6 @@ commands:
   unmute:
     description: Permet d'unmute un joueur
     permission: hera.mute
+  inf:
+    description: Donne les informations générales d'un joueur
+    permission: hera.inf

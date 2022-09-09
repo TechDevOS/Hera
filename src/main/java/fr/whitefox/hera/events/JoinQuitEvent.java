@@ -16,13 +16,13 @@ import java.io.IOException;
 public class JoinQuitEvent implements Listener {
 
     private Main main = Main.getInstance();
+    PlayerInfos playerInfos = new PlayerInfos();
+
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) throws IOException {
 
         Player player = event.getPlayer();
-        PlayerInfos playerInfos = new PlayerInfos();
-
         playerInfos.update(player);
 
         if (main.getConfig().getBoolean("antiVPN.activate")) {
@@ -41,6 +41,7 @@ public class JoinQuitEvent implements Listener {
     public void onLeave(PlayerQuitEvent event) {
 
         Player player = event.getPlayer();
+        playerInfos.setLastConnexion(player);
 
         event.setQuitMessage("");
 

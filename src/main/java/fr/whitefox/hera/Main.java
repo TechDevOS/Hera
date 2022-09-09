@@ -86,6 +86,7 @@ public class Main extends JavaPlugin {
         getCommand("unban").setExecutor(new BanCommand());
         getCommand("mute").setExecutor(new MuteCommand());
         getCommand("unmute").setExecutor(new MuteCommand());
+        getCommand("inf").setExecutor(new InfCommand());
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(), this);
         getServer().getPluginManager().registerEvents(new Fight(), this);

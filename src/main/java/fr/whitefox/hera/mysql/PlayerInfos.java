@@ -13,11 +13,6 @@ import static org.bukkit.Bukkit.getServer;
 
 public class PlayerInfos {
 
-    /**
-     * Actualiser/créer les informations du joueur
-     *
-     * @param player
-     */
     public void update(Player player) {
         try {
             PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT player_name FROM player_infos WHERE player_uuid=?");
@@ -39,11 +34,46 @@ public class PlayerInfos {
                 insert.executeUpdate();
                 insert.close();
 
-                getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera DB] Insertion : " + player.getName() + " , " + player.getUniqueId().toString());
+                getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera DB] Insertion : " + player.getName() + "," + player.getUniqueId().toString());
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void setLastConnexion(Player player) {
+        try {
+            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT last_connection FROM player_infos WHERE player_uuid=?");
+            sts.setString(1, player.getUniqueId().toString());
+            ResultSet rs = sts.executeQuery();
+
+            if (rs.next()) {
+                PreparedStatement update = Main.getInstance().mysql.getConnection().prepareStatement("UPDATE player_infos SET last_connection=? WHERE player_uuid=?");
+                update.setLong(1, System.currentTimeMillis());
+                update.setString(2, player.getUniqueId().toString());
+                update.executeUpdate();
+                update.close();
+
+                getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera DB] Update last connection of " + player.getUniqueId().toString());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public long getLastConnexion(UUID playerUUID){
+        try {
+            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT last_connection FROM player_infos WHERE player_uuid=?");
+            sts.setString(1, playerUUID.toString());
+            ResultSet rs = sts.executeQuery();
+
+            if (rs.next()) {
+                return rs.getLong("last_connection");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        throw new NullPointerException("Le joueur n'a pas d'informations dans la table");
     }
 
     /**
