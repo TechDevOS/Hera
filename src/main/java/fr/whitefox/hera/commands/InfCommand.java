@@ -6,12 +6,9 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
 
 import java.util.Date;
 import java.util.UUID;
-
-import static org.bukkit.Bukkit.getServer;
 
 public class InfCommand implements CommandExecutor {
 
@@ -40,10 +37,8 @@ public class InfCommand implements CommandExecutor {
             sender.sendMessage("\n§7" + ChatColor.STRIKETHROUGH + "----------------" + "§9§lPLAYER INFORMATIONS§7" + ChatColor.STRIKETHROUGH + "----------------");
             sender.sendMessage("\n\n§cPseudo : §6§l" + targetName);
             sender.sendMessage("§cDernière connexion : " + lastConnection);
-            if (Bukkit.getPlayer(targetUUID) != null && sender.hasPermission("hera.dupeip")) {
-                Player target = getServer().getPlayer(args[0]);
-                String ip = target.getAddress().toString().substring(1).split(":")[0];
-                sender.sendMessage("§cDernière IP connue : §6§l" + ip);
+            if (sender.hasPermission("hera.dupeip")) {
+                sender.sendMessage("§cDernière IP connue : §6§l" + Main.getInstance().playerInfos.getIPAddress(targetUUID));
             }
             sender.sendMessage("\n§cMuet : " + isMuted);
             sender.sendMessage("§cBanni : " + isBanned);

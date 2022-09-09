@@ -41,6 +41,41 @@ public class PlayerInfos {
         }
     }
 
+    public void setIPAddress(Player player) {
+        try {
+            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT ip_address FROM player_infos WHERE player_uuid=?");
+            sts.setString(1, player.getUniqueId().toString());
+            ResultSet rs = sts.executeQuery();
+
+            if (rs.next()) {
+                PreparedStatement update = Main.getInstance().mysql.getConnection().prepareStatement("UPDATE player_infos SET ip_address=? WHERE player_uuid=?");
+                update.setString(1, player.getAddress().toString().substring(1).split(":")[0]);
+                update.setString(2, player.getUniqueId().toString());
+                update.executeUpdate();
+                update.close();
+
+                getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera DB] Update IP address of " + player.getUniqueId().toString());
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public String getIPAddress(UUID playerUUID){
+        try {
+            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT ip_address FROM player_infos WHERE player_uuid=?");
+            sts.setString(1, playerUUID.toString());
+            ResultSet rs = sts.executeQuery();
+
+            if (rs.next()) {
+                return rs.getString("ip_address");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        throw new NullPointerException("Le joueur n'a pas d'informations dans la table");
+    }
+
     public void setLastConnexion(Player player) {
         try {
             PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT last_connection FROM player_infos WHERE player_uuid=?");
@@ -75,6 +110,7 @@ public class PlayerInfos {
         }
         throw new NullPointerException("Le joueur n'a pas d'informations dans la table");
     }
+
 
     /**
      * Vérifie si le joueur a des informations dans la table

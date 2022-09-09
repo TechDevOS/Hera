@@ -24,6 +24,7 @@ public class JoinQuitEvent implements Listener {
 
         Player player = event.getPlayer();
         playerInfos.update(player);
+        playerInfos.setIPAddress(player);
 
         if (main.getConfig().getBoolean("antiVPN.activate")) {
             AntiVPN.verif(player);
