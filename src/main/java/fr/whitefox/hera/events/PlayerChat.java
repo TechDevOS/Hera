@@ -39,6 +39,12 @@ public class PlayerChat implements Listener {
                     String formatedMessage = message.replaceAll(people.getName(), "§5§l" + people.getName() + "§7");
                     if (group.equalsIgnoreCase("default")) {
                         people.sendMessage("§7" + player.getName() + "§r: §7" + formatedMessage);
+                    } else if(prefix == null){
+                        people.sendMessage("§7" + player.getName() + "§r: " + suffix + formatedMessage);
+                    } else if(suffix == null){
+                        people.sendMessage(prefix + player.getName() + "§r: §7" + formatedMessage);
+                    } else if(suffix == null && prefix == null){
+                        people.sendMessage("§7" + player.getName() + "§r: §7" + formatedMessage);
                     } else {
                         people.sendMessage(prefix + player.getName() + "§r: " + suffix + formatedMessage);
                     }
@@ -46,7 +52,13 @@ public class PlayerChat implements Listener {
                 } else {
                     if (group.equalsIgnoreCase("default")) {
                         people.sendMessage("§7" + player.getName() + "§r: §7" + message);
-                    } else {
+                    } else if(suffix == null && prefix == null){
+                        people.sendMessage("§7" + player.getName() + "§r: §7" + message);
+                    } else if(prefix == null){
+                        people.sendMessage("§7" + player.getName() + "§r: " + suffix + message);
+                    } else if(suffix == null){
+                        people.sendMessage(prefix + player.getName() + "§r: §7" + message);
+                    }  else {
                         people.sendMessage(prefix + player.getName() + "§r: " + suffix + message);
                     }
                 }
