@@ -2,11 +2,11 @@ package fr.whitefox.hera.events;
 
 import fr.whitefox.hera.Main;
 import fr.whitefox.hera.mysql.PlayerInfos;
-import fr.whitefox.hera.utils.*;
+import fr.whitefox.hera.utils.AntiVPN;
 import org.bukkit.Bukkit;
-import org.bukkit.event.Listener;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
@@ -15,9 +15,8 @@ import java.io.IOException;
 
 public class JoinQuitEvent implements Listener {
 
-    private Main main = Main.getInstance();
     PlayerInfos playerInfos = new PlayerInfos();
-
+    private Main main = Main.getInstance();
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) throws IOException {
@@ -52,11 +51,11 @@ public class JoinQuitEvent implements Listener {
     }
 
     @EventHandler
-    public void onLogin(PlayerLoginEvent event){
+    public void onLogin(PlayerLoginEvent event) {
         Player player = event.getPlayer();
-        main.banManager.checkDuration(player.getUniqueId());
+        Main.getInstance().banManager.checkDuration(player.getUniqueId());
 
-        if(main.banManager.isBanned(player.getUniqueId())){
+        if (main.banManager.isBanned(player.getUniqueId())) {
             event.setResult(PlayerLoginEvent.Result.KICK_BANNED);
             event.setKickMessage("§4§lVous avez été banni du serveur !" +
                     "\n\n\n§c§lRaison : §e" + main.banManager.getReason(player.getUniqueId()) +

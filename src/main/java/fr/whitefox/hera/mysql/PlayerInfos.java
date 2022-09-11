@@ -61,7 +61,7 @@ public class PlayerInfos {
         }
     }
 
-    public String getIPAddress(UUID playerUUID){
+    public String getIPAddress(UUID playerUUID) {
         try {
             PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT ip_address FROM player_infos WHERE player_uuid=?");
             sts.setString(1, playerUUID.toString());
@@ -96,7 +96,7 @@ public class PlayerInfos {
         }
     }
 
-    public long getLastConnexion(UUID playerUUID){
+    public long getLastConnexion(UUID playerUUID) {
         try {
             PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT last_connection FROM player_infos WHERE player_uuid=?");
             sts.setString(1, playerUUID.toString());

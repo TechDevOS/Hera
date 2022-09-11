@@ -46,6 +46,7 @@ public class InfCommand implements CommandExecutor {
             sender.sendMessage("\n§7" + ChatColor.STRIKETHROUGH + "---------------------------------------------------");
             sender.sendMessage(" ");
         }
+
         return true;
     }
 
