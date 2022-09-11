@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 public enum TimeUnit {
 
-    SECONDE("Seconde(s)", "sec", 1),
-    MINUTE("Minute(s)", "min", 60),
+    SECONDE("Seconde(s)", "s", 1),
+    MINUTE("Minute(s)", "m", 60),
     HEURE("Heure(s)", "h", 60 * 60),
     JOUR("Jour(s)", "j", 60 * 60 * 24);
 

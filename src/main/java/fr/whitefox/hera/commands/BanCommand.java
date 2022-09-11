@@ -15,7 +15,7 @@ public class BanCommand implements CommandExecutor {
 
         if (msg.equalsIgnoreCase("ban")) {
 
-            if (args.length < 3) {
+            if (args.length <= 3) {
                 helpMessage(sender);
                 return false;
             }
@@ -40,37 +40,27 @@ public class BanCommand implements CommandExecutor {
             }
 
             if (args[1].equalsIgnoreCase("perm")) {
+                Main.getInstance().historyManager.banRegister(targetUUID, -1, reason, sender.getName());
                 Main.getInstance().banManager.ban(targetUUID, -1, reason);
                 sender.sendMessage("§6[§9Hera§6] §aVous avez banni §6" + targetName + " §c(Permanent) §apour : §e" + reason);
                 return false;
             }
 
-            if (!args[1].contains(":")) {
-                helpMessage(sender);
+            if (args[1].contains("-")) {
+                sender.sendMessage("§cVous ne pouvez pas saisir de valeur négative !");
                 return false;
             }
 
-            int duration = 0;
-            try {
-                duration = Integer.parseInt(args[1].split(":")[0]);
-            } catch (NumberFormatException e) {
-                sender.sendMessage("§cLa valeur 'durée' doit être un nombre !");
+            long banTime = getTime(args[1]);
+            String finalBanTime = getTimeBan(banTime);
+            if (finalBanTime.equalsIgnoreCase("")) {
+                sender.sendMessage("§cVous devez entrer une valeure valide !");
                 return false;
             }
-
-            if (!TimeUnit.existFromShortcut(args[1].split(":")[1])) {
-                sender.sendMessage("§cCette unité de temps n'existe pas !");
-                for (TimeUnit units : TimeUnit.values()) {
-                    sender.sendMessage("§b" + units.getName() + " §f: §e" + units.getShortcut());
-                }
-                return false;
-            }
-
-            TimeUnit unit = TimeUnit.getFromShortcut(args[1].split(":")[1]);
-            long banTime = unit.getToSecond() * duration;
 
             Main.getInstance().banManager.ban(targetUUID, banTime, reason);
-            sender.sendMessage("§6[§9Hera§6] §aVous avez banni §6" + targetName + " §b(" + duration + " " + unit.getName() + ") §apour : §e" + reason);
+            Main.getInstance().historyManager.banRegister(targetUUID, banTime, reason, sender.getName());
+            sender.sendMessage("§6[§9Hera§6] §aVous avez banni §6" + targetName + " pendant §b" + finalBanTime + " §apour : §e" + reason);
             return false;
         }
 
@@ -99,6 +89,7 @@ public class BanCommand implements CommandExecutor {
                 return false;
             }
 
+            Main.getInstance().historyManager.unbanRegister(targetUUID, sender.getName());
             Main.getInstance().banManager.unban(targetUUID);
             sender.sendMessage("§6[§9Hera§6] §aVous avez débanni §6" + targetName);
             return false;
@@ -110,6 +101,94 @@ public class BanCommand implements CommandExecutor {
     public void helpMessage(CommandSender sender) {
         sender.sendMessage("§cSyntaxe : /ban <joueur> perm <raison>");
         sender.sendMessage("§cSyntaxe : /ban <joueur> <durée>:<unité> <raison>");
+    }
+
+    public long getTime(String s) {
+        try {
+            long z = parseLong(s);
+            if (s.contains("d")) {
+                z += parseLong(s.split("d")[0]) * 86400;
+                s = split(s, "d");
+            }
+            if (s.contains("h")) {
+                z += parseLong(s.split("h")[0]) * 3600;
+                s = split(s, "h");
+            }
+            if (s.contains("m")) {
+                z += parseLong(s.split("m")[0]) * 60;
+                s = split(s, "m");
+            }
+            if (s.contains("s")) {
+                z += parseLong(s.split("s")[0]);
+                s = split(s, "s");
+            }
+            return z;
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    private String split(String arg0, String arg1) {
+        try {
+            return arg0.split(arg1)[1];
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    private long parseLong(String arg0) {
+        try {
+            return Long.parseLong(arg0);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    private String getTimeBan(long tempsRestant) {
+        int jours = 0;
+        int heures = 0;
+        int minutes = 0;
+        int secondes = 0;
+
+        while (tempsRestant >= TimeUnit.JOUR.getToSecond()) {
+            jours++;
+            tempsRestant -= TimeUnit.JOUR.getToSecond();
+        }
+
+        while (tempsRestant >= TimeUnit.HEURE.getToSecond()) {
+            heures++;
+            tempsRestant -= TimeUnit.HEURE.getToSecond();
+        }
+
+        while (tempsRestant >= TimeUnit.MINUTE.getToSecond()) {
+            minutes++;
+            tempsRestant -= TimeUnit.MINUTE.getToSecond();
+        }
+
+        while (tempsRestant >= TimeUnit.SECONDE.getToSecond()) {
+            secondes++;
+            tempsRestant -= TimeUnit.SECONDE.getToSecond();
+        }
+
+        String d = "";
+        String h = "";
+        String m = "";
+        String s = "";
+
+        if (!(jours == 0)) {
+            d = jours + " " + TimeUnit.JOUR.getName();
+        }
+        if (!(heures == 0)) {
+            h = heures + " " + TimeUnit.HEURE.getName();
+        }
+        if (!(minutes == 0)) {
+            m = minutes + " " + TimeUnit.MINUTE.getName();
+        }
+        if (!(secondes == 0)) {
+            s = secondes + " " + TimeUnit.SECONDE.getName();
+        }
+
+        return d + h + m + s;
     }
 }
 

@@ -3,10 +3,7 @@ package fr.whitefox.hera;
 import fr.whitefox.hera.commands.*;
 import fr.whitefox.hera.debug.DebugCommand;
 import fr.whitefox.hera.events.*;
-import fr.whitefox.hera.mysql.MuteManager;
-import fr.whitefox.hera.mysql.MySQL;
-import fr.whitefox.hera.mysql.PlayerInfos;
-import fr.whitefox.hera.mysql.BanManager;
+import fr.whitefox.hera.mysql.*;
 import fr.whitefox.hera.utils.Webhooks;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.luckperms.api.LuckPerms;
@@ -30,6 +27,7 @@ public class Main extends JavaPlugin {
     public PlayerInfos playerInfos = new PlayerInfos();
     public BanManager banManager = new BanManager();
     public MuteManager muteManager = new MuteManager();
+    public HistoryManager historyManager = new HistoryManager();
 
     private LuckPerms luckPerms;
 
