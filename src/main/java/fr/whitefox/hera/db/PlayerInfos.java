@@ -1,4 +1,4 @@
-package fr.whitefox.hera.mysql;
+package fr.whitefox.hera.db;
 
 import fr.whitefox.hera.Main;
 import org.bukkit.ChatColor;
@@ -15,12 +15,12 @@ public class PlayerInfos {
 
     public void update(Player player) {
         try {
-            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT player_name FROM player_infos WHERE player_uuid=?");
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("SELECT player_name FROM player_infos WHERE player_uuid=?");
             sts.setString(1, player.getUniqueId().toString());
             ResultSet rs = sts.executeQuery();
 
             if (rs.next()) {
-                PreparedStatement update = Main.getInstance().mysql.getConnection().prepareStatement("UPDATE player_infos SET player_name=? WHERE player_uuid=?");
+                PreparedStatement update = Main.getInstance().sqlite.getConnection().prepareStatement("UPDATE player_infos SET player_name=? WHERE player_uuid=?");
                 update.setString(1, player.getName());
                 update.setString(2, player.getUniqueId().toString());
                 update.executeUpdate();
@@ -28,7 +28,7 @@ public class PlayerInfos {
 
                 getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera DB] Update : " + player.getName() + " , " + player.getUniqueId().toString());
             } else {
-                PreparedStatement insert = Main.getInstance().mysql.getConnection().prepareStatement("INSERT INTO player_infos (player_uuid, player_name) VALUES (?, ?)");
+                PreparedStatement insert = Main.getInstance().sqlite.getConnection().prepareStatement("INSERT INTO player_infos (player_uuid, player_name) VALUES (?, ?)");
                 insert.setString(1, player.getUniqueId().toString());
                 insert.setString(2, player.getName());
                 insert.executeUpdate();
@@ -43,12 +43,12 @@ public class PlayerInfos {
 
     public void setIPAddress(Player player) {
         try {
-            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT ip_address FROM player_infos WHERE player_uuid=?");
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("SELECT ip_address FROM player_infos WHERE player_uuid=?");
             sts.setString(1, player.getUniqueId().toString());
             ResultSet rs = sts.executeQuery();
 
             if (rs.next()) {
-                PreparedStatement update = Main.getInstance().mysql.getConnection().prepareStatement("UPDATE player_infos SET ip_address=? WHERE player_uuid=?");
+                PreparedStatement update = Main.getInstance().sqlite.getConnection().prepareStatement("UPDATE player_infos SET ip_address=? WHERE player_uuid=?");
                 update.setString(1, player.getAddress().toString().substring(1).split(":")[0]);
                 update.setString(2, player.getUniqueId().toString());
                 update.executeUpdate();
@@ -63,7 +63,7 @@ public class PlayerInfos {
 
     public String getIPAddress(UUID playerUUID) {
         try {
-            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT ip_address FROM player_infos WHERE player_uuid=?");
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("SELECT ip_address FROM player_infos WHERE player_uuid=?");
             sts.setString(1, playerUUID.toString());
             ResultSet rs = sts.executeQuery();
 
@@ -78,12 +78,12 @@ public class PlayerInfos {
 
     public void setLastConnexion(Player player) {
         try {
-            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT last_connection FROM player_infos WHERE player_uuid=?");
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("SELECT last_connection FROM player_infos WHERE player_uuid=?");
             sts.setString(1, player.getUniqueId().toString());
             ResultSet rs = sts.executeQuery();
 
             if (rs.next()) {
-                PreparedStatement update = Main.getInstance().mysql.getConnection().prepareStatement("UPDATE player_infos SET last_connection=? WHERE player_uuid=?");
+                PreparedStatement update = Main.getInstance().sqlite.getConnection().prepareStatement("UPDATE player_infos SET last_connection=? WHERE player_uuid=?");
                 update.setLong(1, System.currentTimeMillis());
                 update.setString(2, player.getUniqueId().toString());
                 update.executeUpdate();
@@ -98,7 +98,7 @@ public class PlayerInfos {
 
     public long getLastConnexion(UUID playerUUID) {
         try {
-            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT last_connection FROM player_infos WHERE player_uuid=?");
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("SELECT last_connection FROM player_infos WHERE player_uuid=?");
             sts.setString(1, playerUUID.toString());
             ResultSet rs = sts.executeQuery();
 
@@ -120,7 +120,7 @@ public class PlayerInfos {
      */
     public boolean exist(String playerName) {
         try {
-            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT * FROM player_infos WHERE player_name=?");
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("SELECT * FROM player_infos WHERE player_name=?");
             sts.setString(1, playerName);
             ResultSet rs = sts.executeQuery();
             return rs.next();
@@ -138,7 +138,7 @@ public class PlayerInfos {
      */
     public UUID getUUID(String playerName) {
         try {
-            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT player_uuid FROM player_infos WHERE player_name=?");
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("SELECT player_uuid FROM player_infos WHERE player_name=?");
             sts.setString(1, playerName);
             ResultSet rs = sts.executeQuery();
 

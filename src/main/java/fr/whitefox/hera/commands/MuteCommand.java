@@ -1,7 +1,7 @@
 package fr.whitefox.hera.commands;
 
 import fr.whitefox.hera.Main;
-import fr.whitefox.hera.mysql.TimeUnit;
+import fr.whitefox.hera.db.TimeUnit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -13,18 +13,9 @@ public class MuteCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 
-        /**
-         *    /mute <joueur> perm <raison>
-         *    /mute <joueur> <durée>:<unité> <raison>
-         */
-
         if (msg.equalsIgnoreCase("mute")) {
-            if (!sender.hasPermission("hera.mute")) {
-                sender.sendMessage("§cVous n'avez pas la permission d'éxecuter cette commande !");
-                return false;
-            }
 
-            if (args.length < 3) {
+            if (args.length <= 2) {
                 helpMessage(sender);
                 return false;
             }
@@ -39,7 +30,7 @@ public class MuteCommand implements CommandExecutor {
             UUID targetUUID = Main.getInstance().playerInfos.getUUID(targetName);
 
             if (Main.getInstance().muteManager.isMuted(targetUUID)) {
-                sender.sendMessage("§cCe joueur est déjà mute !");
+                sender.sendMessage("§cCe joueur est déjà muteni !");
                 return false;
             }
 
@@ -49,43 +40,29 @@ public class MuteCommand implements CommandExecutor {
             }
 
             if (args[1].equalsIgnoreCase("perm")) {
+                Main.getInstance().historyManager.muteRegister(targetUUID, -1, reason, sender.getName());
                 Main.getInstance().muteManager.mute(targetUUID, -1, reason);
-                sender.sendMessage("§6[§9Hera§6] §aVous avez mute §6" + targetName + " §c(Permanent) §apour : §e" + reason);
+                sender.sendMessage("§6[§9Hera§6] §aVous avez rendu muet §6" + targetName + "§a de façon permanente pour : §e" + reason);
                 return false;
             }
 
-            if (!args[1].contains(":")) {
-                helpMessage(sender);
+            if (args[1].contains("-")) {
+                sender.sendMessage("§cVous ne pouvez pas saisir de valeur négative !");
                 return false;
             }
 
-            int duration = 0;
-            try {
-                duration = Integer.parseInt(args[1].split(":")[0]);
-            } catch (NumberFormatException e) {
-                sender.sendMessage("§cLa valeur 'durée' doit être un nombre !");
+            long muteTime = getTime(args[1]);
+            String finalmuteTime = getTimeMute(muteTime);
+            if (finalmuteTime.equalsIgnoreCase("")) {
+                sender.sendMessage("§cVous devez entrer une valeure valide !");
                 return false;
             }
-
-            if (!TimeUnit.existFromShortcut(args[1].split(":")[1])) {
-                sender.sendMessage("§cCette unité de temps n'existe pas !");
-                for (TimeUnit units : TimeUnit.values()) {
-                    sender.sendMessage("§b" + units.getName() + " §f: §e" + units.getShortcut());
-                }
-                return false;
-            }
-
-            TimeUnit unit = TimeUnit.getFromShortcut(args[1].split(":")[1]);
-            long muteTime = unit.getToSecond() * duration;
 
             Main.getInstance().muteManager.mute(targetUUID, muteTime, reason);
-            sender.sendMessage("§6[§9Hera§6] §aVous avez mute §6" + targetName + " §b(" + duration + " " + unit.getName() + ") §apour : §e" + reason);
+            Main.getInstance().historyManager.muteRegister(targetUUID, muteTime, reason, sender.getName());
+            sender.sendMessage("§6[§9Hera§6] §aVous avez rendu muet §6" + targetName + " pendant §b" + finalmuteTime + " §apour : §e" + reason);
             return false;
         }
-
-        /**
-         *    /unmute <joueur>
-         */
 
         if (msg.equalsIgnoreCase("unmute")) {
             if (!sender.hasPermission("hera.mute")) {
@@ -108,10 +85,11 @@ public class MuteCommand implements CommandExecutor {
             UUID targetUUID = Main.getInstance().playerInfos.getUUID(targetName);
 
             if (!Main.getInstance().muteManager.isMuted(targetUUID)) {
-                sender.sendMessage("§cCe joueur n'est pas mute !");
+                sender.sendMessage("§cCe joueur n'est pas muet !");
                 return false;
             }
 
+            Main.getInstance().historyManager.unmuteRegister(targetUUID, sender.getName());
             Main.getInstance().muteManager.unmute(targetUUID);
             sender.sendMessage("§6[§9Hera§6] §aVous avez unmute §6" + targetName);
             return false;
@@ -124,6 +102,92 @@ public class MuteCommand implements CommandExecutor {
         sender.sendMessage("§cSyntaxe : /mute <joueur> perm <raison>");
         sender.sendMessage("§cSyntaxe : /mute <joueur> <durée><unité> <raison>");
     }
+
+    public long getTime(String s) {
+        try {
+            long z = parseLong(s);
+            if (s.contains("d")) {
+                z += parseLong(s.split("d")[0]) * 86400;
+                s = split(s, "d");
+            }
+            if (s.contains("h")) {
+                z += parseLong(s.split("h")[0]) * 3600;
+                s = split(s, "h");
+            }
+            if (s.contains("m")) {
+                z += parseLong(s.split("m")[0]) * 60;
+                s = split(s, "m");
+            }
+            if (s.contains("s")) {
+                z += parseLong(s.split("s")[0]);
+                s = split(s, "s");
+            }
+            return z;
+        } catch (Exception e) {
+            return -1;
+        }
+    }
+
+    private String split(String arg0, String arg1) {
+        try {
+            return arg0.split(arg1)[1];
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    private long parseLong(String arg0) {
+        try {
+            return Long.parseLong(arg0);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    private String getTimeMute(long tempsRestant) {
+        int jours = 0;
+        int heures = 0;
+        int minutes = 0;
+        int secondes = 0;
+
+        while (tempsRestant >= TimeUnit.JOUR.getToSecond()) {
+            jours++;
+            tempsRestant -= TimeUnit.JOUR.getToSecond();
+        }
+
+        while (tempsRestant >= TimeUnit.HEURE.getToSecond()) {
+            heures++;
+            tempsRestant -= TimeUnit.HEURE.getToSecond();
+        }
+
+        while (tempsRestant >= TimeUnit.MINUTE.getToSecond()) {
+            minutes++;
+            tempsRestant -= TimeUnit.MINUTE.getToSecond();
+        }
+
+        while (tempsRestant >= TimeUnit.SECONDE.getToSecond()) {
+            secondes++;
+            tempsRestant -= TimeUnit.SECONDE.getToSecond();
+        }
+
+        String d = "";
+        String h = "";
+        String m = "";
+        String s = "";
+
+        if (!(jours == 0)) {
+            d = jours + " " + TimeUnit.JOUR.getName();
+        }
+        if (!(heures == 0)) {
+            h = heures + " " + TimeUnit.HEURE.getName();
+        }
+        if (!(minutes == 0)) {
+            m = minutes + " " + TimeUnit.MINUTE.getName();
+        }
+        if (!(secondes == 0)) {
+            s = secondes + " " + TimeUnit.SECONDE.getName();
+        }
+
+        return d + h + m + s;
+    }
 }
-
-

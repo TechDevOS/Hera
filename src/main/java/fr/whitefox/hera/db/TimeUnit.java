@@ -1,4 +1,4 @@
-package fr.whitefox.hera.mysql;
+package fr.whitefox.hera.db;
 
 import java.util.HashMap;
 

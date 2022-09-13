@@ -1,4 +1,4 @@
-package fr.whitefox.hera.mysql;
+package fr.whitefox.hera.db;
 
 import fr.whitefox.hera.Main;
 import org.bukkit.Bukkit;
@@ -22,7 +22,7 @@ public class MuteManager {
         }
 
         try {
-            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("INSERT INTO mutes (player_uuid, end, reason) VALUES (?, ?, ?)");
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("INSERT INTO mutes (player_uuid, end, reason) VALUES (?, ?, ?)");
             sts.setString(1, uuid.toString());
             sts.setLong(2, end);
             sts.setString(3, reason);
@@ -41,7 +41,7 @@ public class MuteManager {
         if (!isMuted(uuid)) return;
 
         try {
-            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("DELETE FROM mutes WHERE player_uuid=?");
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("DELETE FROM mutes WHERE player_uuid=?");
             sts.setString(1, uuid.toString());
             sts.executeUpdate();
         } catch (SQLException e) {
@@ -51,7 +51,7 @@ public class MuteManager {
 
     public boolean isMuted(UUID uuid) {
         try {
-            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT * FROM mutes WHERE player_uuid=?");
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("SELECT * FROM mutes WHERE player_uuid=?");
             sts.setString(1, uuid.toString());
             ResultSet rs = sts.executeQuery();
             return rs.next();
@@ -75,7 +75,7 @@ public class MuteManager {
         if (!isMuted(uuid)) return 0;
 
         try {
-            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT * FROM mutes WHERE player_uuid=?");
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("SELECT * FROM mutes WHERE player_uuid=?");
             sts.setString(1, uuid.toString());
             ResultSet rs = sts.executeQuery();
             if (rs.next()) {
@@ -127,7 +127,7 @@ public class MuteManager {
         if (!isMuted(uuid)) return "§cNon mute";
 
         try {
-            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT * FROM mutes WHERE player_uuid=?");
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("SELECT * FROM mutes WHERE player_uuid=?");
             sts.setString(1, uuid.toString());
             ResultSet rs = sts.executeQuery();
             if (rs.next()) {

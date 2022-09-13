@@ -3,7 +3,7 @@ package fr.whitefox.hera;
 import fr.whitefox.hera.commands.*;
 import fr.whitefox.hera.debug.DebugCommand;
 import fr.whitefox.hera.events.*;
-import fr.whitefox.hera.mysql.*;
+import fr.whitefox.hera.db.*;
 import fr.whitefox.hera.utils.Webhooks;
 import io.github.cdimascio.dotenv.Dotenv;
 import net.luckperms.api.LuckPerms;
@@ -11,6 +11,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.sql.*;
 import java.util.ArrayList;
 
 
@@ -23,7 +24,7 @@ public class Main extends JavaPlugin {
     public ArrayList<Player> fly_list = new ArrayList<>();
     public ArrayList<Player> pday_list = new ArrayList<>();
     public ArrayList<Player> pnight_list = new ArrayList<>();
-    public MySQL mysql = new MySQL();
+    public SQLite sqlite = new SQLite();
     public PlayerInfos playerInfos = new PlayerInfos();
     public BanManager banManager = new BanManager();
     public MuteManager muteManager = new MuteManager();
@@ -42,16 +43,17 @@ public class Main extends JavaPlugin {
         instance = this;
         this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
 
-        Dotenv dotenv = null;
-        dotenv = Dotenv.configure().load();
+        try {
+            sqlite.connect("sample.db");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        }
 
-        int port = Integer.parseInt(dotenv.get("SQL_PORT"));
-        String host = dotenv.get("SQL_HOST");
-        String tablename = dotenv.get("SQL_TABLENAME");
-        String username = dotenv.get("SQL_USERNAME");
-        String password = dotenv.get("SQL_PASSWORD");
-
-        mysql.connect(host, port, tablename, username, password);
+        try {
+            sqlite.initTables();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
         saveDefaultConfig();
 
@@ -102,7 +104,7 @@ public class Main extends JavaPlugin {
     @Override
     public void onDisable() {
         instance = null;
-        mysql.disconnect();
+        sqlite.disconnect();
 
         if (this.getConfig().getBoolean("WebhooksDiscord.activate")) {
             Webhooks.down();

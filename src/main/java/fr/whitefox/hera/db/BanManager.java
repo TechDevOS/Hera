@@ -1,4 +1,4 @@
-package fr.whitefox.hera.mysql;
+package fr.whitefox.hera.db;
 
 import fr.whitefox.hera.Main;
 import org.bukkit.Bukkit;
@@ -22,7 +22,7 @@ public class BanManager {
         }
 
         try {
-            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("INSERT INTO bans (player_uuid, end, reason) VALUES (?, ?, ?)");
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("INSERT INTO bans (player_uuid, end, reason) VALUES (?, ?, ?)");
             sts.setString(1, uuid.toString());
             sts.setLong(2, end);
             sts.setString(3, reason);
@@ -45,7 +45,7 @@ public class BanManager {
         if (!isBanned(uuid)) return;
 
         try {
-            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("DELETE FROM bans WHERE player_uuid=?");
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("DELETE FROM bans WHERE player_uuid=?");
             sts.setString(1, uuid.toString());
             sts.executeUpdate();
         } catch (SQLException e) {
@@ -55,7 +55,7 @@ public class BanManager {
 
     public boolean isBanned(UUID uuid) {
         try {
-            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT * FROM bans WHERE player_uuid=?");
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("SELECT * FROM bans WHERE player_uuid=?");
             sts.setString(1, uuid.toString());
             ResultSet rs = sts.executeQuery();
             return rs.next();
@@ -79,7 +79,7 @@ public class BanManager {
         if (!isBanned(uuid)) return 0;
 
         try {
-            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT * FROM bans WHERE player_uuid=?");
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("SELECT * FROM bans WHERE player_uuid=?");
             sts.setString(1, uuid.toString());
             ResultSet rs = sts.executeQuery();
             if (rs.next()) {
@@ -131,7 +131,7 @@ public class BanManager {
         if (!isBanned(uuid)) return "§cNon banni";
 
         try {
-            PreparedStatement sts = Main.getInstance().mysql.getConnection().prepareStatement("SELECT * FROM bans WHERE player_uuid=?");
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("SELECT * FROM bans WHERE player_uuid=?");
             sts.setString(1, uuid.toString());
             ResultSet rs = sts.executeQuery();
             if (rs.next()) {

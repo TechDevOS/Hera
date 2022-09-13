@@ -1,7 +1,7 @@
 package fr.whitefox.hera.commands;
 
 import fr.whitefox.hera.Main;
-import fr.whitefox.hera.mysql.TimeUnit;
+import fr.whitefox.hera.db.TimeUnit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -15,7 +15,7 @@ public class BanCommand implements CommandExecutor {
 
         if (msg.equalsIgnoreCase("ban")) {
 
-            if (args.length <= 3) {
+            if (args.length <= 2) {
                 helpMessage(sender);
                 return false;
             }

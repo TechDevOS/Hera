@@ -1,7 +1,7 @@
 package fr.whitefox.hera.events;
 
 import fr.whitefox.hera.Main;
-import fr.whitefox.hera.mysql.PlayerInfos;
+import fr.whitefox.hera.db.PlayerInfos;
 import fr.whitefox.hera.utils.AntiVPN;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -19,7 +19,7 @@ public class JoinQuitEvent implements Listener {
     private Main main = Main.getInstance();
 
     @EventHandler
-    public void onJoin(PlayerJoinEvent event) throws IOException {
+    public void onJoin(PlayerJoinEvent event) {
 
         Player player = event.getPlayer();
         playerInfos.update(player);
