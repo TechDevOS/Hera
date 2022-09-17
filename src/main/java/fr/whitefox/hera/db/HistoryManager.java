@@ -89,4 +89,24 @@ public class HistoryManager {
             e.printStackTrace();
         }
     }
+
+    public void warnRegister(UUID uuid, String moderator, String reason) {
+
+        if (!(moderator.equalsIgnoreCase("CONSOLE")))
+            moderator = Main.getInstance().playerInfos.getUUID(moderator).toString();
+        try {
+            PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("INSERT INTO mod_history (player_uuid, duration, reason, moderator, time, type) VALUES (?, ?, ?, ?, ?, ?)");
+            sts.setString(1, uuid.toString());
+            sts.setLong(2, -1);
+            sts.setString(3, reason);
+            sts.setString(4, moderator);
+            sts.setLong(5, System.currentTimeMillis());
+            sts.setString(6, "warn");
+            sts.executeUpdate();
+
+            getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera DB] Insert warn log of " + uuid);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }
