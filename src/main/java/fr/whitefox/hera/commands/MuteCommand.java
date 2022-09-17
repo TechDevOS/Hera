@@ -30,7 +30,7 @@ public class MuteCommand implements CommandExecutor {
             UUID targetUUID = Main.getInstance().playerInfos.getUUID(targetName);
 
             if (Main.getInstance().muteManager.isMuted(targetUUID)) {
-                sender.sendMessage("§cCe joueur est déjà muteni !");
+                sender.sendMessage("§cCe joueur est déjà mute !");
                 return false;
             }
 

@@ -74,6 +74,11 @@ public class SQLite {
                     "moderator VARCHAR(255)," +
                     "time BIGINT," +
                     "type VARCHAR(255))");
+            sts.execute("CREATE TABLE  IF NOT EXISTS back(" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "player_uuid VARCHAR(255)," +
+                    "coordinates VARCHAR(255))");
+
             sts.close();
             getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera DB] Tables update");
         } catch (SQLException e) {

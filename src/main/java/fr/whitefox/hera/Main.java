@@ -44,7 +44,7 @@ public class Main extends JavaPlugin {
         this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
 
         try {
-            sqlite.connect("sample.db");
+            sqlite.connect("Hera.db");
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -87,6 +87,8 @@ public class Main extends JavaPlugin {
         getCommand("mute").setExecutor(new MuteCommand());
         getCommand("unmute").setExecutor(new MuteCommand());
         getCommand("inf").setExecutor(new InfCommand());
+        getCommand("warn").setExecutor(new WarnCommand());
+        getCommand("back").setExecutor(new BackCommand());
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(), this);
         getServer().getPluginManager().registerEvents(new Fight(), this);

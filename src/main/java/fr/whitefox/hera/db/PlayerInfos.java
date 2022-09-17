@@ -111,13 +111,6 @@ public class PlayerInfos {
         throw new NullPointerException("Le joueur n'a pas d'informations dans la table");
     }
 
-
-    /**
-     * Vérifie si le joueur a des informations dans la table
-     *
-     * @param playerName
-     * @return true/false
-     */
     public boolean exist(String playerName) {
         try {
             PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("SELECT * FROM player_infos WHERE player_name=?");
@@ -130,12 +123,6 @@ public class PlayerInfos {
         return false;
     }
 
-    /**
-     * Récupérer lUUID dun joueur avec son pseudo
-     *
-     * @param playerName
-     * @return UUID
-     */
     public UUID getUUID(String playerName) {
         try {
             PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("SELECT player_uuid FROM player_infos WHERE player_name=?");
