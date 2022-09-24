@@ -5,7 +5,6 @@ import fr.whitefox.hera.debug.DebugCommand;
 import fr.whitefox.hera.events.*;
 import fr.whitefox.hera.db.*;
 import fr.whitefox.hera.utils.Webhooks;
-import io.github.cdimascio.dotenv.Dotenv;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;

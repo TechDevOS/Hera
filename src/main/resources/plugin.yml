@@ -84,3 +84,9 @@ commands:
   inf:
     description: Donne les informations générales d'un joueur
     permission: hera.inf
+  warn:
+    description: Permet d'avertir un utilisateur
+    permission: hera.warn
+  back:
+    description: Permet de revenir sur son dernier point de mort
+    permission: hera.back
