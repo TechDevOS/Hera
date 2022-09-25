@@ -90,3 +90,15 @@ commands:
   back:
     description: Permet de revenir sur son dernier point de mort
     permission: hera.back
+  home:
+    description: Vous permet de vous téléporter à un point prélablement enregisté
+    permission: hera.home
+  homes:
+    description: Vous permet de savoir vos points de téléportation existants
+    permission: hera.home
+  sethome:
+    description: Vous permet de vous créer un point afin de vous y téléporter ultérieurement
+    permission: hera.home
+  delhome:
+    description: Vous permet de supprimer un point de téléportation
+    permission: hera.home

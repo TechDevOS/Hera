@@ -88,6 +88,10 @@ public class Main extends JavaPlugin {
         getCommand("inf").setExecutor(new InfCommand());
         getCommand("warn").setExecutor(new WarnCommand());
         getCommand("back").setExecutor(new BackCommand());
+        getCommand("home").setExecutor(new HomeCommand());
+        getCommand("sethome").setExecutor(new HomeCommand());
+        getCommand("delhome").setExecutor(new HomeCommand());
+        getCommand("homes").setExecutor(new HomeCommand());
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(), this);
         getServer().getPluginManager().registerEvents(new Fight(), this);

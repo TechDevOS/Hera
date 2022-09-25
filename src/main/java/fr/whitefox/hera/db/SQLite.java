@@ -78,6 +78,11 @@ public class SQLite {
                     "id INTEGER PRIMARY KEY AUTOINCREMENT," +
                     "player_uuid VARCHAR(255)," +
                     "coordinates VARCHAR(255))");
+            sts.execute("CREATE TABLE  IF NOT EXISTS homes(" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+                    "player_uuid VARCHAR(255)," +
+                    "home_name VARCHAR(255)," +
+                    "coordinates VARCHAR(255))");
 
             sts.close();
             getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera DB] Tables update");

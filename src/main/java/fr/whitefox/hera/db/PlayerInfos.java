@@ -111,7 +111,7 @@ public class PlayerInfos {
         throw new NullPointerException("Le joueur n'a pas d'informations dans la table");
     }
 
-    public boolean exist(String playerName) {
+    public static boolean exist(String playerName) {
         try {
             PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("SELECT * FROM player_infos WHERE player_name=?");
             sts.setString(1, playerName);
@@ -123,7 +123,7 @@ public class PlayerInfos {
         return false;
     }
 
-    public UUID getUUID(String playerName) {
+    public static UUID getUUID(String playerName) {
         try {
             PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("SELECT player_uuid FROM player_infos WHERE player_name=?");
             sts.setString(1, playerName);
