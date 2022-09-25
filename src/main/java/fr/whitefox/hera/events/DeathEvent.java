@@ -32,12 +32,12 @@ public class DeathEvent implements Listener {
         String y = String.valueOf(loc.getY());
         String z = String.valueOf(loc.getZ());
 
-        String coordonates = x + "," + y + "," + z;
+        String coordinates = x + "," + y + "," + z;
 
         try {
             PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("INSERT INTO back (player_uuid, coordinates) VALUES (?, ?)");
             sts.setString(1, player.getUniqueId().toString());
-            sts.setString(2, coordonates);
+            sts.setString(2, coordinates);
             sts.executeUpdate();
 
             getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera DB] Insert back info of " + player.getUniqueId().toString());
