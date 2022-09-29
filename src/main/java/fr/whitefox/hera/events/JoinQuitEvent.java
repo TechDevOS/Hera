@@ -11,8 +11,6 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import java.io.IOException;
-
 public class JoinQuitEvent implements Listener {
 
     PlayerInfos playerInfos = new PlayerInfos();
@@ -25,12 +23,12 @@ public class JoinQuitEvent implements Listener {
         playerInfos.update(player);
         playerInfos.setIPAddress(player);
 
-        if (main.getConfig().getBoolean("antiVPN.activate")) {
+        if (main.getConfig().getBoolean("antiVPN.activate") && !(player.hasPermission("hera.antivpn.bypass"))) {
             AntiVPN.verif(player);
         }
 
         event.setJoinMessage("");
-
+        
         if (main.getConfig().getBoolean("join.joinMessage")) {
             Bukkit.broadcastMessage(main.getConfig().getString("join.broadcast").replace("&", "§") + player.getDisplayName());
             player.sendMessage(main.getConfig().getString("join.custom1").replace("&", "§") + player.getDisplayName() + main.getConfig().getString("join.custom2").replace("&", "§"));
