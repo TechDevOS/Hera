@@ -7,11 +7,15 @@ import fr.whitefox.hera.db.*;
 import fr.whitefox.hera.utils.Webhooks;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class Main extends JavaPlugin {
@@ -23,6 +27,7 @@ public class Main extends JavaPlugin {
     public ArrayList<Player> fly_list = new ArrayList<>();
     public ArrayList<Player> pday_list = new ArrayList<>();
     public ArrayList<Player> pnight_list = new ArrayList<>();
+    public List<String> automod;
     public SQLite sqlite = new SQLite();
     public PlayerInfos playerInfos = new PlayerInfos();
     public BanManager banManager = new BanManager();
@@ -55,6 +60,24 @@ public class Main extends JavaPlugin {
         }
 
         saveDefaultConfig();
+
+        File dir = this.getDataFolder(); //Your plugin folder
+        dir.mkdirs(); //Make sure your plugin folder exists
+
+        File example = new File(this.getDataFolder() + "/automod.yml"); //This is your external file
+        YamlConfiguration config = YamlConfiguration.loadConfiguration(example); //Get the configuration of your external File
+        if(!example.exists()) { //Check if your external file exists
+            try {
+                example.createNewFile(); //if not so, create a new one
+                config.save(example); //save the configuration of config1 or config2 to your new file
+            } catch (IOException e) {
+                getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera] Couldn't create some files !");
+            }
+        }
+
+        automod = config.getStringList("blacklist");
+
+        System.out.println(automod.get(1));
 
         if (this.getConfig().getBoolean("WebhooksDiscord.activate")) {
             Webhooks.up();
