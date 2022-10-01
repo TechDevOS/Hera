@@ -26,13 +26,22 @@ public class PlayerChat implements Listener {
         CachedMetaData metaData = this.luckPerms.getPlayerAdapter(Player.class).getMetaData(player);
         String prefix = metaData.getPrefix();
         String suffix = metaData.getSuffix();
-        String group = metaData.getPrimaryGroup();
 
         event.setCancelled(true);
 
         Main.getInstance().muteManager.checkDuration(player.getUniqueId());
 
-        if (Automod.isGood(message)) {
+        if (Automod.isFlood(player)) {
+            player.sendMessage("§6[§9Hera§6] §cMerci de ne pas spam !");
+        }
+
+        if (!(Automod.isGood(message))) {
+            player.sendMessage("§6[§9Hera§6] §cMerci de surveiller votre langage !");
+        }
+
+        if(!Automod.isFlood(player) && Automod.isGood(message)) {
+
+            Automod.checkFlood(player);
 
             if (Main.getInstance().muteManager.isMuted(player.getUniqueId())) {
                 player.sendMessage("\n§cVous avez été rendu muet pour : §e" + Main.getInstance().muteManager.getReason(player.getUniqueId()) + ".\n§cFin de votre sanction dans : §e" + Main.getInstance().muteManager.getTimeLeft(player.getUniqueId()) + "\n");
@@ -40,24 +49,20 @@ public class PlayerChat implements Listener {
                 for (Player people : Bukkit.getServer().getOnlinePlayers()) {
                     if (message.contains(people.getName())) {
                         String formatedMessage = message.replaceAll(people.getName(), "§5§l" + people.getName() + "§7");
-                        if (group.equalsIgnoreCase("default")) {
+                        if (suffix == null && prefix == null) {
                             people.sendMessage("§7" + player.getName() + "§r: §7" + formatedMessage);
                         } else if (prefix == null) {
                             people.sendMessage("§7" + player.getName() + "§r: " + suffix + formatedMessage);
                         } else if (suffix == null) {
                             people.sendMessage(prefix + player.getName() + "§r: §7" + formatedMessage);
-                        } else if (suffix == null && prefix == null) {
-                            people.sendMessage("§7" + player.getName() + "§r: §7" + formatedMessage);
                         } else {
                             people.sendMessage(prefix + player.getName() + "§r: " + suffix + formatedMessage);
                         }
 
                     } else {
-                        if (group.equalsIgnoreCase("default")) {
+                        if (suffix == null && prefix == null) {
                             people.sendMessage("§7" + player.getName() + "§r: §7" + message);
-                        } else if (suffix == null && prefix == null) {
-                            people.sendMessage("§7" + player.getName() + "§r: §7" + message);
-                        } else if (prefix == null) {
+                        }  else if (prefix == null) {
                             people.sendMessage("§7" + player.getName() + "§r: " + suffix + message);
                         } else if (suffix == null) {
                             people.sendMessage(prefix + player.getName() + "§r: §7" + message);
@@ -67,8 +72,7 @@ public class PlayerChat implements Listener {
                     }
                 }
             }
-        } else {
-            player.sendMessage("§6[§9Hera§6] §cVeuillez surveiller votre langage !");
         }
     }
 }
+

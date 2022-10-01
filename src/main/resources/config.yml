@@ -21,3 +21,7 @@ antiVPN:
 
 WebhooksDiscord:
   activate: false
+
+blacklist:
+#  - con
+#  - connard
