@@ -9,7 +9,7 @@ import org.bukkit.entity.Player;
 
 public class SpawnCommand implements CommandExecutor {
 
-    private Main main = Main.getInstance();
+    private final Main main = Main.getInstance();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {

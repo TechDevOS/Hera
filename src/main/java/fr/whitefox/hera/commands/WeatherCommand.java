@@ -29,18 +29,16 @@ public class WeatherCommand implements CommandExecutor {
                     return true;
                 }
 
-                if (args.length >= 1) {
-                    Player target = Bukkit.getServer().getPlayer(args[0]);
+                Player target = Bukkit.getServer().getPlayer(args[0]);
 
-                    if (target == null) {
-                        getServer().getConsoleSender().sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
-                        return true;
-                    }
-                    target.getWorld().setThundering(true);
-                    target.getWorld().setStorm(false);
-                    getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Le temps du monde a bien été défini sur Pluvieux");
-                    target.sendMessage("§6[§9Hera§6] §aLe temps du monde a bien été défini sur §2§lPluvieux");
+                if (target == null) {
+                    getServer().getConsoleSender().sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
+                    return true;
                 }
+                target.getWorld().setThundering(true);
+                target.getWorld().setStorm(false);
+                getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Le temps du monde a bien été défini sur Pluvieux");
+                target.sendMessage("§6[§9Hera§6] §aLe temps du monde a bien été défini sur §2§lPluvieux");
             }
         }
 
@@ -58,18 +56,16 @@ public class WeatherCommand implements CommandExecutor {
                     return true;
                 }
 
-                if (args.length >= 1) {
-                    Player target = Bukkit.getServer().getPlayer(args[0]);
+                Player target = Bukkit.getServer().getPlayer(args[0]);
 
-                    if (target == null) {
-                        getServer().getConsoleSender().sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
-                        return true;
-                    }
-                    target.getWorld().setThundering(false);
-                    target.getWorld().setStorm(false);
-                    getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Le temps du monde a bien été défini sur Clair");
-                    target.sendMessage("§6[§9Hera§6] §aLe temps du monde a bien été défini sur §2§lClair");
+                if (target == null) {
+                    getServer().getConsoleSender().sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
+                    return true;
                 }
+                target.getWorld().setThundering(false);
+                target.getWorld().setStorm(false);
+                getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Le temps du monde a bien été défini sur Clair");
+                target.sendMessage("§6[§9Hera§6] §aLe temps du monde a bien été défini sur §2§lClair");
             }
         }
 
@@ -87,18 +83,16 @@ public class WeatherCommand implements CommandExecutor {
                     return true;
                 }
 
-                if (args.length >= 1) {
-                    Player target = Bukkit.getServer().getPlayer(args[0]);
+                Player target = Bukkit.getServer().getPlayer(args[0]);
 
-                    if (target == null) {
-                        getServer().getConsoleSender().sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
-                        return true;
-                    }
-                    target.getWorld().setThundering(true);
-                    target.getWorld().setStorm(true);
-                    getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Le temps du monde a bien été défini sur Orageux");
-                    target.sendMessage("§6[§9Hera§6] §aLe temps du monde a bien été défini sur §2§lOrageux");
+                if (target == null) {
+                    getServer().getConsoleSender().sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
+                    return true;
                 }
+                target.getWorld().setThundering(true);
+                target.getWorld().setStorm(true);
+                getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Le temps du monde a bien été défini sur Orageux");
+                target.sendMessage("§6[§9Hera§6] §aLe temps du monde a bien été défini sur §2§lOrageux");
             }
         }
 

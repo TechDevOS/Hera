@@ -10,7 +10,7 @@ import org.bukkit.entity.Player;
 
 public class FreezeCommand implements CommandExecutor {
 
-    private Main main = Main.getInstance();
+    private final Main main = Main.getInstance();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
@@ -27,23 +27,21 @@ public class FreezeCommand implements CommandExecutor {
                 return false;
             }
 
-            if (args.length > 0) {
-                Player target = Bukkit.getServer().getPlayer(args[0]);
+            Player target = Bukkit.getServer().getPlayer(args[0]);
 
-                if (target == null) {
-                    sender.sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
-                    return false;
-                }
+            if (target == null) {
+                sender.sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
+                return false;
+            }
 
-                if (!main.freeze_list.contains(target)) {
-                    main.freeze_list.add(target);
-                    target.sendMessage("§6[§9Hera§6] §cVous avez été freeze !");
-                    sender.sendMessage("§6[§9Hera§6] §aLe joueur §c" + target.getName() + "§a a bien été freeze.");
-                } else {
-                    main.freeze_list.remove(target);
-                    target.sendMessage("§6[§9Hera§6] §aVous n'êtes plus freeze !");
-                    sender.sendMessage("§6[§9Hera§6] §aLe joueur §c" + target.getName() + "§a n'est plus freeze.");
-                }
+            if (!main.freeze_list.contains(target)) {
+                main.freeze_list.add(target);
+                target.sendMessage("§6[§9Hera§6] §cVous avez été freeze !");
+                sender.sendMessage("§6[§9Hera§6] §aLe joueur §c" + target.getName() + "§a a bien été freeze.");
+            } else {
+                main.freeze_list.remove(target);
+                target.sendMessage("§6[§9Hera§6] §aVous n'êtes plus freeze !");
+                sender.sendMessage("§6[§9Hera§6] §aLe joueur §c" + target.getName() + "§a n'est plus freeze.");
             }
         }
 

@@ -32,8 +32,6 @@ public class Main extends JavaPlugin {
     public MuteManager muteManager = new MuteManager();
     public HistoryManager historyManager = new HistoryManager();
 
-    private LuckPerms luckPerms;
-
     public static Main getInstance() {
         return instance;
     }
@@ -43,7 +41,7 @@ public class Main extends JavaPlugin {
         getServer().getConsoleSender().sendMessage(ChatColor.RED + "[Hera] Starting...");
 
         instance = this;
-        this.luckPerms = getServer().getServicesManager().load(LuckPerms.class);
+        LuckPerms luckPerms = getServer().getServicesManager().load(LuckPerms.class);
 
         try {
             sqlite.connect("Hera.db");
@@ -101,7 +99,7 @@ public class Main extends JavaPlugin {
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(), this);
         getServer().getPluginManager().registerEvents(new Fight(), this);
-        getServer().getPluginManager().registerEvents(new PlayerChat(this.luckPerms), this);
+        getServer().getPluginManager().registerEvents(new PlayerChat(luckPerms), this);
         getServer().getPluginManager().registerEvents(new BetterInvisibility(), this);
         getServer().getPluginManager().registerEvents(new BetterTnt(), this);
         getServer().getPluginManager().registerEvents(new DeathEvent(), this);

@@ -1,6 +1,7 @@
 package fr.whitefox.hera.commands;
 
 import fr.whitefox.hera.Main;
+import fr.whitefox.hera.db.PlayerInfos;
 import fr.whitefox.hera.db.TimeUnit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -22,26 +23,26 @@ public class MuteCommand implements CommandExecutor {
 
             String targetName = args[0];
 
-            if (!Main.getInstance().playerInfos.exist(targetName)) {
+            if (!PlayerInfos.exist(targetName)) {
                 sender.sendMessage("§cCe joueur ne s'est jamais connecté au serveur !");
                 return false;
             }
 
-            UUID targetUUID = Main.getInstance().playerInfos.getUUID(targetName);
+            UUID targetUUID = PlayerInfos.getUUID(targetName);
 
             if (Main.getInstance().muteManager.isMuted(targetUUID)) {
                 sender.sendMessage("§cCe joueur est déjà mute !");
                 return false;
             }
 
-            String reason = "";
+            StringBuilder reason = new StringBuilder();
             for (int i = 2; i < args.length; i++) {
-                reason += args[i] + " ";
+                reason.append(args[i]).append(" ");
             }
 
             if (args[1].equalsIgnoreCase("perm")) {
-                Main.getInstance().historyManager.muteRegister(targetUUID, -1, reason, sender.getName());
-                Main.getInstance().muteManager.mute(targetUUID, -1, reason);
+                Main.getInstance().historyManager.muteRegister(targetUUID, -1, reason.toString(), sender.getName());
+                Main.getInstance().muteManager.mute(targetUUID, -1, reason.toString());
                 sender.sendMessage("§6[§9Hera§6] §aVous avez rendu muet §6" + targetName + "§a de façon permanente pour : §e" + reason);
                 return false;
             }
@@ -58,8 +59,8 @@ public class MuteCommand implements CommandExecutor {
                 return false;
             }
 
-            Main.getInstance().muteManager.mute(targetUUID, muteTime, reason);
-            Main.getInstance().historyManager.muteRegister(targetUUID, muteTime, reason, sender.getName());
+            Main.getInstance().muteManager.mute(targetUUID, muteTime, reason.toString());
+            Main.getInstance().historyManager.muteRegister(targetUUID, muteTime, reason.toString(), sender.getName());
             sender.sendMessage("§6[§9Hera§6] §aVous avez rendu muet §6" + targetName + " pendant §b" + finalmuteTime + " §apour : §e" + reason);
             return false;
         }
@@ -77,12 +78,12 @@ public class MuteCommand implements CommandExecutor {
 
             String targetName = args[0];
 
-            if (!Main.getInstance().playerInfos.exist(targetName)) {
+            if (!PlayerInfos.exist(targetName)) {
                 sender.sendMessage("§cCe joueur ne s'est jamais connecté au serveur !");
                 return false;
             }
 
-            UUID targetUUID = Main.getInstance().playerInfos.getUUID(targetName);
+            UUID targetUUID = PlayerInfos.getUUID(targetName);
 
             if (!Main.getInstance().muteManager.isMuted(targetUUID)) {
                 sender.sendMessage("§cCe joueur n'est pas muet !");
@@ -120,7 +121,6 @@ public class MuteCommand implements CommandExecutor {
             }
             if (s.contains("s")) {
                 z += parseLong(s.split("s")[0]);
-                s = split(s, "s");
             }
             return z;
         } catch (Exception e) {

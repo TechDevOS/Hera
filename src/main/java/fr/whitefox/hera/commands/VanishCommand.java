@@ -11,14 +11,14 @@ import org.bukkit.entity.Player;
 
 public class VanishCommand implements CommandExecutor {
 
-    private Main main = Main.getInstance();
+    private final Main main = Main.getInstance();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 
         if (cmd.getName().equalsIgnoreCase("vanish")) {
 
-            if (sender instanceof Player) return false;
+            if (!(sender instanceof Player)) return false;
             Player player = (Player) sender;
 
             if (args.length == 0) {
@@ -27,25 +27,22 @@ public class VanishCommand implements CommandExecutor {
                 return true;
             }
 
-            if (args.length > 0) {
+            Player target = Bukkit.getServer().getPlayer(args[0]);
 
-                Player target = Bukkit.getServer().getPlayer(args[0]);
-
-                if (target == null) {
-                    player.sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
-                    return true;
-                }
-
-                if (main.invisible_list.contains(target)) {
-                    player.sendMessage(ChatColor.GREEN + "§6[§9Hera§6] §aLe joueur §c" + target.getName() + "§a est maintenant visible pour les autres joueurs du serveur.");
-                } else {
-                    player.sendMessage(ChatColor.GREEN + "§6[§9Hera§6] §aLe joueur §c" + target.getName() + "§a est maintenant invisible.");
-                }
-
-                Vanish.vanish(target);
-
+            if (target == null) {
+                player.sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
                 return true;
             }
+
+            if (main.invisible_list.contains(target)) {
+                player.sendMessage(ChatColor.GREEN + "§6[§9Hera§6] §aLe joueur §c" + target.getName() + "§a est maintenant visible pour les autres joueurs du serveur.");
+            } else {
+                player.sendMessage(ChatColor.GREEN + "§6[§9Hera§6] §aLe joueur §c" + target.getName() + "§a est maintenant invisible.");
+            }
+
+            Vanish.vanish(target);
+
+            return true;
         }
 
         return true;

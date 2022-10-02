@@ -12,7 +12,7 @@ import static org.bukkit.Bukkit.getServer;
 
 public class TimeCommand implements CommandExecutor {
 
-    private Main main = Main.getInstance();
+    private final Main main = Main.getInstance();
 
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
@@ -29,16 +29,14 @@ public class TimeCommand implements CommandExecutor {
                     return true;
                 }
 
-                if (args.length >= 1) {
-                    Player target = Bukkit.getServer().getPlayer(args[0]);
+                Player target = Bukkit.getServer().getPlayer(args[0]);
 
-                    if (target == null) {
-                        getServer().getConsoleSender().sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
-                        return true;
-                    }
-                    target.getLocation().getWorld().setTime(6000);
-                    getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Le monde a bien été défini sur Jour");
+                if (target == null) {
+                    getServer().getConsoleSender().sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
+                    return true;
                 }
+                target.getLocation().getWorld().setTime(6000);
+                getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Le monde a bien été défini sur Jour");
             }
         }
 
@@ -95,16 +93,14 @@ public class TimeCommand implements CommandExecutor {
                     return false;
                 }
 
-                if (args.length >= 1) {
-                    Player target = Bukkit.getServer().getPlayer(args[0]);
+                Player target = Bukkit.getServer().getPlayer(args[0]);
 
-                    if (target == null) {
-                        getServer().getConsoleSender().sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
-                        return false;
-                    }
-                    target.getLocation().getWorld().setTime(18000);
-                    getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Le monde a bien été défini sur Nuit");
+                if (target == null) {
+                    getServer().getConsoleSender().sendMessage(ChatColor.RED + "Le joueur n'existe pas ou n'est pas connecté !");
+                    return false;
                 }
+                target.getLocation().getWorld().setTime(18000);
+                getServer().getConsoleSender().sendMessage(ChatColor.GREEN + "Le monde a bien été défini sur Nuit");
 
                 return true;
             }

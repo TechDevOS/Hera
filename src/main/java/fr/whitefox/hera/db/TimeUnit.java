@@ -9,7 +9,7 @@ public enum TimeUnit {
     HEURE("Heure(s)", "h", 60 * 60),
     JOUR("Jour(s)", "j", 60 * 60 * 24);
 
-    private static HashMap<String, TimeUnit> id_shortcuts = new HashMap<String, TimeUnit>();
+    private static final HashMap<String, TimeUnit> id_shortcuts = new HashMap<>();
 
     static {
         for (TimeUnit units : values()) {
@@ -17,9 +17,9 @@ public enum TimeUnit {
         }
     }
 
-    private String name;
-    private String shortcut;
-    private long toSecond;
+    private final String name;
+    private final String shortcut;
+    private final long toSecond;
 
     TimeUnit(String name, String shortcut, long toSecond) {
         this.name = name;
@@ -27,20 +27,8 @@ public enum TimeUnit {
         this.toSecond = toSecond;
     }
 
-    public static TimeUnit getFromShortcut(String shortcut) {
-        return id_shortcuts.get(shortcut);
-    }
-
-    public static boolean existFromShortcut(String shortcut) {
-        return id_shortcuts.containsKey(shortcut);
-    }
-
     public String getName() {
         return name;
-    }
-
-    public String getShortcut() {
-        return shortcut;
     }
 
     public long getToSecond() {

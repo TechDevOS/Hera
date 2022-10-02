@@ -14,7 +14,7 @@ public class HistoryManager {
     public void banRegister(UUID uuid, long duration, String reason, String moderator) {
 
         if (!(moderator.equalsIgnoreCase("CONSOLE")))
-            moderator = Main.getInstance().playerInfos.getUUID(moderator).toString();
+            moderator = PlayerInfos.getUUID(moderator).toString();
         try {
             PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("INSERT INTO mod_history (player_uuid, duration, reason, moderator, time, type) VALUES (?, ?, ?, ?, ?, ?)");
             sts.setString(1, uuid.toString());
@@ -34,7 +34,7 @@ public class HistoryManager {
     public void unbanRegister(UUID uuid, String moderator) {
 
         if (!(moderator.equalsIgnoreCase("CONSOLE")))
-            moderator = Main.getInstance().playerInfos.getUUID(moderator).toString();
+            moderator = PlayerInfos.getUUID(moderator).toString();
         try {
             PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("INSERT INTO mod_history (player_uuid, duration, reason, moderator, time, type) VALUES (?, ?, ?, ?, ?, ?)");
             sts.setString(1, uuid.toString());
@@ -53,7 +53,7 @@ public class HistoryManager {
 
     public void muteRegister(UUID uuid, long duration, String reason, String moderator) {
         if (!(moderator.equalsIgnoreCase("CONSOLE")))
-            moderator = Main.getInstance().playerInfos.getUUID(moderator).toString();
+            moderator = PlayerInfos.getUUID(moderator).toString();
         try {
             PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("INSERT INTO mod_history (player_uuid, duration, reason, moderator, time, type) VALUES (?, ?, ?, ?, ?, ?)");
             sts.setString(1, uuid.toString());
@@ -73,7 +73,7 @@ public class HistoryManager {
     public void unmuteRegister(UUID uuid, String moderator) {
 
         if (!(moderator.equalsIgnoreCase("CONSOLE")))
-            moderator = Main.getInstance().playerInfos.getUUID(moderator).toString();
+            moderator = PlayerInfos.getUUID(moderator).toString();
         try {
             PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("INSERT INTO mod_history (player_uuid, duration, reason, moderator, time, type) VALUES (?, ?, ?, ?, ?, ?)");
             sts.setString(1, uuid.toString());
@@ -93,7 +93,7 @@ public class HistoryManager {
     public void warnRegister(UUID uuid, String moderator, String reason) {
 
         if (!(moderator.equalsIgnoreCase("CONSOLE")))
-            moderator = Main.getInstance().playerInfos.getUUID(moderator).toString();
+            moderator = PlayerInfos.getUUID(moderator).toString();
         try {
             PreparedStatement sts = Main.getInstance().sqlite.getConnection().prepareStatement("INSERT INTO mod_history (player_uuid, duration, reason, moderator, time, type) VALUES (?, ?, ?, ?, ?, ?)");
             sts.setString(1, uuid.toString());

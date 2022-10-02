@@ -27,7 +27,7 @@ public class StopCommand implements CommandExecutor {
             if (args.length >= 1) {
                 StringBuilder bc = new StringBuilder();
                 for (String part : args) {
-                    bc.append(part + " ");
+                    bc.append(part).append(" ");
                 }
 
                 String reason = bc.toString();

@@ -14,7 +14,7 @@ import org.bukkit.event.player.PlayerQuitEvent;
 public class JoinQuitEvent implements Listener {
 
     PlayerInfos playerInfos = new PlayerInfos();
-    private Main main = Main.getInstance();
+    private final Main main = Main.getInstance();
 
     @EventHandler
     public void onJoin(PlayerJoinEvent event) {

@@ -80,7 +80,7 @@ public class BackCommand implements CommandExecutor {
             sts.setString(1, playerUUID.toString());
             sts.executeUpdate();
 
-            getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera DB] Delete back info of " + playerUUID.toString());
+            getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera DB] Delete back info of " + playerUUID);
         } catch (SQLException e) {
             e.printStackTrace();
         }

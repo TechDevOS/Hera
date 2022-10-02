@@ -20,7 +20,7 @@ public class HomeManager {
             sts.setString(3, coordinates);
             sts.executeUpdate();
 
-            getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera DB] New Home of : " + playerUUID.toString() + "," + homeName + "," + coordinates);
+            getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera DB] New Home of : " + playerUUID + "," + homeName + "," + coordinates);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -33,7 +33,7 @@ public class HomeManager {
             sts.setString(2, homeName);
             sts.executeUpdate();
 
-            getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera DB] Delete home info of " + playerUUID.toString() + "," + homeName);
+            getServer().getConsoleSender().sendMessage(ChatColor.LIGHT_PURPLE + "[Hera DB] Delete home info of " + playerUUID + "," + homeName);
         } catch (SQLException e) {
             e.printStackTrace();
         }

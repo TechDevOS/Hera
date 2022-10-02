@@ -1,6 +1,7 @@
 package fr.whitefox.hera.commands;
 
 import fr.whitefox.hera.Main;
+import fr.whitefox.hera.db.PlayerInfos;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -24,12 +25,12 @@ public class InfCommand implements CommandExecutor {
 
             String targetName = args[0];
 
-            if (!Main.getInstance().playerInfos.exist(targetName)) {
+            if (!PlayerInfos.exist(targetName)) {
                 sender.sendMessage("§cCe joueur ne s'est jamais connecté au serveur !");
                 return false;
             }
 
-            UUID targetUUID = Main.getInstance().playerInfos.getUUID(targetName);
+            UUID targetUUID = PlayerInfos.getUUID(targetName);
             String isBanned = isBanned(targetUUID);
             String isMuted = isMuted(targetUUID);
             String lastConnection = "§6§l" + getLastConnexion(targetUUID);

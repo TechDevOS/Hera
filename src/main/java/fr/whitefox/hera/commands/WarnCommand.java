@@ -1,6 +1,7 @@
 package fr.whitefox.hera.commands;
 
 import fr.whitefox.hera.Main;
+import fr.whitefox.hera.db.PlayerInfos;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -25,21 +26,21 @@ public class WarnCommand implements CommandExecutor {
 
             String targetName = args[0];
 
-            if (!Main.getInstance().playerInfos.exist(targetName)) {
+            if (!PlayerInfos.exist(targetName)) {
                 sender.sendMessage("§cCe joueur ne s'est jamais connecté au serveur !");
                 return false;
             }
 
-            UUID targetUUID = Main.getInstance().playerInfos.getUUID(targetName);
+            UUID targetUUID = PlayerInfos.getUUID(targetName);
 
-            String reason = "";
+            StringBuilder reason = new StringBuilder();
             for (int i = 1; i < args.length; i++) {
-                reason += args[i] + " ";
+                reason.append(args[i]).append(" ");
             }
 
             Player target = getServer().getPlayer(args[0]);
 
-            Main.getInstance().historyManager.warnRegister(targetUUID, sender.getName(), reason);
+            Main.getInstance().historyManager.warnRegister(targetUUID, sender.getName(), reason.toString());
             target.sendMessage("§6[§9Hera§6] §cVous avez été averti pour la raison suivante : §e" + reason);
             sender.sendMessage("§6[§9Hera§6] §aVous avez warn §6" + targetName + "§a pour la raison suivante : §e" + reason);
         }
