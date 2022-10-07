@@ -17,26 +17,21 @@ public class Webhooks {
         // Config
         String tokenWebhook = dotenv.get("WEBHOOKS");
 
-        long timestamp = Instant.now().getEpochSecond();
-
         // Build
         String jsonBrut = "";
-        jsonBrut += "{\"content\": null,"
-                + "\"embeds\": [{"
-                + "\"title\": \"🟢 Plugin Up\","
-                + "\"color\": 5763719,"
-                + "\"fields\": [{"
-                + "\"name\" : \"Date et heure\","
-                + "\"value\": \"<t:" + timestamp + ":F>\","
-                + "\"inline\": true}],"
-                + "\"footer\": {"
-                + "\"text\": \"Hera Logger\","
-                + "\"icon_url\": \"https://media.discordapp.net/attachments/785951129187778614/1000094167302668398/sync.png?width=1264&height=1264\"},"
-                + "\"thumbnail\": {\"url\": \"https://cdn.discordapp.com/attachments/785951129187778614/1000409927401099375/StatusON.png\""
-                + "}}],"
-                + "\"username\": \"Hera Logger\","
-                + "\"avatar_url\": \"https://media.discordapp.net/attachments/785951129187778614/1000094167302668398/sync.png?width=1264&height=1264\","
-                + "\"attachments\": []}";
+        jsonBrut += "{\n" +
+                "  \"content\": \"<:infraction:1027957601851424848> <t:" + System.currentTimeMillis() / 1000 + ":R>\",\n" +
+                "  \"embeds\": [\n" +
+                "    {\n" +
+                "      \"color\": 3158326,\n" +
+                "      \"author\": {\n" +
+                "        \"name\": \"Plugin Up\",\n" +
+                "        \"icon_url\": \"https://media.discordapp.net/attachments/785951129187778614/1000409927401099375/StatusON.png\"\n" +
+                "      }\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"attachments\": []\n" +
+                "}";
 
         try {
             URL url = new URL(tokenWebhook);
@@ -63,26 +58,22 @@ public class Webhooks {
 
         // Config
         String tokenWebhook = dotenv.get("WEBHOOKS");
-        long timestamp = System.currentTimeMillis() / 1000;
 
         // Build
         String jsonBrut = "";
-        jsonBrut += "{\"content\": null,"
-                + "\"embeds\": [{"
-                + "\"title\": \"🔴 Plugin Down\","
-                + "\"color\": 15548997,"
-                + "\"fields\": [{"
-                + "\"name\" : \"Date et heure\","
-                + "\"value\": \"<t:" + timestamp + ":F>\","
-                + "\"inline\": true}],"
-                + "\"footer\": {"
-                + "\"text\": \"Hera Logger\","
-                + "\"icon_url\": \"https://media.discordapp.net/attachments/785951129187778614/1000094167302668398/sync.png?width=1264&height=1264\"},"
-                + "\"thumbnail\": {\"url\": \"https://cdn.discordapp.com/attachments/785951129187778614/1000409926893580298/StatusOff.png\""
-                + "}}],"
-                + "\"username\": \"Hera Logger\","
-                + "\"avatar_url\": \"https://media.discordapp.net/attachments/785951129187778614/1000094167302668398/sync.png?width=1264&height=1264\","
-                + "\"attachments\": []}";
+        jsonBrut += "{\n" +
+                "  \"content\": \"<:infraction:1027957601851424848> <t:" + System.currentTimeMillis() / 1000 + ":R>\",\n" +
+                "  \"embeds\": [\n" +
+                "    {\n" +
+                "      \"color\": 3158326,\n" +
+                "      \"author\": {\n" +
+                "        \"name\": \"Plugin Off\",\n" +
+                "        \"icon_url\": \"https://media.discordapp.net/attachments/785951129187778614/1000409926893580298/StatusOff.png\"\n" +
+                "      }\n" +
+                "    }\n" +
+                "  ],\n" +
+                "  \"attachments\": []\n" +
+                "}";
 
         try {
             URL url = new URL(tokenWebhook);
