@@ -21,11 +21,13 @@ public class SpawnCommand implements CommandExecutor {
 
             if (args.length == 0) {
 
-                double x = main.getConfig().getDouble("config.spawn_x");
-                double y = main.getConfig().getDouble("config.spawn_y");
-                double z = main.getConfig().getDouble("config.spawn_z");
+                String coordinates = main.getConfig().getString("config.spawn_x");
+                String[] parts = coordinates.split(",");
+                String x = parts[0];
+                String y = parts[1];
+                String z = parts[2];
 
-                Location spawn = new Location(player.getWorld(), x, y, z, 0f, 0f);
+                Location spawn = new Location(player.getWorld(), Double.parseDouble(x), Double.parseDouble(y), Double.parseDouble(z), 0f, 0f);
                 player.teleport(spawn);
 
                 player.sendMessage("§6[§9Hera§6] §aVous venez d'être téléporté au spawn.");

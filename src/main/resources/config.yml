@@ -5,9 +5,7 @@ join:
   custom2: "&r sur ce serveur !"
 
 config:
-  spawn_x: 0
-  spawn_y: 0
-  spawn_z: 0
+  spawn: "0,0,0"
 
 leave:
   leaveMessage: true
@@ -23,5 +21,5 @@ WebhooksDiscord:
   activate: false
 
 blacklist:
-#  - con
-#  - connard
+  - con
+  - connard
