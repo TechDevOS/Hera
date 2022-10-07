@@ -18,11 +18,6 @@ public class BanCommand implements CommandExecutor {
 
         if (msg.equalsIgnoreCase("ban")) {
 
-            String moderator = "CONSOLE";
-            if(sender instanceof Player) {
-                moderator = sender.getName();
-            }
-
             if (args.length <= 2) {
                 helpMessage(sender);
                 return false;
@@ -51,7 +46,7 @@ public class BanCommand implements CommandExecutor {
                 Main.getInstance().historyManager.banRegister(targetUUID, -1, reason.toString(), sender.getName());
                 Main.getInstance().banManager.ban(targetUUID, -1, reason.toString());
                 sender.sendMessage("§6[§9Hera§6] §aVous avez banni §6" + targetName + " §c(Permanent) §apour : §e" + reason);
-                DiscordLogger.register(targetName, moderator,"Permanent", reason.toString(), "ban");
+                DiscordLogger.register(targetName, sender,"Permanent", reason.toString(), "ban");
                 return false;
             }
 
@@ -71,7 +66,7 @@ public class BanCommand implements CommandExecutor {
             Main.getInstance().historyManager.banRegister(targetUUID, banTime, reason.toString(), sender.getName());
             sender.sendMessage("§6[§9Hera§6] §aVous avez banni §6" + targetName + " pendant §b" + finalBanTime + " §apour : §e" + reason);
 
-            DiscordLogger.register(targetName, moderator,finalBanTime, reason.toString(), "ban");
+            DiscordLogger.register(targetName, sender,finalBanTime, reason.toString(), "ban");
             return false;
         }
 
@@ -104,11 +99,7 @@ public class BanCommand implements CommandExecutor {
             Main.getInstance().historyManager.unbanRegister(targetUUID, sender.getName());
             Main.getInstance().banManager.unban(targetUUID);
             sender.sendMessage("§6[§9Hera§6] §aVous avez débanni §6" + targetName);
-            String moderator = "CONSOLE";
-            if(sender instanceof Player) {
-                moderator = sender.getName();
-            }
-            DiscordLogger.register(targetName, moderator,"none", "none", "unban");
+            DiscordLogger.register(targetName, sender,"none", "none", "unban");
             return false;
         }
 

@@ -18,11 +18,6 @@ public class MuteCommand implements CommandExecutor {
 
         if (msg.equalsIgnoreCase("mute")) {
 
-            String moderator = "CONSOLE";
-            if(sender instanceof Player) {
-                moderator = sender.getName();
-            }
-
             if (args.length <= 2) {
                 helpMessage(sender);
                 return false;
@@ -50,7 +45,7 @@ public class MuteCommand implements CommandExecutor {
             if (args[1].equalsIgnoreCase("perm")) {
                 Main.getInstance().historyManager.muteRegister(targetUUID, -1, reason.toString(), sender.getName());
                 Main.getInstance().muteManager.mute(targetUUID, -1, reason.toString());
-                DiscordLogger.register(targetName, moderator,"Permanent", reason.toString(), "mute");
+                DiscordLogger.register(targetName, sender,"Permanent", reason.toString(), "mute");
                 sender.sendMessage("§6[§9Hera§6] §aVous avez rendu muet §6" + targetName + "§a de façon permanente pour : §e" + reason);
                 return false;
             }
@@ -69,17 +64,12 @@ public class MuteCommand implements CommandExecutor {
 
             Main.getInstance().muteManager.mute(targetUUID, muteTime, reason.toString());
             Main.getInstance().historyManager.muteRegister(targetUUID, muteTime, reason.toString(), sender.getName());
-            DiscordLogger.register(targetName, moderator,finalmuteTime, reason.toString(), "mute");
+            DiscordLogger.register(targetName, sender,finalmuteTime, reason.toString(), "mute");
             sender.sendMessage("§6[§9Hera§6] §aVous avez rendu muet §6" + targetName + " pendant §b" + finalmuteTime + " §apour : §e" + reason);
             return false;
         }
 
         if (msg.equalsIgnoreCase("unmute")) {
-
-            String moderator = "CONSOLE";
-            if(sender instanceof Player) {
-                moderator = sender.getName();
-            }
 
             if (!sender.hasPermission("hera.mute")) {
                 sender.sendMessage("§cVous n'avez pas la permission d'éxecuter cette commande !");
@@ -108,7 +98,7 @@ public class MuteCommand implements CommandExecutor {
             Main.getInstance().historyManager.unmuteRegister(targetUUID, sender.getName());
             Main.getInstance().muteManager.unmute(targetUUID);
             sender.sendMessage("§6[§9Hera§6] §aVous avez unmute §6" + targetName);
-            DiscordLogger.register(targetName, moderator,"none", "none", "unmute");
+            DiscordLogger.register(targetName, sender,"none", "none", "unmute");
             return false;
         }
 

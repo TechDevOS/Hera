@@ -49,12 +49,7 @@ public class WarnCommand implements CommandExecutor {
                 target.sendMessage("§6[§9Hera§6] §cVous avez été averti pour la raison suivante : §e" + reason);
             }
 
-            String moderator = "CONSOLE";
-            if(sender instanceof Player) {
-                moderator = sender.getName();
-            }
-
-            DiscordLogger.register(targetName, moderator,"none", reason.toString(), "warn");
+            DiscordLogger.register(targetName, sender,"none", reason.toString(), "warn");
         }
         return true;
     }
