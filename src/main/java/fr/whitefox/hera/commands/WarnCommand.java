@@ -2,6 +2,8 @@ package fr.whitefox.hera.commands;
 
 import fr.whitefox.hera.Main;
 import fr.whitefox.hera.db.PlayerInfos;
+import fr.whitefox.hera.utils.DiscordLogger;
+import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -41,8 +43,18 @@ public class WarnCommand implements CommandExecutor {
             Player target = getServer().getPlayer(args[0]);
 
             Main.getInstance().historyManager.warnRegister(targetUUID, sender.getName(), reason.toString());
-            target.sendMessage("§6[§9Hera§6] §cVous avez été averti pour la raison suivante : §e" + reason);
             sender.sendMessage("§6[§9Hera§6] §aVous avez warn §6" + targetName + "§a pour la raison suivante : §e" + reason);
+
+            if (Bukkit.getPlayer(targetUUID) != null) {
+                target.sendMessage("§6[§9Hera§6] §cVous avez été averti pour la raison suivante : §e" + reason);
+            }
+
+            String moderator = "CONSOLE";
+            if(sender instanceof Player) {
+                moderator = sender.getName();
+            }
+
+            DiscordLogger.register(targetName, moderator,"none", reason.toString(), "warn");
         }
         return true;
     }

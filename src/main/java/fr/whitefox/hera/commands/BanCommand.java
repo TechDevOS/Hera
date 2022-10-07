@@ -3,9 +3,11 @@ package fr.whitefox.hera.commands;
 import fr.whitefox.hera.Main;
 import fr.whitefox.hera.db.PlayerInfos;
 import fr.whitefox.hera.db.TimeUnit;
+import fr.whitefox.hera.utils.DiscordLogger;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
 
 import java.util.UUID;
 
@@ -15,6 +17,11 @@ public class BanCommand implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String msg, String[] args) {
 
         if (msg.equalsIgnoreCase("ban")) {
+
+            String moderator = "CONSOLE";
+            if(sender instanceof Player) {
+                moderator = sender.getName();
+            }
 
             if (args.length <= 2) {
                 helpMessage(sender);
@@ -44,6 +51,7 @@ public class BanCommand implements CommandExecutor {
                 Main.getInstance().historyManager.banRegister(targetUUID, -1, reason.toString(), sender.getName());
                 Main.getInstance().banManager.ban(targetUUID, -1, reason.toString());
                 sender.sendMessage("§6[§9Hera§6] §aVous avez banni §6" + targetName + " §c(Permanent) §apour : §e" + reason);
+                DiscordLogger.register(targetName, moderator,"Permanent", reason.toString(), "ban");
                 return false;
             }
 
@@ -62,10 +70,13 @@ public class BanCommand implements CommandExecutor {
             Main.getInstance().banManager.ban(targetUUID, banTime, reason.toString());
             Main.getInstance().historyManager.banRegister(targetUUID, banTime, reason.toString(), sender.getName());
             sender.sendMessage("§6[§9Hera§6] §aVous avez banni §6" + targetName + " pendant §b" + finalBanTime + " §apour : §e" + reason);
+
+            DiscordLogger.register(targetName, moderator,finalBanTime, reason.toString(), "ban");
             return false;
         }
 
         if (msg.equalsIgnoreCase("unban")) {
+
             if (!sender.hasPermission("hera.ban")) {
                 sender.sendMessage("§cVous n'avez pas la permission d'éxecuter cette commande !");
                 return false;
@@ -93,6 +104,11 @@ public class BanCommand implements CommandExecutor {
             Main.getInstance().historyManager.unbanRegister(targetUUID, sender.getName());
             Main.getInstance().banManager.unban(targetUUID);
             sender.sendMessage("§6[§9Hera§6] §aVous avez débanni §6" + targetName);
+            String moderator = "CONSOLE";
+            if(sender instanceof Player) {
+                moderator = sender.getName();
+            }
+            DiscordLogger.register(targetName, moderator,"none", "none", "unban");
             return false;
         }
 

@@ -57,7 +57,7 @@ public class Main extends JavaPlugin {
 
         saveDefaultConfig();
 
-        automod = this.getConfig().getStringList("blacklist");
+        automod = getConfig().getStringList("blacklist");
 
         if (this.getConfig().getBoolean("WebhooksDiscord.activate")) {
             Webhooks.up();
@@ -95,7 +95,6 @@ public class Main extends JavaPlugin {
         getCommand("sethome").setExecutor(new HomeCommand());
         getCommand("delhome").setExecutor(new HomeCommand());
         getCommand("homes").setExecutor(new HomeCommand());
-        getCommand("automod").setExecutor(new AutomodCommand());
 
         getServer().getPluginManager().registerEvents(new JoinQuitEvent(), this);
         getServer().getPluginManager().registerEvents(new Fight(), this);
